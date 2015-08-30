@@ -1,0 +1,1496 @@
+/* globals, noselect */
+.navButton, .searchable, #initEntry, #navMainButton, .fancySeparator, .rslides_nav, .topLinkButton {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	transition: background 0.15s ease, color 0.15s ease, text-shadow 0.15s ease, border-radius 0.15s ease;
+	}
+
+/* clickable - pointer cursor */
+.navButton, .searchable, #navMainButton {
+	cursor: pointer;
+	}
+
+/* fallback for older browsers w/o HTML5 element support, render as block not inline */
+article, aside, details,
+figcaption, figure,
+footer, header, hgroup,
+menu, nav, section {
+	display: block;
+	} 
+
+html {
+	font-family: sans-serif;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	/*Fun fact: This breaks rendering on iOS when used on the html element! -webkit-overflow-scrolling: touch; */
+	}
+
+body {
+	overflow: auto;
+	margin: 0;
+	}
+
+p {
+	display: block;
+	width: 100%;
+	min-width: 30em;
+	}
+	
+code {
+	/* renders code elements at proper font size */
+	font-family: monospace, monospace;
+	}
+	
+.entry a {
+	text-decoration: none;
+	color: #1276D4;
+	}
+	
+.entry a:visited {
+	color: #7C09BF;
+	}
+	
+.entry a:hover {
+	text-decoration: underline;
+	}
+	
+.mainHeader {
+	position: absolute;
+	left: 0em;
+	}
+
+.mainContainer {
+	position: absolute;
+	width: 34em;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	}
+	
+.sidebarWrapper {
+	position: absolute;
+	left: 34em;
+	top: 0em;
+	display: none;
+	}
+	
+.sidebar {
+	width: 18em;
+	height: 100%;
+	position: fixed;
+	z-index: 99;
+	}
+	
+.updateNotice {
+	bottom: 8.3em;
+	left: 2.9em;
+	width: 8em;
+	position: absolute;
+	z-index: -5;
+	font-family: pokeFont, monospace;
+	color: rgb(252, 252, 252);
+	font-size: 1.2em;
+	text-shadow: 0px 0.05em 0.2em black;
+}
+	
+.glaceon {
+	bottom: 8.5em;
+	right: 1.7em;
+	width: 5em;
+	height: 5em;
+	background: url("https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/space/res/Glaceon25_hflip_100px.png") transparent;
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	z-index: -5;
+	}
+	
+.shelfContainer {
+	bottom: 8.5em;
+	left: 0.15em;
+	width: 17.75em;
+	height: 5em;
+	position: absolute;
+	z-index: -6;
+	perspective: 24em;
+	perspective-origin: bottom;
+}
+
+.shelf {
+	width: 15em;
+	height: 8.2em;
+	background-color: white;
+	transform: rotateX(83deg);
+	margin: 0 auto;
+}
+
+.mainTitleContainer {
+	position: fixed;
+	padding-right: 0;
+	height: 9em;
+	text-align: center;
+	color: #FFF;
+	cursor: default;
+	top: 0px;
+	padding-left: 1em;
+	z-index: 99;
+	width: 33em;
+	background: #789;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	}
+	
+.mainTitle {
+	padding: 0em;
+	margin: 0.6em 0.4em 0.4em 5.8em;
+	z-index: 200;
+	position: absolute;
+	}
+	
+.mainNavContainer {
+	margin: -1em;
+	height: 100%;
+	position: absolute;
+	width: 32em;
+	padding: 1em 1em 2em;
+	left: 1em;
+	}
+
+#primaryNav {
+	z-index: 99;
+	width: 32em;
+	height: 8em;
+	top: 0em;
+	position: fixed;
+	}
+	
+#primaryNav .navButton {
+	position: absolute;
+	top: 3.8em;
+	}
+	
+#primaryNav .navButton#navMainButton {
+	left: 6em;
+	}
+
+#primaryNav .navButton#skypeLink {
+	left: 12.4em;
+	}
+
+#primaryNav .navButton#facebookLink {
+	left: 18.70em;
+	}
+	
+#secondaryNav {
+	z-index: 3;
+	background-color: #789;
+	width: 34em;
+	height: 8em;
+	top: 6em;
+	position: absolute;
+	left: 0em;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	}
+	
+#secondaryNav .navButton, #pokeNavImg {
+	position: absolute;
+	top: 3.9em;
+	}
+	
+#secondaryNav .navButton#navProjectsButton {
+	left: 6.78em;
+	}
+
+#secondaryNav .navButton#navMiscButton {
+	left: 13.18em;
+	}
+
+#secondaryNav .navButton#navAboutButton {
+	left: 19.48em;
+	}
+
+.topLinkButton {
+	position: absolute;
+	height: 2.5em;
+	text-decoration: none;
+	color: #87CEFA;
+	background-color: #4D6277;
+	text-align: center;
+	border-top-right-radius: 0.5em;
+	border-top-left-radius: 0.5em;
+	padding: 0.7em 0.3em 0.1em;
+	font-size: 1em;
+	bottom: 0em;
+	width: 31.4005em;
+	left: 0em;
+	}
+	
+.topLinkButton:hover,
+.topLinkButton:active{
+	color: #FFAF22;
+	}
+	
+#topRightPaw {
+	position: relative;
+	bottom: 0.4em;
+	}
+	
+#bottomLeftPaw {
+	position: relative;
+	bottom: -0.1em;
+	}
+
+.mainLogo {
+	background: url('res/UnciaUncia_319px_rock.png') transparent no-repeat;
+	background-size: cover;
+	width: 7em;
+	height: 7em;
+	margin: 0;
+	padding: 0;
+	left: 0em;
+	top: 1.3em;
+	position: absolute;
+	}
+	
+.searchBox {
+	width: 32em;
+	margin-bottom: 0.5em;
+	position: absolute;
+	top: 7.8em;
+	}
+	
+#searchField {
+	width: 33.899em;
+	height: 1.17em;
+	font-size: 0.9em;
+	padding: 0.1em;
+	padding-left: 1.3em;
+	margin: 0;
+	border: 0.2em solid #B4B4B4;
+	}
+	
+.searchBox #inputIndicator {
+    position: absolute;
+    left: 0.5em;
+    top: 0.23em;
+    font-weight: bold;
+	color: #B4B4B4;
+}
+
+#searchField:focus + #inputIndicator {
+	color: black;
+}
+
+#searchField:hover + #inputIndicator {
+	color: black;
+}
+
+.mainNav {
+	margin-top: 0.5em;
+	padding: 0;
+	}
+	
+.mainContent {
+	display: block;
+	position: relative;
+	min-height: 23em;
+	padding: 1em 1em 3.2em;
+	overflow-y: visible;
+	overflow-x: visible;
+	background: no-repeat scroll center center content-box padding-box #FFF;
+	top: 11.8em;
+	bottom: 0px;
+	width: 30em;
+	border: 1em solid rgba(255, 255, 255, 0.55);
+	left: 0em;
+	}
+
+.entry {
+	position: relative;
+	height: auto;
+	width: 100%;
+	background: white;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	border-bottom: solid black 0.1em;
+	}
+	
+.entryHeader {
+	position: relative;
+	height: 6.5em;
+	margin-bottom: 1em;
+	border-bottom: dashed grey 0.1em;
+	}
+
+.entryTitle, .entryTime, .entryCategory, .entryICBM, .entryLink {
+	display: block;
+	}
+
+.entryTitle {
+	margin: 0;
+	font-size: 1.5em;
+	}
+	
+.entryTime {
+	font-size: 1em;
+	position: absolute;
+	left: 0.5em;
+	top: 1.5em;
+	}
+	
+.entryICBM{
+	font-size: 1em;
+	position: absolute;
+	left: 0.5em;
+	top: 3.5em;
+	}
+	
+.entryCategory {
+	position: absolute;
+	right: 0.5em;
+	background: #D3D3D3;
+	padding: 0.3em;
+	top: 0.8em;
+	height: 1.3em;
+	font-size: 1.5em;
+	}
+	
+.youtubeAudio {
+	border-bottom-left-radius: 0.5em;
+	-moz-border-radius-bottomleft: 0.5em;
+	-webkit-border-bottom-left-radius: 0.5em;
+	overflow: hidden;
+	border: solid #1B1B1B 0.5em;
+	width: 29em;
+	height: 65px;
+	background-color: gray;
+	}
+	
+.entryFooter {
+	position: relative;
+	height: 1em;
+	}
+	
+.entryHeader .entryLink {
+	position: relative;
+	visibility: hidden;
+	top: -11.8em;
+	height: 0;
+	}
+	
+.entryFooter .entryLink {
+	display: block;
+	position: absolute;
+	bottom: -0.5em;
+	text-decoration: none;
+	}
+
+.entryFooter .entryLink .fa-link {
+	padding-right: 0.2em;
+	}
+
+.fullWidthLink {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 0.2em;
+	}
+	
+.userSignature {
+	position: absolute;
+	right: 1em;
+	bottom: -0.5em;
+	font-style: italic;
+	}
+
+.lynxFriendly {
+	display: block;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	text-align: center;
+	}
+
+.lynxFriendly img {
+	width: 60%;
+	}
+
+.navButton {
+	display: block;
+	text-align: center;
+	font-size: 1.3em;
+	font-family: sans-serif;
+	padding: 0.19em;
+	margin-bottom: 0.3em;
+	background: #2E82D1;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+	height: 1.24em;
+	width: 5.00462em;
+	}
+
+.navButton:hover,
+.navButton:active,
+.searchable:hover,
+.searchable:active {
+	background: #FFAF22;
+	border-color: #FFAF22;
+	box-shadow: 0 0 9px #FFAF22;
+	border-radius: 0.2em;
+	}
+	
+/* fallback, in case of noscript */
+body {
+	background: url('res/Night.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+
+.morning, .morning .fancySeparator {
+	background: url('res/Morning.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+	
+.lateMorning, .lateMorning .fancySeparator {
+	background: url('res/LateMorning.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+	
+.afternoon, .afternoon .fancySeparator {
+	background: url('res/Afternoon.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+
+.lateAfternoon, .lateAfternoon .fancySeparator {
+	background: url('res/LateAfternoon.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+
+.evening, .evening .fancySeparator {
+	background: url('res/Evening.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+
+.lateEvening, .lateEvening .fancySeparator {
+	background: url('res/LateEvening.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+
+.night, .night .fancySeparator {
+	background: url('res/Night.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+
+.lateNight, .lateNight .fancySeparator {
+	background: url('res/LateNight.png') transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-position: center !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+	
+#pokeClock {
+	  position: absolute;
+	  left: 0.75em;
+	  font-size: 1.3em;
+	  height: 1.62em;
+	  width: 5.3462em;
+	  background: transparent;
+	  top: 3.9em;
+	  overflow: hidden;
+	  color: #F5F5F5;
+	}
+	
+body.night #pokeNavImg, 
+body.lateNight #pokeNavImg,
+body.lateEvening #pokeNavImg {
+	background: url(res/471.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+	}
+	
+body.morning #pokeNavImg, 
+body.lateMorning #pokeNavImg,
+body.afternoon #pokeNavImg,
+body.lateAfternoon #pokeNavImg,
+body.evening #pokeNavImg {
+	background: url(res/310.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+	}
+	
+.fancySeparator {
+	height: 3em;
+    position: absolute;
+    z-index: 47;
+    width: 34em;
+    left: 0em;
+    top: 37.2em;
+	vertical-align: middle;
+    border: 1em solid rgba(255, 255, 255, 0.55);
+    border-left-width: 0;
+    border-right-width: 0;
+	text-align: center;
+}
+
+.fancySeparator a {
+	width: 100%;
+    display: inline-block;
+    top: -0.15em;
+    bottom: 0;
+    position: relative;
+    font-size: 3em;
+	color: #3F53DD;
+    font-family: sans-serif;
+}
+
+.fancySeparator a:hover {
+	color: #EF4D12;
+}
+
+.fancySeparator a:visited {
+	color: #3F53DD;
+}
+
+.fancySeparator a:visited:hover {
+	color: #EF4D12;
+}
+
+/* styles for the slider plugin */
+
+#initEntry {
+	margin-bottom: 3.5em;
+}
+
+.sliderContainer {
+	width: 32em;
+	height: 21.5em;
+	z-index: 2;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	top: -0.9em;
+	left: -1em;
+	position: relative;
+	transition: background 1s ease;
+}
+
+.rslides {
+	position: relative;
+	list-style: none;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+.rslides li {
+	position: absolute;
+	display: none;
+	width: 100%;
+	left: 0;
+}
+
+.rslides li:first-child {
+	position: relative;
+	display: block;
+	float: left;
+}
+
+.rslides img {
+	background-color: transparent;
+	display: block;
+	max-height: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	border: 0;
+}
+
+.rslides_nav {
+	position: absolute;
+	display: block;
+	z-index: 999;
+	height: 1.1em;
+	font-size: 4.5em;
+	width: 1.1em;
+	background-color: rgba(0, 0, 0, 0.58);
+	color: #3F53DD;
+	text-decoration: none;
+	text-align: center;
+	vertical-align: middle;
+	bottom: 0em;
+}
+
+.rslides_nav.prev {
+	left: 0;
+	border-top-right-radius: 0.3em;
+	color: #3F53DD !important;
+	text-decoration: none !important;
+}
+
+.rslides_nav.next {
+	right: 0;
+	border-top-left-radius: 0.3em;
+	color: #3F53DD !important;
+	text-decoration: none !important;
+}
+
+.rslides_nav:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #EF4D12 !important;
+	text-decoration: none !important;
+}
+
+.rslides_tabs li {
+	position: relative;
+	top: 3em;
+	float: left;
+	margin: 0.5em;
+	padding: 1em;
+	width: 2em;
+	text-decoration: none;
+	text-align: center;
+	background-color: rgb(193, 221, 221);
+	font-size: 1.4em;
+	display: block;
+}
+
+.rslides_tabs li a {
+	color: rgb(11, 11, 11);
+	text-decoration: none;
+	font-size: 1.4em;
+}
+
+.msPlayer {
+	position: relative;
+	height: 9.725em;
+	border: solid 0.2em gray;
+	padding: 0.2em;
+	padding-bottom: 0.7em;
+	width: 29.25em;
+	border-top: none;
+	top: -0.258em;
+	z-index: 0;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	box-shadow: 0em 0em 0.9em 0.1em #B2B2B2;
+}
+
+.msPlayer * {
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+
+.msPlayer * {
+	margin: 0;
+}
+
+.msPlayer canvas {
+	margin-top: 0.2em;
+	height: 5em;
+	position: absolute;
+	top: -5.5em;
+	width: 29.2em;
+}
+
+.msPlayer audio {
+	height: 2em;
+}
+
+.msPlayer meter {
+    height: 1.25em;
+    margin-bottom: 0em;
+    padding: 0;
+    position: absolute;
+	left: 0.25em;
+	width: 27.3em;
+}
+
+.msPlayer .midMeter {
+	bottom: 6.08em;
+}
+
+.msPlayer .sideMeter {
+	bottom: 3.575em;
+}
+
+/* Neither FF nor Chrome appreciates setting all these at once, unfortunately. Gotta do them one-by-one. */
+
+.msPlayer meter.masterMeter.left {
+	bottom: 1.75em;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right {
+	bottom: 1.125em;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left::-webkit-meter-bar{
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left::-webkit-meter-optimum-value {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left::-webkit-meter-suboptimum-value {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left::-webkit-meter-even-less-good-value {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left::-moz-meter-bar {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left:-moz-meter-optimum::-moz-meter-bar {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left:-moz-meter-sub-optimum::-moz-meter-bar {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right::-webkit-meter-bar {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right::-webkit-meter-optimum-value {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right::-webkit-meter-suboptimum-value {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right::-webkit-meter-even-less-good-value {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right::-moz-meter-bar {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right:-moz-meter-optimum::-moz-meter-bar {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right:-moz-meter-sub-optimum::-moz-meter-bar {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.right:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.msPlayer meter.masterMeter.left, .msPlayer meter.masterMeter.right {
+	height: 0.625em;
+}
+
+.msPlayer button.muteButton, .msPlayer button.resetButton {
+    height: 2em;
+    width: 2em;
+    position: absolute;
+    font-weight: bold;
+    right: 0.25em;
+    border-radius: 0.4em;
+	border: outset buttonface;
+}
+
+.msPlayer button.muteButton.mid {
+    top: 3.75em;
+}
+
+.msPlayer button.muteButton.side {
+    top: 6.75em;
+}
+
+.msPlayer button.resetButton {
+    bottom: 1.1em;
+}
+
+button.muteButton.muted {
+    background: radial-gradient(ellipse at center, rgba(241,231,103,1) 0%, rgba(241,231,103,1) 38%, rgba(254,182,69,1) 100%) !important;
+    background-color: rgba(241,231,103,1);
+}
+
+button.muteButton:active, button.resetButton:active {
+	border-style: inset;
+}
+
+.msPlayer input {
+	position: absolute;
+	font-size: 1em;
+}
+
+.msPlayer input.midGainSlider {
+	bottom: 7.75em;
+}
+
+.msPlayer input.sideGainSlider {
+	bottom: 5.25em;
+}
+
+.msPlayer input.masterSlider {
+    bottom: 2.75em;
+}
+
+.msPlayer meter::-webkit-meter-bar {
+    background: #EEE;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
+    border-radius: 0.2em
+}
+
+.msPlayer meter::-webkit-meter-optimum-value {
+    background: #86CC00;
+    border-radius: 0.2em
+}
+
+.msPlayer meter::-webkit-meter-suboptimum-value {
+    background: #FFDB1A;
+    border-radius: 0.2em;
+}
+
+.msPlayer meter::-webkit-meter-even-less-good-value {
+    background: #EC2C2C;
+    border-radius: 0.2em
+}
+
+.msPlayer meter {
+    /* For Firefox */
+    background: #EEE;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
+    border-radius: 0.2em
+}
+
+.msPlayer meter::-moz-meter-bar {
+    border-radius: 0.2em
+}
+
+.msPlayer meter:-moz-meter-optimum::-moz-meter-bar {
+    background: #86CC00;
+}
+
+.msPlayer meter:-moz-meter-sub-optimum::-moz-meter-bar {
+    background: #FFDB1A;
+}
+
+.msPlayer meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+    background: #EC2C2C;
+}
+
+.msPlayer input[type=range] {
+	z-index: 2;
+	width: 27.4em;
+	-webkit-appearance: none;
+	position: absolute;
+	/* chrome and FF do not handle meter elements with height zero the same way. */
+	-moz-transform: translateY(1.55em);
+}
+
+.msPlayer input[type=range]:focus {
+	outline: none;
+}
+.msPlayer input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 0em;
+	cursor: pointer;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+	background: rgba(255, 255, 255, 0);
+	border-radius: 0px;
+	border: 0px solid rgba(1, 1, 1, 0);
+}
+.msPlayer input[type=range]::-webkit-slider-thumb {
+	box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+	border: 1px solid #000000;
+	height: 2em;
+	width: 2em;
+	border-radius: 4px;
+	cursor: pointer;
+	-webkit-appearance: none;
+	background: linear-gradient(to right, rgba(0,0,0,0.53) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 42%, rgba(255,255,255,0.9) 50%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.53) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,0.53)), color-stop(15%, rgba(0,0,0,0.4)), color-stop(42%, rgba(0,0,0,0.4)), color-stop(50%, rgba(255,255,255,0.9)), color-stop(58%, rgba(0,0,0,0.4)), color-stop(85%, rgba(0,0,0,0.4)), color-stop(100%, rgba(0,0,0,0.53)));
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0.53) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 42%, rgba(255,255,255,0.9) 50%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.53) 100%);
+}
+.msPlayer input[type=range]:focus::-webkit-slider-runnable-track {
+	background: rgba(255, 255, 255, 0);
+}
+.msPlayer input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 0em;
+	cursor: pointer;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+	background: rgba(255, 255, 255, 0);
+	border-radius: 0em;
+	border: 0px solid rgba(1, 1, 1, 0);
+}
+.msPlayer input[type=range]::-moz-range-thumb {
+	box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+	border: 1px solid #000000;
+	height: 2em;
+	width: 2em;
+	border-radius: 4px;
+	background: linear-gradient(to right, rgba(0,0,0,0.53) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 42%, rgba(255,255,255,0.9) 50%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.53) 100%);
+	background: -moz-linear-gradient(left, rgba(0,0,0,0.53) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 42%, rgba(255,255,255,0.9) 50%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.53) 100%);
+	cursor: pointer;
+}
+.msPlayer input[type=range]::-ms-track {
+	width: 100%;
+	height: 0px;
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+}
+.msPlayer input[type=range]::-ms-fill-lower {
+	background: rgba(219, 219, 219, 0);
+	border: 0px solid rgba(1, 1, 1, 0);
+	border-radius: 0px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+.msPlayer input[type=range]::-ms-fill-upper {
+	background: rgba(255, 255, 255, 0);
+	border: 0px solid rgba(1, 1, 1, 0);
+	border-radius: 0px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+.msPlayer input[type=range]::-ms-thumb {
+	box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+	border: 1px solid #000000;
+	height: 2em;
+	width: 2em;
+	border-radius: 4px;
+	background: -ms-linear-gradient(left, rgba(0,0,0,0.53) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 42%, rgba(255,255,255,0.9) 50%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.53) 100%);
+	background: linear-gradient(to right, rgba(0,0,0,0.53) 0%, rgba(0,0,0,0.4) 15%, rgba(0,0,0,0.4) 42%, rgba(255,255,255,0.9) 50%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.53) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
+	cursor: pointer;
+	height: 0em;
+}
+.msPlayer input[type=range]:focus::-ms-fill-lower {
+	background: rgba(255, 255, 255, 0);
+}
+.msPlayer input[type=range]:focus::-ms-fill-upper {
+	background: rgba(255, 255, 255, 0);
+}
+
+.msPlayer h3 {
+	font-family: sans-serif;
+	font-weight: normal;
+	color: white;
+	left: 0.28em;
+	position: absolute;
+	text-shadow: 0 0 0.2em black;
+}
+
+.msPlayer h3.midTitle {
+	top: 2.8em;
+}
+
+.msPlayer h3.sideTitle {
+	top: 4.95em;
+}
+
+.msPlayer h3.masterTitle {
+	top: 7.05em;
+}
+
+.loadingOverlay {
+    position: absolute;
+    z-index: 5;
+	width: 100%;
+	height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,0.8) 50% 50% no-repeat;
+}
+
+.loader {
+	animation-name: magic;
+	animation-duration: 2s;
+	animation-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	position: relative;
+	width: 1em;
+	height: 1em;
+	background: black;
+	top: 50%;
+	transform: translateY(-50%);
+	margin: 0 auto;
+	transform-style: preserve-3d;
+}
+
+@keyframes magic {
+	0% {
+		border-top-left-radius: 0em;
+		border-bottom-left-radius: 0em;
+		border-top-right-radius: 0em;
+		border-bottom-right-radius: 0em;
+		left: 0em;
+	}
+	25% {
+		border-top-left-radius: 1em;
+		border-bottom-left-radius: 1em;
+		border-top-right-radius: 0em;
+		border-bottom-right-radius: 0em;
+		left: -5em;
+	}
+	50% {
+		border-top-left-radius: 0em;
+		border-bottom-left-radius: 0em;
+		border-top-right-radius: 0em;
+		border-bottom-right-radius: 0em;
+		left: 0em;
+	}
+	75% {
+		border-top-left-radius: 0em;
+		border-bottom-left-radius: 0em;
+		border-top-right-radius: 1em;
+		border-bottom-right-radius: 1em;
+		left: 5em;
+	}
+	100% {
+		border-top-left-radius: 0em;
+		border-bottom-left-radius: 0em;
+		border-top-right-radius: 0em;
+		border-bottom-right-radius: 0em;
+		left: 0em;
+	}
+}
+
+.worldMap {
+	width: 18em;
+	height: 9em;
+	background: url("https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/space/res/Equirectangular_projection_SW.jpg");
+	bottom: 0;
+	position: absolute;
+	background-size: cover;
+	background-position-x: 0%;
+}
+
+.positionMarker {
+	border: solid 0.1em orange;
+	width: 0.5em;
+	height: 0.5em;
+	border-radius: 999em;
+	margin-left: -0.25em;
+	margin-top: -0.25em;
+	left: 52%;
+	top: 15%;
+	position: absolute;
+	box-shadow: 0 0 0.1em 0.05em orange;
+	-webkit-transform: translateZ(0);
+	transition: all 0.5s ease;
+}
+		
+.mapContainer * {
+	font-family: "Consolas", monospace;
+	color: white;
+}
+
+#timeInputBox {
+	margin: 0;
+	position: absolute;
+	top: 0.6666666667em;
+	font-size: 1.5em;
+	width: 10.466667em;
+	height: 1.2em;
+	left: 0.6666666667em;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 1);
+	border: solid 0.1em gray;
+	border-radius: 0.6em;
+	font-family: pokeFont, monospace;
+}
+		
+.mapContainer {
+	width: 18em;
+	height: 13em;
+	margin: 0 auto;
+	background: rgba(255, 255, 255, 0.55);
+	margin-top: 0em;
+	position: relative;
+	}
+	
+.zoi {
+	height: 22.2em;
+	width: 22.2em;
+	position: relative;
+	border-radius: 999em;
+	background: url("res/eso1045ccc.jpg") black;
+	background-size: contain;
+	top: 5em;
+	border: 0.1em solid white;
+	left: -0.1em;
+	font-size: 0.8125em;
+	font-family: "Consolas", monospace;
+}
+
+.star {
+	border-radius: 9999em;
+	width: 1em;
+	height: 1em;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgb(220, 226, 124);
+	margin: auto;
+	overflow: visible;
+	box-shadow: 0em 0em 2.5em 0.2em  rgb(220, 226, 124);
+}
+
+.orbit {
+	border: dashed blue;
+	border-radius: 9999em;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: none;
+}
+
+.planet {
+	position: absolute;
+	border-radius: 9999em;
+	height: 1em;
+	width: 1em;
+	box-shadow: 0 0 0.1em white;
+	transition: all 0.21s linear;
+}
+
+.moon {
+	position: absolute;
+	border-radius: 9999em;
+	height: 0.3em;
+	width: 0.3em;
+	margin-top: 0.5em;
+	margin-left: 0.5em;
+	box-shadow: 0 0 0.1em white;
+	transition: all 0.21s linear;
+	background-color: white;
+}
+
+.zeroMeridian {
+	width: 0.1em;
+	height: 1em;
+	position: relative;
+	background-color: red;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transform: rotate(4deg);
+}
+
+.moon .zeroMeridian {
+	height: 0.5em;
+	display: none;
+}
+
+.Mars .zeroMeridian {
+	display: none;
+}
+
+.Mercury .zeroMeridian {
+	display: none;
+}
+
+.Venus .zeroMeridian {
+	display: none;
+}
+
+.planet .moon label {
+	left: 1.3em;
+	top: 0.2em;
+	font-size: 0.9em;
+}
+
+.zeroMeridian .zeroIndicator {
+	background-color: blue;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50%;
+}
+
+.Mars.orbit {
+	width: 12em;
+	height: 12em;
+}
+
+.Mars.planet {
+	margin-left: 0.3em;
+	margin-top: 0.3em;
+	height: 0.4em;
+	width: 0.4em;
+	background-color: #CB4319;
+}
+
+.Mars .zeroMeridian {
+	height: 0.8em;
+}
+
+.Earth.orbit {
+	width: 10em;
+	height: 10em;
+}
+
+.Earth.planet {
+	margin-left: 0em;
+	margin-top: 0em;
+	background-color: #4F7FC0;
+}
+
+.Earth .zeroMeridian {
+	
+}
+
+.Mercury.orbit {
+	width: 5em;
+	height: 5em;
+}
+
+.Mercury.planet {
+	margin-left: 0.3em;
+	margin-top: 0.3em;
+	width: 0.4em;
+	height: 0.4em;
+	background-color: rgb(205, 205, 218);
+}
+
+.Mercury .zeroMeridian {
+	height: 0.4em;
+}
+
+.Mercury.planet label {
+	top: 0.1em;
+	left: 0.8em;
+}
+
+.Venus.orbit {
+	width: 8em;
+	height: 8em;
+}
+
+.Venus.planet {
+	margin-left: 0.07em;
+	margin-top: 0.07em;
+	width: 0.9em;
+	height: 0.9em;
+	background-color: #EBD1A0;
+}
+
+.Venus .zeroMeridian {
+	height: 0.9em;
+}
+
+.Saturn.orbit {
+	width: 8em;
+	height: 8em;
+}
+
+.Saturn.planet {
+	top: 0em;
+	left: 5em;
+	background-color: rgb(173, 68, 30);
+}
+
+.Saturn .zeroMeridian {
+	
+}
+
+.Jupiter.orbit {
+	width: 8em;
+	height: 8em;
+}
+
+.Jupiter.planet {
+	top: 0em;
+	left: 5em;
+	width: 2em;
+	height: 2em;
+	background-color: rgb(255, 155, 0);
+}
+
+.Jupiter.planet label {
+	left: 2.25em;
+	top: 1.5em;
+}
+
+.Jupiter .zeroMeridian {
+	height: 2em;
+}
+
+.Neptune.orbit {
+	width: 8em;
+	height: 8em;
+}
+
+.Neptune.planet {
+	top: 0em;
+	left: 5em;
+	height: 1.5em;
+	width: 1.5em;
+	background-color: rgb(45, 134, 166);
+}
+
+.Neptune .zeroMeridian {
+	height: 1.5em;
+}
+
+.Neptune.planet label {
+	left: 2.25em;
+	top: 1.5em;
+}
+
+.Uranus.orbit {
+	width: 8em;
+	height: 8em;
+}
+
+.Uranus.planet {
+	top: 0em;
+	left: 5em;
+	background-color: rgb(99, 113, 158);
+	height: 1.6em;
+	width: 1.6em;
+}
+
+.Uranus .zeroMeridian {
+	height: 1.6em;
+}
+
+.Uranus.planet label {
+	left: 2.25em;
+	top: 1.5em;
+}
+
+.star label{
+	margin: 0 auto;
+	position: absolute;
+	width: 15em;
+	left: 1em;
+	top: 0;
+	z-index: 999;
+	font-size: 1.3em;
+	text-shadow: 0px 0px 0.2em black;
+}
+
+.star > label {
+	display: none;
+}
+
+@media (min-width: 54em) {
+	.sidebarWrapper {
+		display: block !important;
+	}
+	.mainHeader {
+		left: -1em !important;
+	}
+.mainContent {
+		left: -1em !important;
+	}
+.mainContainer {
+		width: 51em !important;
+	}
+}
+
+@media (max-width: 34em) {
+	.mainTitleContainer {
+		position: absolute !important;
+	}
+	#primaryNav {
+		position: absolute !important;
+		top: 1em !important;
+	}
+}

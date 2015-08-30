@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=600, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon" />
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+	<title>space.mrawr.net</title>
+	<!-- IE8 HTML5 polyfill/shiv -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="main.css" >
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="res/js/prefixfree.min.js"></script>
+	
+	<!-- lynx: http://www.epochconverter.com/, http://www.daftlogic.com/sandbox-google-maps-find-altitude.htm -->
+	
+<!-- time-based CSS background changing -->
+<script>
+	$(document).ready(function(){
+		var d = new Date();
+		var n = d.getHours();
+		if (n >= 22 || n < 5) {
+			// If time is between 2200 - 0500 night theme to 'body'
+			document.body.className = "night";
+		}
+		else if (n >= 5 && n < 6) {
+			// If time is between 0500 - 0600 morning theme to 'body'
+			document.body.className = "morning";
+		}
+		else if (n >= 6 && n < 9) {
+			// If time is between 0600 - 0900 lateMorning theme to 'body'
+			document.body.className = "lateMorning";
+		}
+		else if (n >= 16 && n < 18) {
+			// If time is between 1600 - 1800 evening theme to 'body'
+			document.body.className = "lateAfternoon";
+		}
+		else if (n >= 18 && n < 20) {
+			// If time is between 1800 - 2000 sunset theme to 'body'
+			document.body.className = "evening";
+		}
+		else if (n >= 20 && n < 22) {
+			// If time is between 2000 - 2200 lateEvening theme to 'body'
+			document.body.className = "lateEvening";
+		}
+		else {
+			// Else use 'day' theme
+			document.body.className = "afternoon";
+		}
+	});
+</script>
+	
+<!-- jquery "search" functionality -->
+<script>
+	$.expr[":"].contains = $.expr.createPseudo(function(arg) {
+	return function( elem ) {
+		return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+		};
+	});
+	
+	function hide_articles(search) {
+		$(".mainContent > article").hide();
+		$(".mainContent > article:contains('" + search + "')").show(); // show articles that match the current search query
+		$('.fancySeparator').hide();
+		$('#initEntry').hide();
+		if ($('article:visible').length == 0) {
+			$("#timeInputBox").val('');
+			$('.mainContent').css('background', "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAA4CAIAAAD1mGRUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAddSURBVHhe7VxJS21JDG6fAyK6UFERUReiLty5EYcf539TXEhvRARFVBxwAlE30g5of/3SpNOp8Yz3HK2zeDzvrUol31dJpeqkbtfX19cf6fm+CPz6vqYly/5BIBFc6zx4fHzc39+/u7urbdREcAlQx9N2fHz8/Px8cnJSwqhxIhLBTpxA25+/n6DDxdP28fGB8T4/P+PYKaFVItgJIvzsr99P0OHe3t6ItuBUmJ6eRsvJyckSqIsToQmOjzZx8lvcamJigrQPOtyvX//CGJwKIHhjY2Nubq42XDTB8dGmNhU7NRB5W8zDLYNTIUZauW261D54e3ubBsBEgzfTlIQBPJ3LGp6EIwBCYH9//9TUVLmBS8nPZ4JEw294fEspB0peXV2Nj4+XDi+P4iN4d3eXVhfiQGLE8KnPlfZMoZKA7kdHR5Rx8DM7OxvvNCbcEixTPqIoAiNwlMSbppnfWnk1rc5HMCEM3dbW1sryHCWne3NzU350cXFBfw4NDd3e3vJXIOPp6YkJwGbu9fUV39Lng4ODBwcH19fX3d3d+D/12tvb4/nBLfv6+tAA3d/f35Uq2D/c399LCZlshsyXlxdS0pSPQMVfkeZW02AFBRX/o9BAY8ZtZmYm1Pu/78/OzvAHdKNemF5Q4PT0FNJcUCCPOzw8pDaeZjyGM4vGYqwU5QUGekjm4BYy4eRMUjkopEECxXzZXY4Sk7K64ONU9ubmhuUj7CMwUBfS3zU0qR0fKuNbssL+BJaiDk8vKxQwDbzIKRhEzEmwxEhhKrmnnFAmnJxJ0ure1dWFNgplzxwvnqecn5+T/LGxMejmCvuskpx5lOXyw3rKD+n/rkyYds+I2HjUHtqTwFrXLAUF2rBp8UEivA82LTG5By4mhaCW4g/+lSj7N4vFUy2OHPPz8x4giMv4vVAkptLDlHtxjDFFyYzEioCaAVizl5aWZGRyqRcg2A+35D6YH1k3i/GeEYkvN4PmPKKnL4DLKtnfXi0B/tMP1pAnJdS2xgbMG9kGHWUc9fiMj+DglpwCET9+HNkYGXmCRz/50KfgzH2tTJPanpVIDg098USeXFLHmNMP5RVKbVZAZRVkmpxJngMWTbAVC/VhjGdIdIAjkkOZc0njy+JYaqWCszwgdClv9RtuDHeh2BtMashwOGLM6Yci2LWmXF5ekljXDPAkLppgHlIGZ3WC6o/GwUVUGY/Z5+GYc5bgob/UXLEoDwityrt0tjaOyZ89yZ2KSayqZ01hZ+UZEL+y6IOOfCHR2mtra4vyLLkusqNgVpo5oXmcIrOPSg8EXIZLPeFAgNgV8E0z+fQDvTAtdnZ2yNWw9nFjkq+WXnVswn962JEyZbNwFp2bcmaXMymVlMmNCo2iAqDMLPBtjOvk1tbVUW6cFhcXXRFeOiKbqZZh66sk6+uHgmtiTQQHsZabK27MLMrjFEzwYMYXHK7SBkyedWdBRsW/SopcE4OrIQatMETnO55lGuRJuCv+VMpZK4QHQa4qRMdnAS4c5bavFVg3U8mqCA6++g7CYQ16wV6pgUKgKoJ5KY1ZJ6ysxK9YP5bUmDBZ4Rr8Y3GvwnDzBbw6ne7ANqkKO3+sTC6doJ2kYtcTJpMHt2POWM+FSHXX+wn6NhHcDoJJSz4LY6X97KJZKpttE8HqbDzIrsWDuQxM1mm0CYOk6/8R0B7MdyuKb2QT1E1AwPm6sHhtVBPMK1GH+KtKJQ5aXJST4OKiv5MELnnELuXh4aFFplV1ktUiCIKqqk0nXhoGuzSngWWbRC/q8ayvr/sVVfcAPLccmmOwVRP/FRJ+rzU8PAx2e3p6Gm6OVM9CML+BQmEmHaBYmbOW8ppFF4wd7jS4brJ0HC//FRIGZHV1FRcvOq5tJgV8IZoL7a2VZqrcgkY1UzOu9g6W5MuScWvheCbDMjWOvJfdOnYBgo9gWQcJ5ri2D93McgsXoFztbd4ZkbNBXdwgaZEljJm4tDa2FtMUF9sECeEkC/GZFJUEy6prHInEvLciIahb45ss8ojcGg+sIaEK1L7xq8kwwcvLy2b4le5IZc+RuFPhpwmoLECnIr1IgamZH4Hw1ZVMZe7+1/tw36A0VPHTApyYKwWBAMGuO3RWnoJn3/7bYKXYk09IS0+pYoy1EMzkweFIhEmnWfKPpXpgYACN1S3YmMp9j6IqJFTERKZrKTGwNqeNhWDCdHR0lB3OTDLxCW4wykp0ynhpPZa/9RVZOyfnEOYKhqaVeGRkRP40XEVM8H7BX1tf1jWqOukv+sLfU2mQKVHyyKEQQr9iwW+8g8tBJhCt90dYAg/akbszmQwxGxclmBNsdYcsBwF+jmm6+JkoiIWru1SMbhlVNFAVYsshuETNrDTnmC4lqiQjB47ocRa9sLCAc+lyh6hIWuMIrsjOgmLVtFtZWent7S0os57u4YOOevRo+Ch0T45+bwS+2xZ2oW3y4IZPraLqJQ8uimDD+yeC8xBk/sZbHim19EkhuhaYOzdI8uDOYV/LyIngWmDu3CB/AwkGeWqiI3OvAAAAAElFTkSuQmCC) no-repeat scroll center center content-box padding-box #FFF");
+		}
+		$(window).scroll();
+		setTimeout(function() {$(window).scroll();},100);
+	}
+
+	function show_all() {
+		$("#timeInputBox").val('');
+		$(".mainContent > article").show();
+		newImgLoaded(".rslides1_on > img");
+		$('.mainContent').css('background', "no-repeat scroll center center content-box padding-box #FFF");
+		$('.fancySeparator').show();
+		$(window).scroll();
+		setTimeout(function() {$(window).scroll();},100);
+	}
+
+	$(document).ready(function() {
+	$("#searchField").keyup(function doSearch() {
+		$("html, body").scrollTop(0);
+		var search = $.trim(this.value);
+		if (search === "") {
+			show_all();
+		}
+		else {
+			hide_articles(search);
+		}
+		});
+	});
+</script>
+	
+<!-- onclick category search -->
+<script>
+	$(function () {
+		$('.searchable').on('click', function () {
+			$(window).scroll();
+			var search = $('#searchField');
+			var searchterm = $(this).data("elementSearchTerm");
+			if ($(this).data("elementSearchTerm") === undefined) {
+				var searchterm = $(this).text();
+			}
+			search.val(searchterm);    
+			$('#searchField').trigger('keyup');
+			$(window).scroll();
+			setTimeout(function() {$(window).scroll();},100);
+		});
+	});
+</script>
+	
+<!-- onclick "main" clear search input -->
+<script>
+	$(function () {
+		$('#navMainButton').on('click', function () {
+			$("#searchField").val('');
+			$('#searchField').trigger('keyup');
+			$(window).scroll();
+			setTimeout(function() {$(window).scroll();},100);
+		});
+	});
+</script>
+
+<!-- onclick "about" clear search input -->
+<script>
+	$(function () {
+		$('#navAboutButton').on('click', function () {
+			$("#searchField").val('');
+			$('#searchField').trigger('keyup');
+			$(window).scroll();
+		});
+	});
+</script>
+	
+<!-- ipconv script -->
+<script type="text/javascript">
+	function d2h(d) {return d.toString(16);}
+	function h2d(h) {return parseInt(h,16);} 
+
+	function dot2num(dot) {
+	var d = dot.split('.');
+	return ((((((+d[0])*256)+(+d[1]))*256)+(+d[2]))*256)+(+d[3]);}
+
+	function num2dot(num) {
+	var d = num%256;;
+	for (var i = 3; i > 0; i--) { 
+	num = Math.floor(num/256);
+	d = num%256 + '.'  + d;}
+	return d;}
+
+	function convert() {
+	var ip = document.getElementById('ipnum').value;
+	var dotted = /^(\d|[01]?\d\d|2[0-4]\d|25[0-5])\.(\d|[01]?\d\d|2[0-4]\d|25[0-5])\.(\d|[01]?\d\d|2[0-4]\d|25[0-5])\.(\d|[01]?\d\d|2[0-4]\d|25[0-5])$/;
+	var num = /^\d+$/;
+	if (ip.match(dotted)) ip = dot2num(ip);
+	else if (ip.match(num) && +ip < 4294967296) ip = num2dot(ip);
+	document.getElementById('ipnum').value = ip;
+	}
+</script>
+<script src="res/js/responsiveslides.min.js"></script>
+<script src="res/js/jquery.adaptive-backgrounds.js"></script>
+<script src="res/js/rgbcolor.js"></script>
+<script src="res/js/audiocontext-polyfill.js"></script>
+<script>
+	function resizeTargets(container) {
+		var viewportHeight = $(container).height();
+		var sliderString = "; height: "+viewportHeight + "px !important;";
+		var bodyString = "; height: "+viewportHeight + "px !important;";
+		$(".rslides > li").each(function() {
+			$(this).attr("style", function(i,s) { return s + sliderString});
+		});
+		$(".rslides > li > img").each(function() {
+			newImgLoaded(this);
+		});
+		$(".rslides").each(function() {
+			$(this).attr("style", function(i,s) { return s + sliderString});
+		});
+		$("body").attr("style", function(i,s) { return s + bodyString});
+	}
+
+	function newImgLoaded(loadedImg) {
+		var viewportHeight = $(".sliderContainer").height();
+		var viewportWidth = $(".sliderContainer").width();
+		var viewportAspect = viewportWidth/viewportHeight;
+		var actualImgHeight = $(loadedImg).height();
+		var actualImgWidth = $(loadedImg).width();
+		var imgAspect = actualImgWidth/actualImgHeight;
+		var imgMargin = (viewportHeight-actualImgHeight)/2;
+		if (viewportAspect >= imgAspect) {
+			var imgString = "height: 100% !important;";
+		} else {
+			var imgString = "width: 100% !important; margin-top:"+imgMargin+"px !important;";
+		}
+		$(loadedImg).attr("style", imgString);
+	}
+
+	function colorTools_getApproxLuminosity(r, g, b) {
+		return 0.00000326951*r*r+0.00001099884*g*g+0.00000111034*b*b;
+	}
+
+	function contrastText(element) {
+		var getColor = $("body").css("backgroundColor");
+		var rgbColor = new RGBColor(getColor);
+		var L = colorTools_getApproxLuminosity(rgbColor.r, rgbColor.g, rgbColor.b);
+		if (L >= 2) {
+			$(element).css({"color" : "#183F5F", "text-shadow" : "0.2em #FFF"});
+			}
+		if (L < -1) {
+			$(element).css({"color" : "#67D7E9", "text-shadow" : "0.2em #000"});
+			}
+	}
+</script>
+
+<!-- pokemon clock script -->
+<script>
+function updateClock() {
+    var unixTime = Math.floor(Date.now() / 1000)
+    var offsetTime = Math.floor((unixTime+2*3600));
+    var currentTime = (offsetTime % 86400)/120;
+    var currentPokemon = Math.floor(currentTime);
+    var nextPokemon = (currentPokemon + 1) % 720;
+    var previousPokemon = (currentPokemon - 1) % 720;
+    sprite1x = -100+100*((currentTime-1) % 2);
+    sprite2x = -100+100*(currentTime % 2);
+    var sprite1;
+    var sprite2;
+    containerHeight = document.getElementById('pokeClock').clientHeight;
+    if (!document.getElementById("sprite1")) {
+	// rewrite; CSS
+	var css = "<style>@font-face {font-family: 'pokeFont';src: url('https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/pkmndp.ttf') format('truetype');}</style>"
+	var sprite1div = "<div id='sprite1' style='position: absolute; text-align: right; vertical-align: center; font-size:1.3em; background-position: 12% 16%; height: 100%; width: 97%; top: "+sprite1x+"%; background-repeat: no-repeat; background-image:url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite1+".png);'><span style=\"vertical-align: middle; position: relative; right: 0.1em; font-family: 'pokeFont', monospace;\" id='pokeText1'></span></div>";
+	var sprite2div = "<div id='sprite2' style='position: absolute; text-align: right; vertical-align: center; font-size:1.3em; background-position: 12% 16%; height: 100%; width: 97%; top: "+sprite2x+"%; background-repeat: no-repeat; background-image:url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite2+".png);'><span style=\"vertical-align: middle; position: relative; right: 0.1em; font-family: 'pokeFont', monospace;\" id='pokeText2'></span></div>";
+	clockInnerHTML = css+sprite1div+sprite2div;
+	document.getElementById('pokeClock').innerHTML = clockInnerHTML;
+    }
+    var sprite1divElement = document.querySelector("#sprite1");
+    var sprite2divElement = document.querySelector("#sprite2");
+    var sprite1text = document.querySelector("#pokeText1");
+    var sprite2text = document.querySelector("#pokeText2");
+    sprite1divElement.style.top = sprite1x+"%";
+    sprite2divElement.style.top = sprite2x+"%";
+    if (sprite1x < sprite2x) {
+	sprite1 = nextPokemon;
+	sprite2 = currentPokemon;
+	}
+    if (sprite2x < sprite1x) {
+	sprite2 = nextPokemon;
+	sprite1 = currentPokemon;
+	}
+    sprite1divElement.style.backgroundImage = "url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite1+".png)";
+    sprite2divElement.style.backgroundImage = "url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite2+".png)";
+    sprite1text.innerHTML = "#"+sprite1;
+    sprite2text.innerHTML = "#"+sprite2;
+}
+</script>
+<!-- audio element handlers -->
+<script>
+$(document).ready(function() {
+	$('.msPlayer').each(function(){
+		msDecode(this);
+	});
+	$('audio').each(function () {
+		var myAudio = this;
+		this.addEventListener('play', function () {
+			$('audio').each(function () {
+				if (!(this === myAudio)) {
+					this.pause();
+				}
+			});
+		});
+	});
+});
+</script>
+<!-- msDecode script -->
+<script>
+function msDecode(container) {
+	$(container).append("<div class='loadingOverlay'><div class='loader'></div></div>");
+	var context = new AudioContext();
+	var parentID = $(container).attr("id");
+	var audio = document.querySelector("#" + parentID + " .player");
+	var source;
+
+	var sideGain = document.querySelector("#" + parentID + " .sideGainSlider");
+	var sideMuteButton = document.querySelector("#" + parentID + " .muteButton.side");
+	var midGain = document.querySelector("#" + parentID + " .midGainSlider");
+	var midMuteButton = document.querySelector("#" + parentID + " .muteButton.mid");
+	var masterGain = document.querySelector("#" + parentID + " .masterSlider");
+	var resetButton = document.querySelector("#" + parentID + " .resetButton");
+	var midMeter = document.querySelector("#" + parentID + " .midMeter");
+	var sideMeter = document.querySelector("#" + parentID + " .sideMeter");
+	var masterLeftMeter = document.querySelector("#" + parentID + " .masterMeter.left");
+	var masterRightMeter = document.querySelector("#" + parentID + " .masterMeter.right");
+
+	var splitter = context.createChannelSplitter(2);
+	var midLevel = context.createGain();
+	var sideLeft = context.createGain();
+	var sideRight = context.createGain();
+	var merger = context.createChannelMerger(2);
+	var output = context.createGain();
+	var silence = context.createBufferSource();
+	var masterMeterSplitter = context.createChannelSplitter(2);
+
+	sideLeft.gain.value = (sideGain.value)/1000;
+	sideRight.gain.value = -(sideGain.value)/1000;
+	midLevel.gain.value = (midGain.value)/1000;
+	output.gain.value = (masterGain.value)/100;
+
+	splitter.connect(midLevel, 0, 0);
+	splitter.connect(sideLeft, 1, 0);
+	splitter.connect(sideRight, 1, 0);
+	sideLeft.connect(merger, 0, 0);
+	sideRight.connect(merger, 0, 1);
+	midLevel.connect(merger, 0, 0);
+	midLevel.connect(merger, 0, 1);
+	merger.connect(output);
+	output.connect(context.destination);
+	output.connect(masterMeterSplitter);
+
+	sideGain.addEventListener('input', function () {
+		if (sideMuteButton.className.indexOf("muted") == -1) {
+			sideLeft.gain.value = (sideGain.value)/1000;
+			sideRight.gain.value = -(sideGain.value)/1000;
+		}
+	});
+
+	midGain.addEventListener('input', function () {
+		if (midMuteButton.className.indexOf("muted") == -1) {
+			midLevel.gain.value = (midGain.value)/1000;
+		}
+	});
+
+	masterGain.addEventListener('input', function () {
+		output.gain.value = (masterGain.value)/100;
+	});
+	
+	midMuteButton.addEventListener('click', function () {
+		$(midMuteButton).toggleClass("muted");
+		if (midMuteButton.className.indexOf("muted") != -1) {
+			midLevel.gain.value = 0;
+		} else {
+			midLevel.gain.value = (midGain.value)/1000;
+		}
+	});
+	
+	sideMuteButton.addEventListener('click', function () {
+		$(sideMuteButton).toggleClass("muted");
+		if (sideMuteButton.className.indexOf("muted") != -1) {
+			sideLeft.gain.value = 0;
+			sideRight.gain.value = 0;
+		} else {
+			sideLeft.gain.value = (sideGain.value)/1000;
+			sideRight.gain.value = -(sideGain.value)/1000;
+		}
+	});
+	
+	resetButton.addEventListener('click', function () {
+		$(sideMuteButton).removeClass("muted");
+		$(midMuteButton).removeClass("muted");
+		sideGain.value = sideGain.defaultValue;
+		midGain.value = midGain.defaultValue;
+		masterGain.value = masterGain.defaultValue;
+		midLevel.gain.value = (midGain.defaultValue)/1000;
+		sideLeft.gain.value = (sideGain.defaultValue)/1000;
+		sideRight.gain.value = -(sideGain.defaultValue)/1000;
+		output.gain.value = (masterGain.defaultValue)/100;
+	});
+
+	source = context.createMediaElementSource(audio);
+	source.connect(splitter);
+
+	var canvas = document.querySelector("#" + parentID + " .visualizer");
+	var canvasCtx = canvas.getContext("2d");
+	var WIDTH = canvas.width;
+	var HEIGHT = canvas.height;
+	canvas.setAttribute('width',WIDTH);
+
+	var drawVisual;
+
+	var analyser = context.createAnalyser();
+	analyser.fftSize = 256;
+	var bufferLength = analyser.frequencyBinCount;
+	var dataArray = new Uint8Array(bufferLength);
+	output.connect(analyser);
+	
+	var midAnalyser = context.createAnalyser();
+	midAnalyser.fftSize = 256;
+	var midBufferLength = midAnalyser.frequencyBinCount;
+	var midDataArray = new Uint8Array(midBufferLength);
+	midLevel.connect(midAnalyser, 0, 0);
+	
+	var sideAnalyser = context.createAnalyser();
+	sideAnalyser.fftSize = 256;
+	var sideBufferLength = sideAnalyser.frequencyBinCount;
+	var sideDataArray = new Uint8Array(sideBufferLength);
+	sideLeft.connect(sideAnalyser, 0, 0);
+	
+	var masterLeftAnalyser = context.createAnalyser();
+	masterLeftAnalyser.fftSize = 256;
+	var masterLeftBufferLength = masterLeftAnalyser.frequencyBinCount;
+	var masterLeftDataArray = new Uint8Array(masterLeftBufferLength);
+	masterMeterSplitter.connect(masterLeftAnalyser, 0, 0);
+
+	var masterRightAnalyser = context.createAnalyser();
+	masterRightAnalyser.fftSize = 256;
+	var masterRightBufferLength = masterRightAnalyser.frequencyBinCount;
+	var masterRightDataArray = new Uint8Array(masterRightBufferLength);
+	masterMeterSplitter.connect(masterRightAnalyser, 1, 0);
+	
+	canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+	console.log(bufferLength);
+	
+	$("#" + parentID + " .loadingOverlay").remove();
+
+	function draw() {
+		drawVisual = requestAnimationFrame(draw);
+		
+		// only do rendering if the audio element is playing
+		if (!audio.paused && !audio.ended && 0 < audio.currentTime) {
+			var WIDTH = canvas.offsetWidth;
+			var HEIGHT = canvas.offsetHeight;
+			canvasCtx.canvas.width  = WIDTH;
+			canvasCtx.canvas.height  = HEIGHT;
+
+			analyser.getByteFrequencyData(dataArray);
+
+			canvasCtx.fillStyle = "transparent";
+			canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+			var barWidth = (WIDTH / bufferLength);
+			var barHeight;
+			var x = 0;
+			
+			// mid meter
+			var midArray =  new Uint8Array(midAnalyser.frequencyBinCount);
+			midAnalyser.getByteFrequencyData(midDataArray);
+			var midAverage = getAverageVolume(midDataArray);
+			midMeter.value = midAverage;
+			
+			// side meter
+			var sideArray =  new Uint8Array(sideAnalyser.frequencyBinCount);
+			sideAnalyser.getByteFrequencyData(sideDataArray);
+			var sideAverage = getAverageVolume(sideDataArray);
+			sideMeter.value = sideAverage;
+			
+			// left master meter
+			var masterLeftArray =  new Uint8Array(masterLeftAnalyser.frequencyBinCount);
+			masterLeftAnalyser.getByteFrequencyData(masterLeftDataArray);
+			var masterLeftAverage = getAverageVolume(masterLeftDataArray);
+			masterLeftMeter.value = masterLeftAverage;
+			
+			// right master meter
+			var masterRightArray =  new Uint8Array(masterRightAnalyser.frequencyBinCount);
+			masterRightAnalyser.getByteFrequencyData(masterRightDataArray);
+			var masterRightAverage = getAverageVolume(masterRightDataArray);
+			masterRightMeter.value = masterRightAverage;
+
+			for(var i = 0; i < bufferLength; i++) {
+				barHeight = dataArray[i];
+
+				// that spectrograph won't draw itself
+				var grad = canvasCtx.createLinearGradient(0,0,0,barHeight);
+				grad.addColorStop(0,"#FFC507");
+				grad.addColorStop(1,"#1989F8");
+				canvasCtx.fillStyle=grad;
+				canvasCtx.fillRect(x,HEIGHT-(barHeight/256)*HEIGHT,barWidth,(barHeight/256)*HEIGHT);
+
+				x += barWidth + 1;
+			}
+		}
+	};
+
+	draw();
+	/*
+	setTimeout(function () {
+		// adding an approximately three second timeout for loading seems to fix a relatively rare Chrome AudioContext bug.
+		$("#" + parentID + " .loadingOverlay").remove();
+	}, 3471);
+	*/
+}
+</script>
+<!-- array averaging function -->
+<script>
+function getAverageVolume(array) {
+	var values = 0;
+	var average;
+
+	var length = array.length;
+
+	// get amplitudes of all FFT frequency bins
+	for (var i = 0; i < length; i++) {
+		values += array[i];
+	}
+
+	average = values / length;
+	return average;
+}
+</script>
+<script>
+	var scaleFactor = 6;
+	var mercuryRadius = 0.3*scaleFactor;
+	var venusRadius = 0.723*scaleFactor;
+	var earthRadius = 1*scaleFactor;
+		var theMoonRadius = 1.5;
+	var marsRadius = 1.524*scaleFactor;
+	var mercuryOrbitalPeriod = 7600553.15812;
+	var venusOrbitalPeriod = 19400947.2;
+	var earthOrbitalPeriod = 31556900;
+	var moonOrbitalPeriod = 2551442.8896;
+	var marsOrbitalPeriod = 59316062.4;
+	
+	
+
+	function checkTime(i) {
+		if (i<10) {i = "0" + i};
+		return i;
+	}
+	
+	function updateUniverse() {
+		var timeInput  = document.querySelector("#timeInputBox");
+		var currentUnixTime = Date.now() / 1000;
+		timeInput.placeholder = Math.floor(currentUnixTime);
+		if (timeInput.value == "") {
+			var unixTime = currentUnixTime;
+		} else {
+			var unixTime = timeInput.value;
+		}
+		var mercuryAngle = (mercuryOrbitalPeriod-((unixTime % mercuryOrbitalPeriod)/mercuryOrbitalPeriod))*2*Math.PI-2.19200017;
+		var venusAngle = (venusOrbitalPeriod-((unixTime % venusOrbitalPeriod)/venusOrbitalPeriod))*2*Math.PI+0.95927838;
+		var earthAngle = (earthOrbitalPeriod-((unixTime % earthOrbitalPeriod)/earthOrbitalPeriod))*2*Math.PI-1.663100995;
+			var earthMeridianAngle = (86400-((unixTime % 86400)/86400))*2*Math.PI-0.27320000;
+			var theMoonAngle = ((unixTime % moonOrbitalPeriod)/moonOrbitalPeriod)*2*Math.PI-2.47203920;
+				var theMoonMeridianAngle = theMoonAngle+2*Math.PI+1.7921000;
+		var marsAngle = (marsOrbitalPeriod-((unixTime % marsOrbitalPeriod)/marsOrbitalPeriod))*2*Math.PI-2.84200054;
+
+		var mercury = document.querySelector(".planet.Mercury");
+		mercuryX = Math.cos(mercuryAngle);
+		mercuryY = Math.sin(mercuryAngle);
+		mercury.style.top = (mercuryRadius*mercuryY+"em");
+		mercury.style.left = (mercuryRadius*mercuryX+"em");
+
+		var venus = document.querySelector(".planet.Venus");
+		venusX = Math.cos(venusAngle);
+		venusY = Math.sin(venusAngle);
+		venus.style.top = (venusRadius*venusY+"em");
+		venus.style.left = (venusRadius*venusX+"em");
+
+		var earth = document.querySelector(".planet.Earth");
+		earthX = Math.cos(earthAngle);
+		earthY = Math.sin(earthAngle);
+		var earthZeroMeridian =  document.querySelector(".planet.Earth .zeroMeridian");
+		earthZeroMeridian.style.transform = "rotate("+(earthMeridianAngle)+"rad)";
+		earth.style.top = (earthRadius*earthY+"em");
+		earth.style.left = (earthRadius*earthX+"em");
+		
+			var theMoon = document.querySelector(".moon.theMoon");
+			theMoonX = Math.cos(theMoonAngle);
+			theMoonY = Math.sin(theMoonAngle);
+			var theMoonZeroMeridian =  document.querySelector(".moon.theMoon .zeroMeridian");
+			theMoonZeroMeridian.style.transform = "rotate("+(theMoonMeridianAngle)+"rad)";
+			theMoon.style.top = (theMoonRadius*theMoonY+"em");
+			theMoon.style.left = (theMoonRadius*theMoonX+"em");
+
+		var mars = document.querySelector(".planet.Mars");
+		marsX = Math.cos(marsAngle);
+		marsY = Math.sin(marsAngle);
+		mars.style.top = (marsRadius*marsY+"em");
+		mars.style.left = (marsRadius*marsX+"em");
+}
+</script>
+<!-- js inview plugin -->
+<script>
+/**
+ * author Remy Sharp
+ * url http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+ */
+(function ($) {
+    function getViewportHeight() {
+        var height = window.innerHeight; // Safari, Opera
+        var mode = document.compatMode;
+
+        if ( (mode || !$.support.boxModel) ) { // IE, Gecko
+            height = (mode == 'CSS1Compat') ?
+            document.documentElement.clientHeight : // Standards
+            document.body.clientHeight; // Quirks
+        }
+
+        return height;
+    }
+
+    $(window).scroll(function () {
+        var vpH = getViewportHeight(),
+            scrolltop = (document.documentElement.scrollTop ?
+                document.documentElement.scrollTop :
+                document.body.scrollTop),
+            elems = [];
+        
+        // naughty, but this is how it knows which elements to check for
+        $.each($.cache, function () {
+            if (this.events && this.events.inview) {
+                elems.push(this.handle.elem);
+            }
+        });
+
+        if (elems.length) {
+            $(elems).each(function () {
+                var $el = $(this),
+                    top = $el.offset().top,
+                    height = $el.height(),
+                    inview = $el.data('inview') || false;
+
+                if (scrolltop > (top + height) || scrolltop + vpH < top) {
+                    if (inview) {
+                        $el.data('inview', false);
+                        $el.trigger('inview', [ false ]);                        
+                    }
+                } else if (scrolltop < (top + height)) {
+                    if (!inview) {
+                        $el.data('inview', true);
+                        $el.trigger('inview', [ true ]);
+                    }
+                }
+            });
+        }
+    });
+})(jQuery);
+</script>
+<!-- on change orbit update function -->
+<script>
+function setOrbit(time) {
+	document.querySelector("#timeInputBox").value = time;
+	updateUniverse();
+}
+</script>
+<script>
+function updateMap(icbmString) {
+	var xPos;
+	var yPos;
+	var x = parseFloat(icbmString.slice(12,21));
+	var we = icbmString.slice(21,22);
+	var y = parseFloat(icbmString.slice(0,9));
+	var ns = icbmString.slice(9,10);
+	if (we == "W") {
+		var xPos = 50-(x/180)*50;
+	} else {
+		var xPos = 50+(x/180)*50;
+	}
+	if (ns == "N") {
+		var yPos = 50-(y/90)*50;
+	} else {
+		var yPos = 50+(y/90)*50;
+	}
+	document.querySelector(".positionMarker").style.top = yPos+"%";
+	document.querySelector(".positionMarker").style.left = xPos+"%";
+}
+</script>
+<script>
+	console.log("Hi there, fellow console enthusiast. Thanks for visiting!");
+</script>
+</head>
+<body>
+	<div class="mainContainer">
+	<header class="mainHeader">
+		<div class="mainTitleContainer"><h1 class="mainTitle">space.mrawr.net</h1></div>
+		<div class="mainNavContainer">
+			<nav class="mainNav">
+				<div id="primaryNav">
+					<div class="mainLogo"></div>
+					<div class="searchBox"><input id="searchField" type="text" placeholder="Search..."><span id="inputIndicator">&gt;</span></div>
+					<div class="navButton" id="navMainButton">main</div>
+					<a target="_blank" class="navButton" id="skypeLink" href="skype:space.error?userinfo">skype</a>
+					<a target="_blank" class="navButton" id="facebookLink" href="https://www.facebook.com/Audun.Nytroe">facebook</a>
+				</div>
+				<div id="secondaryNav">
+					<div class="navButton searchable" id="navProjectsButton" data-elementSearchTerm="projects">projects</div>
+					<div class="navButton searchable" id="navMiscButton" data-elementSearchTerm="tagMisc">misc</div>
+					<a class="navButton" id="navAboutButton" href="#809658774">about?</a>
+					<div id="pokeClock"></div>
+				</div>
+				<div class="fancySeparator"><a href="#1438652351"><i class="fa fa-chevron-down"></i></a></div>
+			</nav>
+		</div>
+	</header>
+	<div class="sidebarWrapper">
+		<div class="sidebar">
+			<div class="orbitDisplay">
+				<div class="mapContainer">
+					<div class="zoi">
+						<div class="celBody star parent" id="Sol">
+							<label>Sol</label>
+							
+							<div class="celBody planet child Mercury">
+								<div class="Mercury zeroMeridian">
+									<div class="zeroIndicator"></div>
+								</div>
+								<label>Mercury</label>
+							</div>
+							
+							<div class="celBody planet child Venus">
+								<div class="Venus zeroMeridian">
+									<div class="zeroIndicator"></div>
+								</div>
+								<label>Venus</label>
+							</div>
+							
+							<div class="celBody planet child Earth">
+								<div class="Earth zeroMeridian">
+									<div class="zeroIndicator"></div>
+								</div>
+								<label>Earth</label>
+								<div class="orbit child theMoon"></div>
+								<div class="celBody moon child theMoon">
+									<div class="theMoon zeroMeridian">
+										<div class="zeroIndicator"></div>
+									</div>
+									<label>The Moon</label>
+								</div>
+							</div>
+								
+							<div class="celBody planet child Mars">
+								<div class="Mars zeroMeridian">
+									<div class="zeroIndicator"></div>
+								</div>
+								<label>Mars</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<input id="timeInputBox">
+			</div>
+			<span class="updateNotice">Updated 20.08</span>
+			<div class="glaceon"></div>
+			<div class="shelfContainer">
+				<div class="shelf"></div>
+			</div>
+			<a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_SW.jpg" target="_blank">
+				<div class="worldMap">
+					<div class="positionMarker"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<main class="mainContent">
+
+	<!-- init entry start -->
+	
+	<article class="entry" id="initEntry">
+	<div class="entryMain">
+		<div class="sliderContainer">
+			<ul class="rslides">
+				<li><img src='res/entries/slpNordensArk0215/DSC06452_lq600px.jpg' data-adaptive-background='1' alt="Low-key snow leopard"></li>
+				<li><img src='res/slider/DSC00010e2.jpg' data-adaptive-background='1' alt="Plush fox at sunset!"></li>
+				<li><img src='res/slider/DSC00993.jpg' data-adaptive-background='1' alt="The moon, (seen from) Earth"></li>
+				<li><img src='res/slider/DSC01339.jpg' data-adaptive-background='1' alt="Streetside in Nagano, Japan"></li>
+				<li><img src='res/slider/DSC01483.jpg' data-adaptive-background='1' alt="Mt. Fuji"></li>
+				<li><img src='res/slider/IMGP0248lq.jpg' data-adaptive-background='1' alt="Longyearbyen seen from Hjortfjellet, Svalbard, Spitsbergen"></li>
+				<li><img src='res/slider/IMGP0349lq.jpg' data-adaptive-background='1' alt="Isfjord Radio, Svalbard, Spitsbergen"></li>
+				<li><img src='res/slider/DSC02307.jpg' data-adaptive-background='1' alt="Akihabara District, Tokyo"></li>
+				<li><img src='res/slider/DSC02394.jpg' data-adaptive-background='1' alt="Aquarium tank with snake-like fish"></li>
+				<li><img src='res/slider/DSC03822c.jpg' data-adaptive-background='1' alt="Functional metal arch art installation"></li>
+				<li><img src='res/slider/DSC03971.jpg' data-adaptive-background='1' alt="East Ikebukuro, Tokyo"></li>
+				<li><img src='res/slider/DSC03999.jpg' data-adaptive-background='1' alt="Nighttime cityscape, Tokyo"></li>
+				<li><img src='res/slider/DSC04973.jpg' data-adaptive-background='1' alt="&#197;re, Sweden"></li>
+				<li><img src='res/slider/DSC06277.jpg' data-adaptive-background='1' alt="Snow leopard portrait"></li>
+				<li><img src='res/slider/DSC09327.jpg' data-adaptive-background='1' alt="Low-key snow leopard"></li>
+				<li><img src='res/slider/DSC09610.jpg' data-adaptive-background='1' alt="Lianvannet, Trondheim, Norway"></li>
+				<li><img src='res/slider/IMGP9420.jpg' data-adaptive-background='1' alt="F-16 formation flight at NTM2012"></li>
+				<li><img src='res/slider/IMGP9459.jpg' data-adaptive-background='1' alt="RNoAF P-3 Orion at NTM2012"></li>
+				<li><img src='res/slider/IMGP0127.jpg' data-adaptive-background='1' alt="Maj. Eskil Amdal's demo F-16AM at NTM2012"></li>
+				<li><img src='res/slider/DSC02565.jpg' data-adaptive-background='1' alt="Glaceon at Sn&#230;fellsj&#246;kull"></li>
+				<li><img src='res/slider/LongyearPanorama_01_LQ.jpg' data-adaptive-background='1' alt="Longyearbyen seen from Platåberget, Svalbard, Spitsbergen"></li>
+				<li><img src='res/slider/Pyramiden_01_LQ.jpg' data-adaptive-background='1' alt="Pyramiden, Svalbard, Spitsbergen"></li>
+			</ul>
+		</div>
+		<script>
+		  $(function() {
+			    $(".rslides").responsiveSlides({
+				  auto: true,             // Boolean: Animate automatically, true or false
+				  speed: 500,            // Integer: Speed of the transition, in milliseconds
+				  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+				  pager: false,           // Boolean: Show pager, true or false
+				  nav: true,             // Boolean: Show navigation, true or false
+				  random: true,          // Boolean: Randomize the order of the slides, true or false
+				  pause: false,           // Boolean: Pause on hover, true or false
+				  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+				  prevText: "<",   // String: Text for the "previous" button
+				  nextText: ">",       // String: Text for the "next" button
+				  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+				  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+				  manualControls: "",     // Selector: Declare custom pager navigation
+				  namespace: "rslides",   // String: Change the default namespace used
+				  before: function(){},   // Function: Before callback
+				  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
+			});
+		  });
+
+		$(document).ready(function() {
+			resizeTargets(".sliderContainer");
+			$(".sliderContainer").resize(resizeTargets);
+			setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 125);
+			setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 300);
+			setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 500);
+			setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 125);
+			setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 300);
+			setTimeout(function() {$(".rslides").find("img").each(function() {
+				newImgLoaded(this);
+			});},5000);
+		});
+		</script>
+	</div>
+	</article>
+	
+	<!-- init entry end -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Discovery Navmaps</h2>
+		<h3 class="entryTime"><time>1438652351</time> (<time datetime="2015-08-04" pubdate>04.08.2015, 01:39</time>)</h3>
+		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" id="1438652351" href="http://link.mrawr.net/space/#1438652351"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<a target="_blank" href="http://map.mrawr.net/"><img style="width: 30em; height: auto;" src="res/entries/navmap/demo.png" alt="Map of the Ontario system"></a>
+		<p>After having had a go at <a href="#1398524154">creating a map site</a> for the <a href="https://en.wikipedia.org/wiki/Freelancer_(video_game)" target="_blank">Freelancer</a> mod <a href="http://www.moddb.com/mods/discovery-freelancer" target="_blank">Discovery</a> about two years ago, I eventually got rather tired with looking at and updating the <a href="http://navmap.mrawr.net/Alaska.html" target="_blank">old raster screenshots</a> that it provides. The result of this and a few days' work is one of my newer web projects, which uses JavaScript, jQuery and quite a lot of CSS3 to render much more usable and interactable maps directly from the game files at run time (i.e. page load) without any server-side processing, so the only maintenance it requires is fresh game files to chew on whenever there's a new update out.</p>
+		<p>The in-development version can more or less be viewed above or at <a target="_blank" href="http://map.mrawr.net">its website</a>, for those who want to click around the Sirius sector for a bit or read some infocards.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1438652351"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">D/S Skibladner</h2>
+		<h3 class="entryTime"><time>1437824700</time> (<time datetime="2015-07-25" pubdate>25.07.2015, 11:45</time>)</h3>
+		<h3 class="entryICBM">60.548608N, 11.199622E, 114m</h3>
+		<h3 class="entryCategory searchable">misc</h3>
+		<a class="entryLink" id="1437824700" href="http://link.mrawr.net/space/#1437824700"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 30em; height: auto;" src="res/entries/skibladner/DSC03202lq.jpg" alt="Two of D/S Skibladner's crankshafts.">
+		<div class="msPlayer" id="skibladner">
+			<canvas class="visualizer" width="600"></canvas>
+			<audio controls="controls" class="player" preload="metadata">
+				<source src="res/entries/skibladner/skibladner.mp3" type="audio/mpeg">
+				<source src="res/entries/skibladner/skibladner.ogg" type="audio/ogg">
+				<p>Your browser does not support the <code>audio</code> element! : (</p>
+				<p>You may download the sound file <a href="res/entries/skibladner/skibladner.mp3">here</a> instead.</p>
+			</audio>
+			<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="midTitle">MID</h3>
+			<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="444">
+			<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="sideTitle">SIDE</h3>
+			<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="568">
+			<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="masterTitle">MASTER</h3>
+			<input class="masterSlider" type="range" min="0" max="250" value="79"><button class="resetButton"><i class="fa fa-undo"></i></button>
+		</div>
+		<p>I first took a recording of the <a href="https://en.wikipedia.org/wiki/Skibladner" target="_blank">Skibladner</a>'s steam engine years ago before I had much more than a compact camera to do it with, and I've been wanting to revisit it ever since - and particularly so after getting some better recording equipment. One of the first ones can be heard <a href="res/entries/skibladner/skibladner.wav" target="_blank">here</a> (loud volume warning).</p>
+		<p>The recording above was made by hand approximately from the location pictured (i.e. the wall in the back), pointing down towards the piston heads. Equipment used was the H6 and SSH-6, <a href="#1434451727">as usual</a>.</p>
+		<p>Instructions on using the Mid/Side decoder may be found in <a href="#1433427360">this post</a>.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1437824700"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Hellishei&#240;i geothermal power station</h2>
+		<h3 class="entryTime"><time>1434451727</time> (<time datetime="2015-06-16" pubdate>16.06.2015, 10:48</time>)</h3>
+		<h3 class="entryICBM">64.266142N, 18.815813W, 260m</h3>
+		<h3 class="entryCategory searchable">misc</h3>
+		<a class="entryLink" id="1434451727" href="http://link.mrawr.net/space/#1434451727"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 30em; height: auto;" src="res/entries/icelandGeo/DSC01564.jpg" alt="Picture of 45MW high pressure turbine generator at Hellishei&#240;i geothermal power station, Iceland">
+		<div class="msPlayer" id="powerPlant">
+			<canvas class="visualizer" width="600"></canvas>
+			<audio controls="controls" class="player" preload="metadata">
+				<source src="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3" type="audio/mpeg">
+				<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_2.mp3" type="audio/mpeg">
+				<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_3.mp3" type="audio/mpeg">
+				<p>Your browser does not support the <code>audio</code> element! : (</p>
+				<p>You may download the sound file <a href="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3">here</a> instead.</p>
+			</audio>
+			<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="midTitle">MID</h3>
+			<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="710">
+			<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="sideTitle">SIDE</h3>
+			<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="670">
+			<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="masterTitle">MASTER</h3>
+			<input class="masterSlider" type="range" min="0" max="250" value="137"><button class="resetButton"><i class="fa fa-undo"></i></button>
+		</div>
+		<p>One of five recordings taken at the <a target="_blank" href="https://en.wikipedia.org/wiki/Hellishei%C3%B0i_Power_Station">Hellishei&#240;i geothermal power station</a> in Iceland. This particular one was done with the <a target="_blank" href="https://www.zoom-na.com/products/field-video-recording/field-recording/h6-handy-recorder">Zoom H6</a> and a <a target="_blank" href="https://www.zoom-na.com/products/product-accessories/zoom-ssh-6-stereo-shotgun-microphone-capsule-h5-h6-and-q8">SSH-6 mic module</a>, with the mid microphone pointed down towards the alternator of one of the two 45 MW high pressure turbine generators at Hellishei&#240;i, pictured in the bottom-right of the image above.</p>
+		<p>Instructions on using the Mid/Side decoder may be found in <a href="#1433427360">this post</a>.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1434451727"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+
+	<!-- article spacer -->
+
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">In-browser Mid/Side decoding</h2>
+		<h3 class="entryTime"><time>1433427360</time> (<time datetime="2015-06-04" pubdate>04.06.2015, 12:16</time>)</h3>
+		<h3 class="entryICBM">63.431588N, 10.379426E, 3m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" id="1433427360" href="http://link.mrawr.net/space/#1433427360"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 30em; height: auto;" src="res/entries/msDecode/audioGraph.png" alt="Mid/Side microphone setup illustration and decoding steps/routing">
+		<p>For quite some time now I've wanted a platform for uploading and showcasing my (stereo) sound recordings. As a result of this, I recently started looking into the (relatively) new <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> as it's recently started to gain <a target="_blank" href="http://caniuse.com/#feat=audio-api">fairly widespread support</a> in most of the commonly-used mobile and desktop browsers, including the latest versions of Chrome and Firefox (for both platforms).</p>
+		<p>Using this it is possible to do <a target="_blank" href="http://www.uaudio.com/blog/mid-side-mic-recording/">Mid/Side microphone setup decoding</a> <i>in-browser in real time</i>,  allowing the listener to adjust the stereo width of the recording as desired, which is - to say it mildly - a rather useful feature when it comes to posting M/S stereo recordings online. This is due to quite a lot of the point of recording anything in Mid/Side (i.e. the interactivity that arises from the possibility to modify the stereo width post-recording) is lost the moment the raw, M/S-coded recording is mixed down to regular fixed-width stereo.</p>
+		<p>As seen in the <code>AudioContext</code> connection graph above, the implementation is relatively simple: A HTML5 <code>&lt;audio&gt;</code> element is used as the audio source for a M/S-coded recording, which is then routed through a <code>ChannelSplitterNode</code>, a few <code>GainNode</code>s (which handle the phase inversion and control the per-channel gain) before going into a <code>ChannelMergerNode</code> and finally to a <code>GainNode</code> for the master gain slider. The output of this node is then routed into an <code>AnalyserNode</code> for a bit of FFT action before being pushed to a <code>&lt;canvas&gt;</code> element for rendering.</p>
+		<p>A demonstration of the current version with gain sliders for the side and mid channels plus the summed master bus may be seen below.</p>
+		<img style="width: 30em; height: auto;" src="res/entries/msDecode/DSC00840.jpg" alt="NSB local train passing over the Skansen railway bridge at dusk.">
+		<div class="msPlayer" id="skansenDemo">
+			<canvas class="visualizer" width="480"></canvas>
+			<audio controls="controls" class="player" preload="metadata">
+				<source src="res/ZOOM0031_LR.mp3" type="audio/mpeg">
+				<source src="res/ZOOM0031_LR_2.mp3" type="audio/mpeg">
+				<source src="res/ZOOM0031_LR_3.mp3" type="audio/mpeg">
+				<p>Your browser does not support the <code>audio</code> element! : (</p>
+				<p>You may download the sound file <a href="res/ZOOM0031_LR.mp3">here</a> instead.</p>
+			</audio>
+			<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="midTitle">MID</h3>
+			<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="440">
+			<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="sideTitle">SIDE</h3>
+			<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="430">
+			<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+			<h3 class="masterTitle">MASTER</h3>
+			<input class="masterSlider" type="range" min="0" max="1000" value="170"><button class="resetButton"><i class="fa fa-undo"></i></button>
+		</div>
+		<p>Adjusting the SIDE slider relative to the MID slider will adjust the stereo width of the output, while adjusting the MASTER slider will adjust the post-MID/SIDE slider gain of the output. Using headphones is strongly recommended.</p>
+		<p>An interesting thing to note here is that one of the main consequences and/or advantages/drawbacks of recording audio in Mid/Side can be seen on the FFT visualization by reducing the mid level to zero (i.e. dragging the MID slider all the way to the left, or pressing the mute button): The visualizer will show zero for all frequencies, despite there still being sound on the left and right channels. Why is this?</p>
+		<p>Well. The visualizer is only looking at a (mono) single channel version of the signal; the sum (i.e. the mono signal mentioned earlier) of the two side channels is indeed zero as they are the inverse of each other, and the sum of a wave and its inverse <a href="http://www.phys.uconn.edu/~gibson/Notes/Section5_2/Sec5_2.htm">is neccessarily zero</a>. This is important to note, as it has implications for what'll happen if a Mid/Side recording is run through a single speaker or other mono audio source: The side channels will cancel each other out and disappear completely and leave only the mid channel audible in the output.</p>
+		<p>The recording was made earlier this year, and features the old <a href="https://en.wikipedia.org/wiki/Skansen_Bridge" target="_blank">Skansen bridge</a> in Trondheim (see the <a target="_blank" href="https://goo.gl/maps/czweS">entry coordinates</a>) in rain with two local trains passing over near the start and end of the track. It was recorded using the <a target="_blank" href="https://www.zoom-na.com/products/field-video-recording/field-recording/h6-handy-recorder">Zoom H6</a> equipped with a <a target="_blank" href="https://www.zoom-na.com/products/product-accessories/zoom-ssh-6-stereo-shotgun-microphone-capsule-h5-h6-and-q8">SSH-6 mic module</a>, with the recorder placed directly under the middle of the bridge with the microphone setup angled slightly up towards the train tracks overhead.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1433427360"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Nordens Ark V2015</h2>
+		<h3 class="entryTime"><time>1423320544</time> (<time datetime="2015-02-07" pubdate>07.02.2015, 14:49</time>)</h3>
+		<h3 class="entryICBM">58.438510N, 11.431632E, 58m</h3>
+		<h3 class="entryCategory searchable">misc</h3>
+		<a class="entryLink" id="1423320544" href="http://link.mrawr.net/space/#1423320544"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06452_lq600px.jpg" alt="Nordens Ark 1">
+		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC09228_lq600px.jpg" alt="Nordens Ark 2">
+		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC09327_lq600px.jpg" alt="Nordens Ark 3">
+		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06785_lq600px.jpg" alt="Nordens Ark 4">
+		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06269cc_lq600px.jpg" alt="Nordens Ark 5">
+		<p>It's fun to see how fast these have grown up since 2013! It's not even all that easy to distinguish between the adults and kids any more at this point, unless you're up for identifying them by their markings.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1423320544"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Uncia Uncia</h2>
+		<h3 class="entryTime"><time>1420169060</time> (<time datetime="2015-01-02" pubdate>02.01.2015, 11:24</time>)</h3>
+		<h3 class="entryICBM">35.647939N, 139.395531E, 165m</h3>
+		<h3 class="entryCategory searchable">misc</h3>
+		<a class="entryLink" id="1420169060" href="http://link.mrawr.net/space/#1420169060"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 30em; height: auto;" src="res/slider/DSC02682.jpg" alt="Tama Zoo, Tokyo">
+		<audio controls="controls" preload="metadata" style="width: 30em;">
+			<source src="res/entries/audioTama/slp2_lc.mp3" type="audio/mpeg">
+			<source src="res/entries/audioTama/slp2_lc_2.mp3" type="audio/mpeg">
+			<source src="res/entries/audioTama/slp2_lc_3.mp3" type="audio/mpeg">
+			<p>Your browser does not support the <code>audio</code> element! : (</p>
+			<p>You may download the sound file <a href="res/entries/audioTama/slp2_lc.mp3">here</a> instead.</p>
+		</audio>
+		<p>Probably one of the more interesting recordings I've done of snow leopard cries; in my experience so far they're usually not quite as vocal as this, so I guess I'll consider myself lucky.</p>
+		<p>The enclosure does have running water inside it with a fence and a few other things between the mic and... subject producing some warbly effects and distortion. The quality of the H6's MSH-6 mic probably contributes (negatively) to this as well, though, but I'm perfectly happy that the bits with snow leopard in them sound alright compared to what I've found online so far.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1420169060"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+
+	<!-- article spacer -->
+	
+	<article class="entry" id="1413018467">
+	<header class="entryHeader">
+		<h2 class="entryTitle">KspPy or bust</h2>
+		<h3 class="entryTime"><time>1413018467</time> (<time datetime="2014-10-11" pubdate>11.10.2014, 11:07</time>)</h3>
+		<h3 class="entryICBM">63.417963N, 10.401233E, 41m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1413018467"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 30em; height: auto;" src="res/entries/KspPy/KspPy1_lq.jpg" alt="A picture of the stock Aeris Mk 4 being controlled from Python.">
+		<p>After getting into cybernetics and control systems this autumn, I started stumbling around for a while trying to find a fun simulation environment to stage some experiments in. I wanted to start making an autopilot for Kerbal Space Program using PID controllers and various other forms of control logic, and initally started looking at keyboard emulation and a few rather roundabout ways for getting data in and out of KSP.</p>
+		<p>Fortunately, it turns out that there's a much better and well-tested solution out there already: the <a target="_blank" href="http://forum.kerbalspaceprogram.com/threads/24594-0-25-(2014-10-12)-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser">Telemachus</a> mod! It provides a really nifty <a href="https://github.com/richardbunt/Telemachus/wiki/HTTP-API">API</a> for getting data in and out of the game, requiring barely any setup beyond installing the mod to get it up and running, but there's (unfortunately) not a lot of documentation or help out there for programmatically controlling KSP with it, at least not for Python 3.</p>
+		<p>Here's a small Python 3 usage example that should help you get started if you're so inclined; it should be simple enough to understand even if you're relatively new to the language (like me).</p>
+		<div class="codeContainer" style="border: 0.1em black dashed; overflow: hidden;">
+		<pre style="color:#000000;margin-left: 1em; margin-top: 0.7em; margin-bottom: 0em; font-size: 0.9em">
+<span style='color:#696969; '># config start</span>
+tmurl <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>"http://127.0.0.1:8085/telemachus/datalink?alt="</span>
+updateRate <span style='color:#808030; '>=</span> <span style='color:#008000; '>0.08</span>
+<span style='color:#696969; '># config end</span>
+
+<span style='color:#696969; '># init start</span>
+<span style='color:#800000; font-weight:bold; '>import</span> json
+<span style='color:#800000; font-weight:bold; '>import</span> urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>,</span> urllib<span style='color:#808030; '>.</span>error<span style='color:#808030; '>,</span> urllib<span style='color:#808030; '>.</span>parse
+<span style='color:#800000; font-weight:bold; '>import</span> socket
+<span style='color:#800000; font-weight:bold; '>import</span> time
+
+programCounter <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span>
+
+<span style='color:#800000; font-weight:bold; '>def</span> fetch<span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+    tmdata <span style='color:#808030; '>=</span> urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>.</span>urlopen<span style='color:#808030; '>(</span>tmurl <span style='color:#808030; '>+</span> <span style='color:#e34adc; '>str</span><span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+    tmdata_out <span style='color:#808030; '>=</span> json<span style='color:#808030; '>.</span>loads<span style='color:#808030; '>(</span>tmfetch<span style='color:#808030; '>.</span>readall<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>.</span>decode<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'utf-8'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+    <span style='color:#800000; font-weight:bold; '>return</span> tmdata_out<span style='color:#808030; '>[</span><span style='color:#0000e6; '>"alt"</span><span style='color:#808030; '>]</span>
+
+<span style='color:#800000; font-weight:bold; '>def</span> write<span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+    urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>.</span>urlopen<span style='color:#808030; '>(</span>tmurl <span style='color:#808030; '>+</span> <span style='color:#e34adc; '>str</span><span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+<span style='color:#696969; '># init end</span>
+
+write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.stage"</span><span style='color:#808030; '>)</span>
+write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.sas"</span><span style='color:#808030; '>)</span>
+
+<span style='color:#800000; font-weight:bold; '>while</span> <span style='color:#e34adc; '>True</span><span style='color:#808030; '>:</span>
+    time<span style='color:#808030; '>.</span>sleep<span style='color:#808030; '>(</span>updateRate<span style='color:#808030; '>)</span>
+    programCounter <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span>
+
+    <span style='color:#696969; '># get data from KSP</span>
+    altAGL <span style='color:#808030; '>=</span> fetch<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"v.heightFromTerrain"</span><span style='color:#808030; '>)</span>
+    liquidFuel <span style='color:#808030; '>=</span> fetch<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"r.resource[LiquidFuel]"</span><span style='color:#808030; '>)</span>
+    
+    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>programCounter <span style='color:#808030; '>%</span> <span style='color:#008c00; '>100</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+	<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>"Altitude (AGL) (m):"</span><span style='color:#808030; '>,</span> altAGL<span style='color:#808030; '>)</span>
+	<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>"Liquid Fuel (kg):"</span><span style='color:#808030; '>,</span> liquidFuel<span style='color:#808030; '>)</span>
+
+    <span style='color:#696969; '># set throttle to max if below 100 m AGL</span>
+    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>altAGL <span style='color:#808030; '>></span> <span style='color:#008c00; '>100</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.setThrottle[0]"</span><span style='color:#808030; '>)</span>
+    <span style='color:#800000; font-weight:bold; '>else</span><span style='color:#808030; '>:</span>
+	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.setThrottle[1]"</span><span style='color:#808030; '>)</span>
+
+    <span style='color:#696969; '># no fuel, you say? no problem:</span>
+    <span style='color:#696969; '># spam the stage/typewriter button and hope for the best</span>
+    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>liquidFuel <span style='color:#808030; '>&lt;</span> <span style='color:#008c00; '>5</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.stage"</span><span style='color:#808030; '>)</span>
+		</pre>
+		</div>
+	<p>The important bits here are the fetch(tmvar) and write(tmvar) functions, which get and write data to and from KSP via the <a target="_blank" href="https://github.com/richardbunt/Telemachus/wiki/HTTP-API">Telemachus HTTP API</a> using <a href="https://github.com/richardbunt/Telemachus/wiki/API-String">API query strings</a> such as <code>r.resource[LiquidFuel]</code>. I've personally got most of those in a library that saves me from having to remember all the different query strings, but that's not quite ready for the public just yet; however, the functionality of this minimal usage example is almost exactly the same.</p>
+	<p>Safe flights, and be careful with the polling/update rate! You <i>will</i> kill the connection if you push it too low, though the exact lower limit will probably depend on your setup.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1413018467"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Tinychart</h2>
+		<h3 class="entryTime"><time>1413629374</time> (<time datetime="2014-10-18" pubdate>18.10.2014, 12:50</time>)</h3>
+		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" id="1413629374" href="http://link.mrawr.net/space/#1413629374"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<a target="_blank" href="res/entries/tinyChart/410pxTypeChart.gif" style="display: block; text-align: center; width: 50%; padding-top: 0.5em; padding-bottom: 1em; float: left;"><img style="width: 32%; height: auto;" src="res/entries/tinyChart/410pxTypeChart.gif" alt="Tiny Pok&eacute;mon type chart"></a>
+		<a target="_blank" href="res/entries/tinyChart/240pxTypeChart4.gif" style="display: block; text-align: center; width: 50%; padding-top: 0.5em; padding-bottom: 1em; float: left;"><img style="width: 32%; height: auto;" src="res/entries/tinyChart/240pxTypeChart4.gif" alt="Tiny Pok&eacute;mon type chart"></a>
+		<p>A simple 41px 1.11KB Pok&eacute;mon type matchup chart. This is actually quite a bit more usable than it looks (provided that you scale it up a bit)! The rows indicate the attacking type, and the columns are the defending type (like on most type charts). It may work for you if you've played the games for years and recognize the types by colour, but still can't fathom the type matchups. Might even be able to fit this on a 3DS for in-battle use.</p>
+		<p>This is probably almost as small as you can make a type chart; you could technically remove the extra type rows/columns and the grid to get it down to ~21px, but that'd probably render it unreadable in the process.</p>
+		<p>EDIT: Added a 24px one. Actually works a lot better than the original, in my opinion.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1413629374"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Google Drive web hosting</h2>
+		<h3 class="entryTime"><time>1411064579</time> (<time datetime="2014-09-18" pubdate>18.09.2014, 18:22</time>)</h3>
+		<h3 class="entryICBM">63.395094N, 10.365054E, 129m</h3>
+		<h3 class="entryCategory searchable">misc</h3>
+		<a class="entryLink" id="1411064579" href="http://link.mrawr.net/space/#1411064579"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<a href="http://drive.google.com" style="display: block; text-align: center; width: 100%; padding-top: 0.5em;" target="_blank"><img style="width: 10%; height: auto;" src="res/entries/gDrive/gDrive.png" alt="Google Drive logo"></a>
+		<p>As you may have noticed, this and all the rest of my websites are and have been dependent on iframes for quite some time. The reason for this is rather simple: Almost all of them are hosted on Google Drive, with a bit of jQuery and AJAX here and there providing sparks of dynamic content in my wasteland of static flat HTML files. As you may have guessed by this point, there are quite a few drawbacks to using Google Drive, but for simple, small web sites like this one there are plenty of upsides to it as well.</p>
+		<p>If you'd like to give it a go yourself - which I've been asked about a few times before - it's really as simple as setting up web hosting could get: Create a new Google Drive folder, right click and set the sharing options on it to "Public on the web", throw a HTML file or two in there (and whatever else you may want accessible online) and access it by heading to:</p>
+		<p style="text-align: center;">http://googledrive.com/host/<a href="res/entries/gDrive/IDStringDrive.png" target="_blank">yourfoldersharingid</a>/site.html</p>
+		<p>And that's pretty much it!</p>
+		<p>Like I mentioned earlier, however, there's no real way to get a custom domain name on your Drive websites without resorting to a domain name provider that can host an iframe with your Drive website in it like Namecheap (which I'm using) or something similar. That's a rather small drawback for free, simple and always-on web hosting, though. At least it's a lot better and more reliable than my (or your) poor, old, chronically broken laptop server if all you need is somewhere to throw your (mostly) static HTML, CSS and image files.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1411064579"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Using Skype v4.2.0.187</h2>
+		<h3 class="entryTime"><time>1404296085</time> (<time datetime="2014-07-02" pubdate>02.07.2014, 10:14</time>)</h3>
+		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+		<h3 class="entryCategory searchable">misc</h3>
+		<a class="entryLink" id="1404296085" href="http://link.mrawr.net/space/#1404296085"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+			<a href="https://www.google.com/search?q=what+is+my+ip" target="_blank">Find your IP address</a>
+			<div style="">
+				<input type="text" id="ipnum" size="15">
+				<input type="button" value="Convert" onclick="convert();return false;">
+			</div>
+			<p><b>Edit:</b> As of 18.08.2014, it seems like Microsoft has finally pulled the plug on v4.2.0.187; it is no longer be able to log in at all, and there is no known fix for it at this time, unfortunately.</p>
+			<p>Sometime in 2013, Microsoft silently made the Skype login servers provide invalid IP details to the v4.2.0.187 client (<a href="http://drive.mrawr.net/SkypeSetup_4.2.0.187.exe" target="_blank">download</a>), essentially making all fresh installs of this Skype version unable to log in any more.</p>
+			<p>The solution to this "feature" is luckily rather simple: Provide valid IP details yourself.</p>
+			<p>First, attempt to log in on your new copy of Skype v4.2.0.187 once. It will fail, so don't worry about that just yet.
+			<p>After that, navigate to Skype's shared.xml file in "%appdata%/Skype" (type that into the "Run" window; Windows key + R) and open it in Notepad. Take a backup of it as well, just in case anything goes wrong.</p>
+			<p>Then use Notepad's "Find" function (ctrl + F) to locate "&lt;LastIP&gt;". Replace the number in between <code>&lt;LastIP&gt;</code> and <code>&lt;/LastIP&gt;</code> with the number you get when you enter your IP address into the textbox above after clicking "Convert". If those two tags don't exist in your shared.xml file, you'll have to add them yourself after the opening <code>&lt;Connection&gt;</code> tag. Directly after it should work.</p>
+			<p>Save the file after ensuring that you've only replaced the number enclosed by the <code>&lt;LastIP&gt;</code> and <code>&lt;/LastIP&gt;</code> tags, without overwriting any of the <code>&lt;</code>s or <code>&gt;</code>s.</p>
+			<p>Start Skype; enjoy your (smoke)s and blinking text.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1404296085"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+		
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Not A Team Rocket Announcement</h2>
+		<h3 class="entryTime"><time>1404029527</time> (<time datetime="2014-06-29" pubdate>29.06.2014, 08:12</time>)</h3>
+		<h3 class="entryICBM">58.438510N, 11.431632E, 58m</h3>
+		<h3 class="entryCategory searchable">misc</h3>
+		<a class="entryLink" id="1404029527" href="http://link.mrawr.net/space/#1404029527"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/BigCat01_res1.jpg" alt="Playful snow leopard cub">
+		<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/IMGP9918_res1.jpg" alt="Two snow leopards playfighting">
+		<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/IMGP9891_res2.jpg" alt="Snow leopard family. Minus one member.">
+		<p style="text-align: center;"><i>Plot twist: It's actually a snow leopard announcement.</i></p>
+		<p></p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1404029527"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Team Rocket Announcement</h2>
+		<h3 class="entryTime"><time>1403554657</time> (<time datetime="2014-06-23" pubdate>23.06.2014, 20:17</time>)</h3>
+		<h3 class="entryICBM">63.400845N, 10.316698E, 220m</h3>
+		<h3 class="entryCategory searchable">team_rocket</h3>
+		<a class="entryLink" id="1403554657" href="http://link.mrawr.net/space/#1403554657"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<p>...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket!</p>
+		<iframe class="youtubeAudio" width="100" height="65" src="//www.youtube.com/embed/hTaW0HK-Cw4" seamless></iframe>
+		<p>(<i>In other news, I've gone through another (!) revision of my home page. Who would have thought that one could go through five hosting solutions and layouts in less than two years without actually having any content to display!</i>)</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Team Rocket Executive</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1403554657"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">"Russekort"!</h2>
+		<h3 class="entryTime"><time>1399061035</time> (<time datetime="2014-05-02" pubdate>02.05.2014, 20:03</time>)</h3>
+		<h3 class="entryICBM">63.395094N, 10.365054E, 129m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" id="1399061035" href="http://link.mrawr.net/space/#1399061035"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<img style="width: 14.85em; height: auto;" src="res/entries/russekort/russekort_vfin.jpg" alt="Printed card">
+		<img style="width: 14.85em; height: auto;" src="res/entries/russekort/RusseKortRendered.png" alt="Browser-rendered (in Firefox, not Lynx) version of the code on the printed card.">
+		<p>This is a small bit of (nerdy) web design work that I did (mostly) back in November in preparation for May 2014. It's a form of <a href="http://en.wikipedia.org/wiki/Russefeiring#Cards_.28Russekort.29" target="_blank">contact card</a> which includes the source code for rendering the code for the actual card in a browser (though I admittedly had to resort to a few cheats, particularly for mobile browser compatibility).</p>
+		<p>The QR code leads to <a href="http://r.mrawr.net" target="_blank">this companion site</a> (in Norwegian), which enabled mobile users - i.e. most people who were going to see the card - to see a rendered version of it in their web browser, along with a few explanations.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1399061035"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">One-off websites</h2>
+		<h3 class="entryTime"><time>1398524154</time> (<time datetime="2014-04-26" pubdate>26.04.2014, 14:55</time>)</h3>
+		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" id="1398524154" href="http://link.mrawr.net/space/#1398524154"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<a href="http://teachy.tv/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/TeachyTV.jpg" alt="Image of the Teachy.TV web site"></a>
+		<a href="http://rk.mrawr.net/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/rk01.png" alt="Image of the Russeknuter Trondheim 2014 web site"></a>
+		<a href="http://navmap.mrawr.net/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/Navmap2.jpg" alt="Image of the Discovery Navmaps web site"></a>
+		<p>There have been a few of these over the years, and there are probably quite a few more to come. The first one is perhaps the most stupid one, and even has it's own domain name registered (for now). Not bad for a site based off two rather fun hours on the <a href="http://twitch.tv/twitchplayspokemon">TwitchPlaysPokemon stream</a>. The other two are (were?) rather more useful, I suppose.</p>
+		<a class="fullWidthLink" target="_blank" href="http://teachy.tv/">Teachy TV</a>
+		<a class="fullWidthLink" target="_blank" href="http://rk.mrawr.net/">Russeknuter for Trondheim, 2014</a>
+		<a class="fullWidthLink" target="_blank" href="http://navmap.mrawr.net/">Discovery Mod Navmaps</a>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1398524154"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Mozzi/Arduino synthesizer</h2>
+		<h3 class="entryTime"><time>1378683316</time> (<time datetime="2013-09-08" pubdate>08.09.2013, 23:35</time>)</h3>
+		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" id="1378683316" href="http://link.mrawr.net/space/#1378683316"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<p>This is a small (currently) one-oscillator USB MIDI-controlled synthesizer sketch made for the Teensy++ 2.0 microcontroller (which I'm a rather large fan of) utilizing the Mozzi library (which it requires). The USB MIDI version uses no external parts except for a few wires to connect it to a mixer/amp, and has a basic LFO, low-pass filter, an AD envelope and, of course, a single sine/square/saw/triangle wave oscillator.</p>
+		<p>Please see the attached Arduino sketch below for more information.</p>
+		<a target="_blank" href="https://googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/mrawr/files/OneOscSynth6_0-130719a.zip">OneOscSynth6.0 sketch</a>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1378683316"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">Discovery Search Engine</h2>
+		<h3 class="entryTime"><time>1350440274</time> (<time datetime="2012-10-17" pubdate>17.10.2012, 02:17</time>)</h3>
+		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+		<h3 class="entryCategory searchable">projects</h3>
+		<a class="entryLink" id="1350440274" href="http://link.mrawr.net/space/#1350440274"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<p>A small Google Custom Search wrapper for the <a href="http://discoverygc.com" target="_blank">Discovery mod and community site(s)</a>. It uses promotions and a few other Google CSE goodies to help improve searches, including a large search term suggestion database.</p>
+		<a target="_blank" href="http://dgc.mrawr.net">Discovery Search Engine</a>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#1350440274"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+
+	<article class="entry">
+	<header class="entryHeader">
+		<h2 class="entryTitle">About</h2>
+		<h3 class="entryTime"><time>809658774</time> (<time datetime="1995-08-29">29.08.1995, 01:12</time>)</h3>
+		<h3 class="entryICBM">63.421474N, 10.386919E, 12m</h3>
+		<!-- I won't give you a cookie if you can guess why the current tag for the "about" page is "about?". Sorry. Best workaround 2014 (as long as there are no other mentions of "about?" on the page, at least. Won't last for long). Kappa -->
+		<h3 class="entryCategory searchable">about?</h3>
+		<a class="entryLink" id="809658774" href="http://link.mrawr.net/space/#809658774"><i class="fa fa-link"></i>Link to this entry</a>
+	</header>
+	<div class="entryMain">
+		<p>That timestamp may be a bit off, unfortunately. Probably. I think I remember something about it being during the night, at least.</p>
+		<p>To keep things short: I'm a web design enthusiast/n00b, snow leopard enthusiast and a hobbyist ambient audio recorder. Plus a few other things.</p>
+		<p>This is my home page that I'm going to be using to post projects I'm working on, mostly for my own enjoyment so I've got some documentation of what I've done so far, and so I can get some of it up on the 'net in case I feel like showing it to somebody one day.</p>
+		<p>It is currently hosted on Google Drive, running on the Glorious Flat File CMS (tm) system aided by a little jQuery to keep things manageable until I get it up and running on a home server again. Looking forward to that one.</p>
+		<p>If you need to contact me, the "Facebook" and "Skype" links on the navigation header would perhaps be good starting points.</p>
+		<a class="lynxFriendly" href="http://www.cs.umanitoba.ca/~djc/personal/lynxfriend.html"><img src="res/LynxFriendly_v1.png" alt="This web site is designed to be Lynx-friendly!"></a>
+		<p><i>(You'll just have to trust me on that one. Unless you're one of the few Lynx/screen reader users out there, of course. Hi!)</i></p>
+		<p>Disclaimers and credits: Pok&eacute;mon, the team sprites and all related content belongs to GameFreak/Nintendo. The code for the slider, adaptive background and dominant colour finder belong to their respective creators. All credit for the background images go to the (unfortunately unknown) creator(s). Everything else here was created by or otherwise belongs to me, unless anything else is explicitly stated or if the content is used under the terms of a license that does not require direct attribution.</p>
+	</div>
+	<footer class="entryFooter">
+		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+		<a class="entryLink" href="http://link.mrawr.net/space/#809658774"><i class="fa fa-link"></i>Link to this entry</a>
+	</footer>
+	</article>
+	
+	<!-- article spacer -->
+	
+	<a class="topLinkButton" href="#">
+		<i class="fa fa-paw" id="bottomLeftPaw"></i>
+		<i class="fa fa-paw" id="topRightPaw"></i>
+		<div class="scrollUpText">scroll up</div>
+	</a>
+	
+	</main>
+	</div>
+	
+	<!-- g analytics -->
+	<script>
+            var _gaq=[['_setAccount','UA-33754219-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+	
+	<!-- pokeclock script exec -->
+	<script>
+		(function() {
+		    updateClock();
+		    setInterval(updateClock, 1000);
+		})();
+	</script>
+	
+	<!-- orbit script exec -->
+	<script>
+		(function() {
+			updateUniverse();
+			setInterval(updateUniverse, 1000);
+			$(".entryTime time:first-child").bind('inview', function (event, visible) {
+				  if (visible == true) {
+					var time =  $(this).html();
+					var icbmString =  $(this).closest(".entryTime").next(".entryICBM").html();
+					setOrbit(time);
+					updateMap(icbmString);
+				  } else {
+					// element has gone out of viewport
+				  }
+			});
+		})();
+	</script>
+</body>
+</html>
