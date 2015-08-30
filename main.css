@@ -622,7 +622,7 @@ body.evening #pokeNavImg {
 .fancySeparator a {
 	width: 100%;
     display: inline-block;
-    top: -0.15em;
+    top: -0.3em;
     bottom: 0;
     position: relative;
     font-size: 3em;
@@ -717,6 +717,18 @@ body.evening #pokeNavImg {
 	border-top-left-radius: 0.3em;
 	color: #3F53DD !important;
 	text-decoration: none !important;
+}
+
+.rslides_nav.prev span {
+	position: relative;
+	top: -0.125em;
+	left: -0.05em;
+}
+
+.rslides_nav.next span {
+	position: relative;
+	top: -0.125em;
+	left: 0.05em;
 }
 
 .rslides_nav:hover {
