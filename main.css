@@ -267,24 +267,24 @@ code {
 }
 
 .logo .end {
-  display: inline-block;
-  color: #39CDEE;
-  text-shadow: 0 0 0.05em #39CDEE;
+	display: inline-block;
+	color: #39CDEE;
+	text-shadow: 0 0 0.05em #39CDEE;
 }
 
 .logo .mid {
-  display: inline-block;
-  text-shadow: 0 0 0.05em #1073C5;
-  color: #1073C5;
+	display: inline-block;
+	text-shadow: 0 0 0.05em #1073C5;
+	color: #1073C5;
 }
 
 .logo .end .dash {
-  height: 0;
-  width: 96%;
-  border: solid #1073C5 0.025em;
-  position: relative;
-  top: -0.2em;
-  box-shadow: 0 0.01em 0.1em 0.05em rgba(127, 127, 255, 0.15);
+	width: 99%;
+	position: relative;
+	top: -0.18em;
+	box-shadow: 0px 0.01em 0.1em 0.05em rgba(127, 127, 255, 0.15);
+	height: 0.05em;
+	background: #1073C5;
 }
 
 /* 471 logo styles end */
