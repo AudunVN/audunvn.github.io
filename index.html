@@ -1377,7 +1377,6 @@ write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.sas"
 					var icbmString =  $(this).closest(".entryTime").next(".entryICBM").html();
 					setOrbit(time);
 					updateMap(icbmString);
-					window.location.hash = time;
 					history.pushState(time, "471.no "+time, "#"+time);
 				  } else {
 					// element has gone out of viewport
