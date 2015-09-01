@@ -1216,7 +1216,7 @@ button.muteButton:active, button.resetButton:active {
 #timeInputBox {
 	margin: 0;
 	position: absolute;
-	top: 0.6666666667em;
+	top: 0.444444em;
 	font-size: 1.5em;
 	width: 10.466667em;
 	height: 1.2em;
@@ -1244,7 +1244,7 @@ button.muteButton:active, button.resetButton:active {
 	border-radius: 999em;
 	background: url("res/eso1045ccc.jpg") black;
 	background-size: contain;
-	top: 5em;
+	top: 4.266667em;
 	border: 0.1em solid white;
 	left: -0.1em;
 	font-size: 0.8125em;
