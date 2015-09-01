@@ -90,7 +90,7 @@
           else {
             $parent = $this.parent();
           }
-	console.log(data.color);
+
           $parent.css({ backgroundColor: data.color });
 
           // Helper function to calculate yiq - http://en.wikipedia.org/wiki/YIQ
