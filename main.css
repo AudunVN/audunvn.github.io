@@ -1226,6 +1226,7 @@ button.muteButton:active, button.resetButton:active {
 	border: solid 0.1em gray;
 	border-radius: 0.6em;
 	font-family: "Open Sans", sans-serif;
+	padding: 0.025em;
 }
 		
 .mapContainer {
