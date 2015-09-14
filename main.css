@@ -284,7 +284,25 @@ code {
 	top: -0.18em;
 	box-shadow: 0px 0.01em 0.1em 0.05em rgba(127, 127, 255, 0.15);
 	height: 0.05em;
-	background: #1073C5;
+	background-color: #1073C5;
+	background: transparent linear-gradient(270deg, #1073C5, #39CDEE) repeat scroll 0% 0% / 400% 400%;
+}
+
+// keyframes for the dash gradient animation
+@-webkit-keyframes pulse {
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
+}
+@-moz-keyframes pulse {
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
+}
+@keyframes pulse {
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
 }
 
 /* 471 logo styles end */
