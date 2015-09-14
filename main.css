@@ -286,6 +286,9 @@ code {
 	height: 0.05em;
 	background-color: #1073C5;
 	background: transparent linear-gradient(270deg, #1073C5, #39CDEE) repeat scroll 0% 0% / 400% 400%;
+	-webkit-animation: pulse 7s ease infinite;
+	-moz-animation: pulse 7s ease infinite;
+	animation: pulse 7s ease infinite;
 }
 
 // keyframes for the dash gradient animation
