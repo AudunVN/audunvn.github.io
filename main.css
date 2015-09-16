@@ -1539,12 +1539,12 @@ body {
   margin-bottom: 0.125em;
 }
 
-.receiverBox i.fa-battery-half {
+.receiverBox i.fa-bolt {
   margin: 0 auto;
   position: relative;
-  color: white;
-  top: 0.65em;
-  text-shadow: 0 0 0.1em white;
+  color: #FBFF00;
+  top: 0.5em;
+  /* text-shadow: 0 0 0.1em white; */
 }
 
 .spaceElevator .laserReceiver {
