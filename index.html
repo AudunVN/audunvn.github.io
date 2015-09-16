@@ -17,7 +17,7 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="main.css" >
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="res/js/prefixfree.min.js"></script>
 	
@@ -667,689 +667,778 @@ function updateMap(icbmString) {
 }
 </script>
 <script>
+$(document).ready(function() {
+var starClassArray = ["O", "B", "A", "F", "F", "F", "G", "G", "G", "G", "G", "G", "G", "K", "K", "K", "K", "K", "K", "K", "K", "K", "K", "K", "K", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M"];
+
+function generateStarfield(starCount, containerSelector, avgFreq) {
+  for (i = 0; i < starCount; i++) {
+    x = Math.random() * 100;
+    y = Math.random() * 100;
+    magnitude = Math.random();
+    starClass = starClassArray[Math.floor(Math.random() * starClassArray.length)];
+    new Star(x, y, magnitude, starClass, i, containerSelector);
+  }
+  twinkleEvent(avgFreq, starCount);
+}
+
+function twinkleEvent(avgFreq, elementCount) {
+  // -> removing the class
+  var element = document.querySelector("#no" + Math.floor(Math.random() * elementCount));
+  element.classList.remove("twinkle");
+
+  // -> triggering reflow /* The actual magic */
+  // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
+  element.offsetWidth = element.offsetWidth;
+
+  // -> and re-adding the class
+  element.classList.add("twinkle");
+  setTimeout(function() {
+    twinkleEvent(avgFreq, elementCount);
+  }, Math.random() * 1000 + 1000 / avgFreq);
+}
+
+function Star(x, y, magnitude, classString, number, containerSelector) {
+  var starObject = document.createElement("div");
+  var container = document.querySelector(containerSelector);
+  starObject.className = "star " + classString;
+  starObject.id = "no" + number;
+  starObject.style.left = x + "%";
+  starObject.style.top = y + "%";
+
+  starObject.style.opacity = magnitude;
+
+  starObject.style.position = "absolute";
+  container.appendChild(starObject);
+}
+
+(function init() {
+  generateStarfield(300, '.starfield', 500000);
+})();
+});
+</script>
+<script>
 	console.log("Hi there, fellow console enthusiast. Thanks for visiting!");
 </script>
 </head>
 <body>
-	<div class="mainContainer">
-	<header class="mainHeader">
-		<div class="mainTitleContainer"></div>
-		<div class="mainNavContainer">
-			<nav class="mainNav">
-				<div id="primaryNav">
-					<div class="logo">
-						<span class="start">47</span><span class="end"><span class="mid">1</span>.no<div class="dash"></div></span>
-					</div>
-					<div class="searchBox"><input id="searchField" type="text" placeholder="Search..."><span id="inputIndicator">&gt;</span></div>
-					<div class="navButton" id="navMainButton">main</div>
-					<a target="_blank" class="navButton" id="skypeLink" href="skype:space.error?userinfo">skype</a>
-					<a target="_blank" class="navButton" id="facebookLink" href="https://www.facebook.com/Audun.Nytroe">facebook</a>
-				</div>
-				<div id="secondaryNav">
-					<div class="navButton searchable" id="navProjectsButton" data-elementSearchTerm="projects">projects</div>
-					<div class="navButton searchable" id="navMiscButton" data-elementSearchTerm="tagMisc">misc</div>
-					<a class="navButton" id="navAboutButton" href="#809658774">about?</a>
-					<div id="pokeClock"></div>
-				</div>
-				<div class="fancySeparator"><a href="#1438652351"><i class="fa fa-chevron-down"></i></a></div>
-			</nav>
+	<div class="backgroundContainer">
+		<div class="starfield"></div>
+		<div class="sun"></div>
+		<div class="atmosphere"></div>
+		<div class="spaceshipBody primaryShipColor">
+			<div class="tailFin"></div>
+			<div class="fuelContainer"></div>
+			<div class="noseCone primaryShipColor"></div>
+			<div class="windShield"></div>
+			<i class="fa-battery-full fa door"></i>
+			<div class="leg left"></div>
+			<div class="leg right"></div>
+			<div class="navLight flashing"></div>
+			<div class="windowContainer">
+				<div class="window left"></div>
+				<div class="window middle"></div>
+				<div class="window right "></div>
+			</div>
+			<div class="engineStack">
+				<div class="nozzle upper"></div>
+				<div class="nozzle lower"></div>
+			</div>
 		</div>
-	</header>
-	<div class="sidebarWrapper">
-		<div class="sidebar">
-			<div class="orbitDisplay">
-				<div class="mapContainer">
-					<div class="zoi">
-						<div class="celBody star parent" id="Sol">
-							<label>Sol</label>
-							
-							<div class="celBody planet child Mercury">
-								<div class="Mercury zeroMeridian">
-									<div class="zeroIndicator"></div>
-								</div>
-								<label>Mercury</label>
-							</div>
-							
-							<div class="celBody planet child Venus">
-								<div class="Venus zeroMeridian">
-									<div class="zeroIndicator"></div>
-								</div>
-								<label>Venus</label>
-							</div>
-							
-							<div class="celBody planet child Earth">
-								<div class="Earth zeroMeridian">
-									<div class="zeroIndicator"></div>
-								</div>
-								<label>Earth</label>
-								<div class="orbit child theMoon"></div>
-								<div class="celBody moon child theMoon">
-									<div class="theMoon zeroMeridian">
+		<div class="spaceElevator">
+			<div class="laserReceiver upper"></div>
+			<div class="receiverBox">
+				<div class="window"></div>
+				<i class="fa fa-battery-half"></i>
+				<div class="panelAxle">
+				<div class="solarPanel left"></div>
+				<div class="solarPanel right"></div>
+				</div>
+			</div>
+			<div class="laserReceiver"></div>
+			<div class="tether"></div>
+		</div>
+	</div>
+	<div class="mainWrapper">
+		<div class="mainContainer">
+		<header class="mainHeader">
+			<div class="mainTitleContainer"></div>
+			<div class="mainNavContainer">
+				<nav class="mainNav">
+					<div id="primaryNav">
+						<div class="logo">
+							<span class="start">47</span><span class="end"><span class="mid">1</span>.no<div class="dash"></div></span>
+						</div>
+						<div class="searchBox"><input id="searchField" type="text" placeholder="Search..."><span id="inputIndicator">&gt;</span></div>
+						<div class="navButton" id="navMainButton">main</div>
+						<a target="_blank" class="navButton" id="skypeLink" href="skype:space.error?userinfo">skype</a>
+						<a target="_blank" class="navButton" id="facebookLink" href="https://www.facebook.com/Audun.Nytroe">facebook</a>
+					</div>
+					<div id="secondaryNav">
+						<div class="navButton searchable" id="navProjectsButton" data-elementSearchTerm="projects">projects</div>
+						<div class="navButton searchable" id="navMiscButton" data-elementSearchTerm="tagMisc">misc</div>
+						<a class="navButton" id="navAboutButton" href="#809658774">about?</a>
+						<div id="pokeClock"></div>
+					</div>
+					<div class="fancySeparator"><a href="#1438652351"><i class="fa fa-chevron-down"></i></a></div>
+				</nav>
+			</div>
+		</header>
+		<div class="sidebarWrapper">
+			<div class="sidebar">
+				<div class="orbitDisplay">
+					<div class="mapContainer">
+						<div class="zoi">
+							<div class="celBody star parent" id="Sol">
+								<label>Sol</label>
+								
+								<div class="celBody planet child Mercury">
+									<div class="Mercury zeroMeridian">
 										<div class="zeroIndicator"></div>
 									</div>
-									<label>The Moon</label>
+									<label>Mercury</label>
 								</div>
-							</div>
 								
-							<div class="celBody planet child Mars">
-								<div class="Mars zeroMeridian">
-									<div class="zeroIndicator"></div>
+								<div class="celBody planet child Venus">
+									<div class="Venus zeroMeridian">
+										<div class="zeroIndicator"></div>
+									</div>
+									<label>Venus</label>
 								</div>
-								<label>Mars</label>
+								
+								<div class="celBody planet child Earth">
+									<div class="Earth zeroMeridian">
+										<div class="zeroIndicator"></div>
+									</div>
+									<label>Earth</label>
+									<div class="orbit child theMoon"></div>
+									<div class="celBody moon child theMoon">
+										<div class="theMoon zeroMeridian">
+											<div class="zeroIndicator"></div>
+										</div>
+										<label>The Moon</label>
+									</div>
+								</div>
+									
+								<div class="celBody planet child Mars">
+									<div class="Mars zeroMeridian">
+										<div class="zeroIndicator"></div>
+									</div>
+									<label>Mars</label>
+								</div>
 							</div>
 						</div>
 					</div>
+					<input id="timeInputBox">
 				</div>
-				<input id="timeInputBox">
-			</div>
-			<span class="updateNotice">Updated 20.08</span>
-			<div class="glaceon"></div>
-			<div class="shelfContainer">
-				<div class="shelf"></div>
-			</div>
-			<a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_SW.jpg" target="_blank">
-				<div class="worldMap">
-					<div class="positionMarker"></div>
+				<span class="updateNotice">Updated 20.08</span>
+				<div class="glaceon"></div>
+				<div class="shelfContainer">
+					<div class="shelf"></div>
 				</div>
-			</a>
-		</div>
-	</div>
-
-	<main class="mainContent">
-
-	<!-- init entry start -->
-	
-	<article class="entry" id="initEntry">
-	<div class="entryMain">
-		<div class="sliderContainer">
-			<ul class="rslides">
-				<li><img src='res/entries/slpNordensArk0215/DSC06452_lq600px.jpg' data-adaptive-background='1' alt="Low-key snow leopard"></li>
-				<li><img src='res/slider/DSC00010e2.jpg' data-adaptive-background='1' alt="Plush fox at sunset!"></li>
-				<li><img src='res/slider/DSC00993.jpg' data-adaptive-background='1' alt="The moon, (seen from) Earth"></li>
-				<li><img src='res/slider/DSC01339.jpg' data-adaptive-background='1' alt="Streetside in Nagano, Japan"></li>
-				<li><img src='res/slider/DSC01483.jpg' data-adaptive-background='1' alt="Mt. Fuji"></li>
-				<li><img src='res/slider/IMGP0248lq.jpg' data-adaptive-background='1' alt="Longyearbyen seen from Hjortfjellet, Svalbard, Spitsbergen"></li>
-				<li><img src='res/slider/IMGP0349lq.jpg' data-adaptive-background='1' alt="Isfjord Radio, Svalbard, Spitsbergen"></li>
-				<li><img src='res/slider/DSC02307.jpg' data-adaptive-background='1' alt="Akihabara District, Tokyo"></li>
-				<li><img src='res/slider/DSC02394.jpg' data-adaptive-background='1' alt="Aquarium tank with snake-like fish"></li>
-				<li><img src='res/slider/DSC03822c.jpg' data-adaptive-background='1' alt="Functional metal arch art installation"></li>
-				<li><img src='res/slider/DSC03971.jpg' data-adaptive-background='1' alt="East Ikebukuro, Tokyo"></li>
-				<li><img src='res/slider/DSC03999.jpg' data-adaptive-background='1' alt="Nighttime cityscape, Tokyo"></li>
-				<li><img src='res/slider/DSC04973.jpg' data-adaptive-background='1' alt="&#197;re, Sweden"></li>
-				<li><img src='res/slider/DSC06277.jpg' data-adaptive-background='1' alt="Snow leopard portrait"></li>
-				<li><img src='res/slider/DSC09327.jpg' data-adaptive-background='1' alt="Low-key snow leopard"></li>
-				<li><img src='res/slider/DSC09610.jpg' data-adaptive-background='1' alt="Lianvannet, Trondheim, Norway"></li>
-				<li><img src='res/slider/IMGP9420.jpg' data-adaptive-background='1' alt="F-16 formation flight at NTM2012"></li>
-				<li><img src='res/slider/IMGP9459.jpg' data-adaptive-background='1' alt="RNoAF P-3 Orion at NTM2012"></li>
-				<li><img src='res/slider/IMGP0127.jpg' data-adaptive-background='1' alt="Maj. Eskil Amdal's demo F-16AM at NTM2012"></li>
-				<li><img src='res/slider/DSC02565.jpg' data-adaptive-background='1' alt="Glaceon at Sn&#230;fellsj&#246;kull"></li>
-				<li><img src='res/slider/LongyearPanorama_01_LQ.jpg' data-adaptive-background='1' alt="Longyearbyen seen from Platåberget, Svalbard, Spitsbergen"></li>
-				<li><img src='res/slider/Pyramiden_01_LQ.jpg' data-adaptive-background='1' alt="Pyramiden, Svalbard, Spitsbergen"></li>
-				<li><img src='res/slider/DSC04084c.jpg' data-adaptive-background='1' alt="Northern lights over Trondheim, Norway"></li>
-			</ul>
-		</div>
-		<script>
-		  $(function() {
-			    $(".rslides").responsiveSlides({
-				  auto: true,             // Boolean: Animate automatically, true or false
-				  speed: 500,            // Integer: Speed of the transition, in milliseconds
-				  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
-				  pager: false,           // Boolean: Show pager, true or false
-				  nav: true,             // Boolean: Show navigation, true or false
-				  random: true,          // Boolean: Randomize the order of the slides, true or false
-				  pause: false,           // Boolean: Pause on hover, true or false
-				  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
-				  prevText: "<",   // String: Text for the "previous" button
-				  nextText: ">",       // String: Text for the "next" button
-				  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
-				  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
-				  manualControls: "",     // Selector: Declare custom pager navigation
-				  namespace: "rslides",   // String: Change the default namespace used
-				  before: function(){},   // Function: Before callback
-				  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
-			});
-		  });
-
-		$(document).ready(function() {
-			resizeTargets(".sliderContainer");
-			$(".sliderContainer").resize(resizeTargets);
-			setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 125);
-			setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 300);
-			setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 500);
-			setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 125);
-			setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 300);
-			setTimeout(function() {$(".rslides").find("img").each(function() {
-				newImgLoaded(this);
-			});},5000);
-		});
-		</script>
-	</div>
-	</article>
-	
-	<!-- init entry end -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Discovery Navmaps</h2>
-		<h3 class="entryTime"><time>1438652351</time> (<time datetime="2015-08-04" pubdate>04.08.2015, 01:39</time>)</h3>
-		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1438652351" href="http://471.no#1438652351"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<a target="_blank" href="http://map.mrawr.net/"><img style="width: 30em; height: auto;" src="res/entries/navmap/demo.png" alt="Map of the Ontario system"></a>
-		<p>After having had a go at <a href="#1398524154">creating a map site</a> for the <a href="https://en.wikipedia.org/wiki/Freelancer_(video_game)" target="_blank">Freelancer</a> mod <a href="http://www.moddb.com/mods/discovery-freelancer" target="_blank">Discovery</a> about two years ago, I eventually got rather tired with looking at and updating the <a href="http://navmap.mrawr.net/Alaska.html" target="_blank">old raster screenshots</a> that it provides. The result of this and a few <s>days'</s> weeks of work is one of my newer web projects, which uses JavaScript, jQuery and quite a lot of CSS3 to render much more usable and interactable maps directly from the game files at run time (i.e. page load) without any server-side processing, so the only maintenance it requires is fresh game files to chew on whenever there's a new update out.</p>
-		<p>The in-development version can more or less be viewed above or at <a target="_blank" href="http://map.mrawr.net">its website</a>, for those who want to click around the Sirius sector for a bit or read some infocards.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1438652351"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">D/S Skibladner</h2>
-		<h3 class="entryTime"><time>1437824700</time> (<time datetime="2015-07-25" pubdate>25.07.2015, 11:45</time>)</h3>
-		<h3 class="entryICBM">60.548608N, 11.199622E, 114m</h3>
-		<h3 class="entryCategory searchable">misc</h3>
-		<a class="entryLink" id="1437824700" href="http://471.no#1437824700"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 30em; height: auto;" src="res/entries/skibladner/DSC03202lq.jpg" alt="Two of D/S Skibladner's crankshafts.">
-		<div class="msPlayer" id="skibladner">
-			<canvas class="visualizer" width="600"></canvas>
-			<audio controls="controls" class="player" preload="metadata">
-				<source src="res/entries/skibladner/skibladner.mp3" type="audio/mpeg">
-				<source src="res/entries/skibladner/skibladner.ogg" type="audio/ogg">
-				<p>Your browser does not support the <code>audio</code> element! : (</p>
-				<p>You may download the sound file <a href="res/entries/skibladner/skibladner.mp3">here</a> instead.</p>
-			</audio>
-			<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="midTitle">MID</h3>
-			<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="444">
-			<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="sideTitle">SIDE</h3>
-			<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="568">
-			<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="masterTitle">MASTER</h3>
-			<input class="masterSlider" type="range" min="0" max="250" value="79"><button class="resetButton"><i class="fa fa-undo"></i></button>
-		</div>
-		<p>I first took a recording of the <a href="https://en.wikipedia.org/wiki/Skibladner" target="_blank">Skibladner</a>'s steam engine years ago before I had much more than a compact camera to do it with, and I've been wanting to revisit it ever since - and particularly so after getting some better recording equipment. One of the first ones can be heard <a href="res/entries/skibladner/skibladner.wav" target="_blank">here</a> (loud volume warning).</p>
-		<p>The recording above was made by hand approximately from the location pictured (i.e. the wall in the back), pointing down towards the piston heads. Equipment used was the H6 and SSH-6, <a href="#1434451727">as usual</a>.</p>
-		<p>Instructions on using the Mid/Side decoder may be found in <a href="#1433427360">this post</a>.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1437824700"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Hellishei&#240;i geothermal power station</h2>
-		<h3 class="entryTime"><time>1434451727</time> (<time datetime="2015-06-16" pubdate>16.06.2015, 10:48</time>)</h3>
-		<h3 class="entryICBM">64.266142N, 18.815813W, 260m</h3>
-		<h3 class="entryCategory searchable">misc</h3>
-		<a class="entryLink" id="1434451727" href="http://471.no#1434451727"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 30em; height: auto;" src="res/entries/icelandGeo/DSC01564.jpg" alt="Picture of 45MW high pressure turbine generator at Hellishei&#240;i geothermal power station, Iceland">
-		<div class="msPlayer" id="powerPlant">
-			<canvas class="visualizer" width="600"></canvas>
-			<audio controls="controls" class="player" preload="metadata">
-				<source src="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3" type="audio/mpeg">
-				<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_2.mp3" type="audio/mpeg">
-				<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_3.mp3" type="audio/mpeg">
-				<p>Your browser does not support the <code>audio</code> element! : (</p>
-				<p>You may download the sound file <a href="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3">here</a> instead.</p>
-			</audio>
-			<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="midTitle">MID</h3>
-			<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="710">
-			<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="sideTitle">SIDE</h3>
-			<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="670">
-			<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="masterTitle">MASTER</h3>
-			<input class="masterSlider" type="range" min="0" max="250" value="137"><button class="resetButton"><i class="fa fa-undo"></i></button>
-		</div>
-		<p>One of five recordings taken at the <a target="_blank" href="https://en.wikipedia.org/wiki/Hellishei%C3%B0i_Power_Station">Hellishei&#240;i geothermal power station</a> in Iceland. This particular one was done with the <a target="_blank" href="https://www.zoom-na.com/products/field-video-recording/field-recording/h6-handy-recorder">Zoom H6</a> and a <a target="_blank" href="https://www.zoom-na.com/products/product-accessories/zoom-ssh-6-stereo-shotgun-microphone-capsule-h5-h6-and-q8">SSH-6 mic module</a>, with the mid microphone pointed down towards the alternator of one of the two 45 MW high pressure turbine generators at Hellishei&#240;i, pictured in the bottom-right of the image above.</p>
-		<p>Instructions on using the Mid/Side decoder may be found in <a href="#1433427360">this post</a>.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1434451727"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-
-	<!-- article spacer -->
-
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">In-browser Mid/Side decoding</h2>
-		<h3 class="entryTime"><time>1433427360</time> (<time datetime="2015-06-04" pubdate>04.06.2015, 12:16</time>)</h3>
-		<h3 class="entryICBM">63.431588N, 10.379426E, 3m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1433427360" href="http://471.no#1433427360"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 30em; height: auto;" src="res/entries/msDecode/audioGraph.png" alt="Mid/Side microphone setup illustration and decoding steps/routing">
-		<p>For quite some time now I've wanted a platform for uploading and showcasing my (stereo) sound recordings. As a result of this, I recently started looking into the (relatively) new <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> as it's recently started to gain <a target="_blank" href="http://caniuse.com/#feat=audio-api">fairly widespread support</a> in most of the commonly-used mobile and desktop browsers, including the latest versions of Chrome and Firefox (for both platforms).</p>
-		<p>Using this it is possible to do <a target="_blank" href="http://www.uaudio.com/blog/mid-side-mic-recording/">Mid/Side microphone setup decoding</a> <i>in-browser in real time</i>,  allowing the listener to adjust the stereo width of the recording as desired, which is - to say it mildly - a rather useful feature when it comes to posting M/S stereo recordings online. This is due to quite a lot of the point of recording anything in Mid/Side (i.e. the interactivity that arises from the possibility to modify the stereo width post-recording) is lost the moment the raw, M/S-coded recording is mixed down to regular fixed-width stereo.</p>
-		<p>As seen in the <code>AudioContext</code> connection graph above, the implementation is relatively simple: A HTML5 <code>&lt;audio&gt;</code> element is used as the audio source for a M/S-coded recording, which is then routed through a <code>ChannelSplitterNode</code>, a few <code>GainNode</code>s (which handle the phase inversion and control the per-channel gain) before going into a <code>ChannelMergerNode</code> and finally to a <code>GainNode</code> for the master gain slider. The output of this node is then routed into an <code>AnalyserNode</code> for a bit of FFT action before being pushed to a <code>&lt;canvas&gt;</code> element for rendering.</p>
-		<p>A demonstration of the current version with gain sliders for the side and mid channels plus the summed master bus may be seen below.</p>
-		<img style="width: 30em; height: auto;" src="res/entries/msDecode/DSC00840.jpg" alt="NSB local train passing over the Skansen railway bridge at dusk.">
-		<div class="msPlayer" id="skansenDemo">
-			<canvas class="visualizer" width="480"></canvas>
-			<audio controls="controls" class="player" preload="metadata">
-				<source src="res/ZOOM0031_LR.mp3" type="audio/mpeg">
-				<source src="res/ZOOM0031_LR_2.mp3" type="audio/mpeg">
-				<source src="res/ZOOM0031_LR_3.mp3" type="audio/mpeg">
-				<p>Your browser does not support the <code>audio</code> element! : (</p>
-				<p>You may download the sound file <a href="res/ZOOM0031_LR.mp3">here</a> instead.</p>
-			</audio>
-			<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="midTitle">MID</h3>
-			<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="440">
-			<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="sideTitle">SIDE</h3>
-			<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="430">
-			<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
-			<h3 class="masterTitle">MASTER</h3>
-			<input class="masterSlider" type="range" min="0" max="1000" value="170"><button class="resetButton"><i class="fa fa-undo"></i></button>
-		</div>
-		<p>Adjusting the SIDE slider relative to the MID slider will adjust the stereo width of the output, while adjusting the MASTER slider will adjust the post-MID/SIDE slider gain of the output. Using headphones is strongly recommended.</p>
-		<p>An interesting thing to note here is that one of the main consequences and/or advantages/drawbacks of recording audio in Mid/Side can be seen on the FFT visualization by reducing the mid level to zero (i.e. dragging the MID slider all the way to the left, or pressing the mute button): The visualizer will show zero for all frequencies, despite there still being sound on the left and right channels. Why is this?</p>
-		<p>Well. The visualizer is only looking at a (mono) single channel version of the signal; the sum (i.e. the mono signal mentioned earlier) of the two side channels is indeed zero as they are the inverse of each other, and the sum of a wave and its inverse <a href="http://www.phys.uconn.edu/~gibson/Notes/Section5_2/Sec5_2.htm">is neccessarily zero</a>. This is important to note, as it has implications for what'll happen if a Mid/Side recording is run through a single speaker or other mono audio source: The side channels will cancel each other out and disappear completely and leave only the mid channel audible in the output.</p>
-		<p>The recording was made earlier this year, and features the old <a href="https://en.wikipedia.org/wiki/Skansen_Bridge" target="_blank">Skansen bridge</a> in Trondheim (see the <a target="_blank" href="https://goo.gl/maps/czweS">entry coordinates</a>) in rain with two local trains passing over near the start and end of the track. It was recorded using the <a target="_blank" href="https://www.zoom-na.com/products/field-video-recording/field-recording/h6-handy-recorder">Zoom H6</a> equipped with a <a target="_blank" href="https://www.zoom-na.com/products/product-accessories/zoom-ssh-6-stereo-shotgun-microphone-capsule-h5-h6-and-q8">SSH-6 mic module</a>, with the recorder placed directly under the middle of the bridge with the microphone setup angled slightly up towards the train tracks overhead.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1433427360"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Nordens Ark V2015</h2>
-		<h3 class="entryTime"><time>1423320544</time> (<time datetime="2015-02-07" pubdate>07.02.2015, 14:49</time>)</h3>
-		<h3 class="entryICBM">58.438510N, 11.431632E, 58m</h3>
-		<h3 class="entryCategory searchable">misc</h3>
-		<a class="entryLink" id="1423320544" href="http://471.no#1423320544"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06452_lq600px.jpg" alt="Nordens Ark 1">
-		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC09228_lq600px.jpg" alt="Nordens Ark 2">
-		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC09327_lq600px.jpg" alt="Nordens Ark 3">
-		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06785_lq600px.jpg" alt="Nordens Ark 4">
-		<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06269cc_lq600px.jpg" alt="Nordens Ark 5">
-		<p>It's fun to see how fast these have grown up since 2013! It's not even all that easy to distinguish between the adults and kids any more at this point, unless you're up for identifying them by their markings.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1423320544"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Uncia Uncia</h2>
-		<h3 class="entryTime"><time>1420169060</time> (<time datetime="2015-01-02" pubdate>02.01.2015, 11:24</time>)</h3>
-		<h3 class="entryICBM">35.647939N, 139.395531E, 165m</h3>
-		<h3 class="entryCategory searchable">misc</h3>
-		<a class="entryLink" id="1420169060" href="http://471.no#1420169060"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 30em; height: auto;" src="res/slider/DSC02682.jpg" alt="Tama Zoo, Tokyo">
-		<audio controls="controls" preload="metadata" style="width: 30em;">
-			<source src="res/entries/audioTama/slp2_lc.mp3" type="audio/mpeg">
-			<source src="res/entries/audioTama/slp2_lc_2.mp3" type="audio/mpeg">
-			<source src="res/entries/audioTama/slp2_lc_3.mp3" type="audio/mpeg">
-			<p>Your browser does not support the <code>audio</code> element! : (</p>
-			<p>You may download the sound file <a href="res/entries/audioTama/slp2_lc.mp3">here</a> instead.</p>
-		</audio>
-		<p>Probably one of the more interesting recordings I've done of snow leopard cries; in my experience so far they're usually not quite as vocal as this, so I guess I'll consider myself lucky.</p>
-		<p>The enclosure does have running water inside it with a fence and a few other things between the mic and... subject producing some warbly effects and distortion. The quality of the H6's MSH-6 mic probably contributes (negatively) to this as well, though, but I'm perfectly happy that the bits with snow leopard in them sound alright compared to what I've found online so far.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1420169060"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">KspPy or bust</h2>
-		<h3 class="entryTime"><time>1413018467</time> (<time datetime="2014-10-11" pubdate>11.10.2014, 11:07</time>)</h3>
-		<h3 class="entryICBM">63.417963N, 10.401233E, 41m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1413018467" href="http://471.no#1413018467"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 30em; height: auto;" src="res/entries/KspPy/KspPy1_lq.jpg" alt="A picture of the stock Aeris Mk 4 being controlled from Python.">
-		<p>After getting into cybernetics and control systems this autumn, I started stumbling around for a while trying to find a fun simulation environment to stage some experiments in. I wanted to start making an autopilot for Kerbal Space Program using PID controllers and various other forms of control logic, and initally started looking at keyboard emulation and a few rather roundabout ways for getting data in and out of KSP.</p>
-		<p>Fortunately, it turns out that there's a much better and well-tested solution out there already: the <a target="_blank" href="http://forum.kerbalspaceprogram.com/threads/24594-0-25-(2014-10-12)-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser">Telemachus</a> mod! It provides a really nifty <a href="https://github.com/richardbunt/Telemachus/wiki/HTTP-API">API</a> for getting data in and out of the game, requiring barely any setup beyond installing the mod to get it up and running, but there's (unfortunately) not a lot of documentation or help out there for programmatically controlling KSP with it, at least not for Python 3.</p>
-		<p>Here's a small Python 3 usage example that should help you get started if you're so inclined; it should be simple enough to understand even if you're relatively new to the language (like me).</p>
-		<div class="codeContainer" style="border: 0.1em black dashed; overflow: hidden;">
-		<pre style="color:#000000;margin-left: 1em; margin-top: 0.7em; margin-bottom: 0em; font-size: 0.9em">
-<span style='color:#696969; '># config start</span>
-tmurl <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>"http://127.0.0.1:8085/telemachus/datalink?alt="</span>
-updateRate <span style='color:#808030; '>=</span> <span style='color:#008000; '>0.08</span>
-<span style='color:#696969; '># config end</span>
-
-<span style='color:#696969; '># init start</span>
-<span style='color:#800000; font-weight:bold; '>import</span> json
-<span style='color:#800000; font-weight:bold; '>import</span> urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>,</span> urllib<span style='color:#808030; '>.</span>error<span style='color:#808030; '>,</span> urllib<span style='color:#808030; '>.</span>parse
-<span style='color:#800000; font-weight:bold; '>import</span> socket
-<span style='color:#800000; font-weight:bold; '>import</span> time
-
-programCounter <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span>
-
-<span style='color:#800000; font-weight:bold; '>def</span> fetch<span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-    tmdata <span style='color:#808030; '>=</span> urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>.</span>urlopen<span style='color:#808030; '>(</span>tmurl <span style='color:#808030; '>+</span> <span style='color:#e34adc; '>str</span><span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
-    tmdata_out <span style='color:#808030; '>=</span> json<span style='color:#808030; '>.</span>loads<span style='color:#808030; '>(</span>tmfetch<span style='color:#808030; '>.</span>readall<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>.</span>decode<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'utf-8'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
-    <span style='color:#800000; font-weight:bold; '>return</span> tmdata_out<span style='color:#808030; '>[</span><span style='color:#0000e6; '>"alt"</span><span style='color:#808030; '>]</span>
-
-<span style='color:#800000; font-weight:bold; '>def</span> write<span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-    urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>.</span>urlopen<span style='color:#808030; '>(</span>tmurl <span style='color:#808030; '>+</span> <span style='color:#e34adc; '>str</span><span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
-<span style='color:#696969; '># init end</span>
-
-write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.stage"</span><span style='color:#808030; '>)</span>
-write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.sas"</span><span style='color:#808030; '>)</span>
-
-<span style='color:#800000; font-weight:bold; '>while</span> <span style='color:#e34adc; '>True</span><span style='color:#808030; '>:</span>
-    time<span style='color:#808030; '>.</span>sleep<span style='color:#808030; '>(</span>updateRate<span style='color:#808030; '>)</span>
-    programCounter <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span>
-
-    <span style='color:#696969; '># get data from KSP</span>
-    altAGL <span style='color:#808030; '>=</span> fetch<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"v.heightFromTerrain"</span><span style='color:#808030; '>)</span>
-    liquidFuel <span style='color:#808030; '>=</span> fetch<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"r.resource[LiquidFuel]"</span><span style='color:#808030; '>)</span>
-    
-    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>programCounter <span style='color:#808030; '>%</span> <span style='color:#008c00; '>100</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-	<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>"Altitude (AGL) (m):"</span><span style='color:#808030; '>,</span> altAGL<span style='color:#808030; '>)</span>
-	<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>"Liquid Fuel (kg):"</span><span style='color:#808030; '>,</span> liquidFuel<span style='color:#808030; '>)</span>
-
-    <span style='color:#696969; '># set throttle to max if below 100 m AGL</span>
-    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>altAGL <span style='color:#808030; '>></span> <span style='color:#008c00; '>100</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.setThrottle[0]"</span><span style='color:#808030; '>)</span>
-    <span style='color:#800000; font-weight:bold; '>else</span><span style='color:#808030; '>:</span>
-	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.setThrottle[1]"</span><span style='color:#808030; '>)</span>
-
-    <span style='color:#696969; '># no fuel, you say? no problem:</span>
-    <span style='color:#696969; '># spam the stage/typewriter button and hope for the best</span>
-    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>liquidFuel <span style='color:#808030; '>&lt;</span> <span style='color:#008c00; '>5</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
-	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.stage"</span><span style='color:#808030; '>)</span>
-		</pre>
-		</div>
-	<p>The important bits here are the fetch(tmvar) and write(tmvar) functions, which get and write data to and from KSP via the <a target="_blank" href="https://github.com/richardbunt/Telemachus/wiki/HTTP-API">Telemachus HTTP API</a> using <a href="https://github.com/richardbunt/Telemachus/wiki/API-String">API query strings</a> such as <code>r.resource[LiquidFuel]</code>. I've personally got most of those in a library that saves me from having to remember all the different query strings, but that's not quite ready for the public just yet; however, the functionality of this minimal usage example is almost exactly the same.</p>
-	<p>Safe flights, and be careful with the polling/update rate! You <i>will</i> kill the connection if you push it too low, though the exact lower limit will probably depend on your setup.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1413018467"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Tinychart</h2>
-		<h3 class="entryTime"><time>1413629374</time> (<time datetime="2014-10-18" pubdate>18.10.2014, 12:50</time>)</h3>
-		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1413629374" href="http://471.no#1413629374"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<a target="_blank" href="res/entries/tinyChart/410pxTypeChart.gif" style="display: block; text-align: center; width: 50%; padding-top: 0.5em; padding-bottom: 1em; float: left;"><img style="width: 32%; height: auto;" src="res/entries/tinyChart/410pxTypeChart.gif" alt="Tiny Pok&eacute;mon type chart"></a>
-		<a target="_blank" href="res/entries/tinyChart/240pxTypeChart4.gif" style="display: block; text-align: center; width: 50%; padding-top: 0.5em; padding-bottom: 1em; float: left;"><img style="width: 32%; height: auto;" src="res/entries/tinyChart/240pxTypeChart4.gif" alt="Tiny Pok&eacute;mon type chart"></a>
-		<p>A simple 41px 1.11KB Pok&eacute;mon type matchup chart. This is actually quite a bit more usable than it looks (provided that you scale it up a bit)! The rows indicate the attacking type, and the columns are the defending type (like on most type charts). It may work for you if you've played the games for years and recognize the types by colour, but still can't fathom the type matchups. Might even be able to fit this on a 3DS for in-battle use.</p>
-		<p>This is probably almost as small as you can make a type chart; you could technically remove the extra type rows/columns and the grid to get it down to ~21px, but that'd probably render it unreadable in the process.</p>
-		<p>EDIT: Added a 24px one. Actually works a lot better than the original, in my opinion.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1413629374"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Google Drive web hosting</h2>
-		<h3 class="entryTime"><time>1411064579</time> (<time datetime="2014-09-18" pubdate>18.09.2014, 18:22</time>)</h3>
-		<h3 class="entryICBM">63.395094N, 10.365054E, 129m</h3>
-		<h3 class="entryCategory searchable">misc</h3>
-		<a class="entryLink" id="1411064579" href="http://471.no#1411064579"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<a href="http://drive.google.com" style="display: block; text-align: center; width: 100%; padding-top: 0.5em;" target="_blank"><img style="width: 10%; height: auto;" src="res/entries/gDrive/gDrive.png" alt="Google Drive logo"></a>
-		<p>As you may have noticed, this and all the rest of my websites are and have been dependent on iframes for quite some time. The reason for this is rather simple: Almost all of them are hosted on Google Drive, with a bit of jQuery and AJAX here and there providing sparks of dynamic content in my wasteland of static flat HTML files. As you may have guessed by this point, there are quite a few drawbacks to using Google Drive, but for simple, small web sites like this one there are plenty of upsides to it as well.</p>
-		<p>If you'd like to give it a go yourself - which I've been asked about a few times before - it's really as simple as setting up web hosting could get: Create a new Google Drive folder, right click and set the sharing options on it to "Public on the web", throw a HTML file or two in there (and whatever else you may want accessible online) and access it by heading to:</p>
-		<p style="text-align: center;">http://googledrive.com/host/<a href="res/entries/gDrive/IDStringDrive.png" target="_blank">yourfoldersharingid</a>/site.html</p>
-		<p>And that's pretty much it!</p>
-		<p>Like I mentioned earlier, however, there's no real way to get a custom domain name on your Drive websites without resorting to a domain name provider that can host an iframe with your Drive website in it like Namecheap (which I'm using) or something similar. That's a rather small drawback for free, simple and always-on web hosting, though. At least it's a lot better and more reliable than my (or your) poor, old, chronically broken laptop server if all you need is somewhere to throw your (mostly) static HTML, CSS and image files.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1411064579"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Using Skype v4.2.0.187</h2>
-		<h3 class="entryTime"><time>1404296085</time> (<time datetime="2014-07-02" pubdate>02.07.2014, 10:14</time>)</h3>
-		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
-		<h3 class="entryCategory searchable">misc</h3>
-		<a class="entryLink" id="1404296085" href="http://471.no#1404296085"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-			<a href="https://www.google.com/search?q=what+is+my+ip" target="_blank">Find your IP address</a>
-			<div style="">
-				<input type="text" id="ipnum" size="15">
-				<input type="button" value="Convert" onclick="convert();return false;">
+				<a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_SW.jpg" target="_blank">
+					<div class="worldMap">
+						<div class="positionMarker"></div>
+					</div>
+				</a>
 			</div>
-			<p><b>Edit:</b> As of 18.08.2014, it seems like Microsoft has finally pulled the plug on v4.2.0.187; it is no longer be able to log in at all, and there is no known fix for it at this time, unfortunately.</p>
-			<p>Sometime in 2013, Microsoft silently made the Skype login servers provide invalid IP details to the v4.2.0.187 client (<a href="http://drive.mrawr.net/SkypeSetup_4.2.0.187.exe" target="_blank">download</a>), essentially making all fresh installs of this Skype version unable to log in any more.</p>
-			<p>The solution to this "feature" is luckily rather simple: Provide valid IP details yourself.</p>
-			<p>First, attempt to log in on your new copy of Skype v4.2.0.187 once. It will fail, so don't worry about that just yet.
-			<p>After that, navigate to Skype's shared.xml file in "%appdata%/Skype" (type that into the "Run" window; Windows key + R) and open it in Notepad. Take a backup of it as well, just in case anything goes wrong.</p>
-			<p>Then use Notepad's "Find" function (ctrl + F) to locate "&lt;LastIP&gt;". Replace the number in between <code>&lt;LastIP&gt;</code> and <code>&lt;/LastIP&gt;</code> with the number you get when you enter your IP address into the textbox above after clicking "Convert". If those two tags don't exist in your shared.xml file, you'll have to add them yourself after the opening <code>&lt;Connection&gt;</code> tag. Directly after it should work.</p>
-			<p>Save the file after ensuring that you've only replaced the number enclosed by the <code>&lt;LastIP&gt;</code> and <code>&lt;/LastIP&gt;</code> tags, without overwriting any of the <code>&lt;</code>s or <code>&gt;</code>s.</p>
-			<p>Start Skype; enjoy your (smoke)s and blinking text.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1404296085"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
+		</div>
+
+		<main class="mainContent">
+
+		<!-- init entry start -->
 		
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Not A Team Rocket Announcement</h2>
-		<h3 class="entryTime"><time>1404029527</time> (<time datetime="2014-06-29" pubdate>29.06.2014, 08:12</time>)</h3>
-		<h3 class="entryICBM">58.438510N, 11.431632E, 58m</h3>
-		<h3 class="entryCategory searchable">misc</h3>
-		<a class="entryLink" id="1404029527" href="http://471.no#1404029527"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/BigCat01_res1.jpg" alt="Playful snow leopard cub">
-		<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/IMGP9918_res1.jpg" alt="Two snow leopards playfighting">
-		<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/IMGP9891_res2.jpg" alt="Snow leopard family. Minus one member.">
-		<p style="text-align: center;"><i>Plot twist: It's actually a snow leopard announcement.</i></p>
-		<p></p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1404029527"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Team Rocket Announcement</h2>
-		<h3 class="entryTime"><time>1403554657</time> (<time datetime="2014-06-23" pubdate>23.06.2014, 20:17</time>)</h3>
-		<h3 class="entryICBM">63.400845N, 10.316698E, 220m</h3>
-		<h3 class="entryCategory searchable">team_rocket</h3>
-		<a class="entryLink" id="1403554657" href="http://471.no#1403554657"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<p>...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket!</p>
-		<iframe class="youtubeAudio" width="100" height="65" src="//www.youtube.com/embed/hTaW0HK-Cw4" seamless></iframe>
-		<p>(<i>In other news, I've gone through another (!) revision of my home page. Who would have thought that one could go through five hosting solutions and layouts in less than two years without actually having any content to display!</i>)</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Team Rocket Executive</div>
-		<a class="entryLink" href="http://471.no#1403554657"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">"Russekort"!</h2>
-		<h3 class="entryTime"><time>1399061035</time> (<time datetime="2014-05-02" pubdate>02.05.2014, 20:03</time>)</h3>
-		<h3 class="entryICBM">63.395094N, 10.365054E, 129m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1399061035" href="http://471.no#1399061035"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<img style="width: 14.85em; height: auto;" src="res/entries/russekort/russekort_vfin.jpg" alt="Printed card">
-		<img style="width: 14.85em; height: auto;" src="res/entries/russekort/RusseKortRendered.png" alt="Browser-rendered (in Firefox, not Lynx) version of the code on the printed card.">
-		<p>This is a small bit of (nerdy) web design work that I did (mostly) back in November in preparation for May 2014. It's a form of <a href="http://en.wikipedia.org/wiki/Russefeiring#Cards_.28Russekort.29" target="_blank">contact card</a> which includes the source code for rendering the code for the actual card in a browser (though I admittedly had to resort to a few cheats, particularly for mobile browser compatibility).</p>
-		<p>The QR code leads to <a href="http://r.mrawr.net" target="_blank">this companion site</a> (in Norwegian), which enabled mobile users - i.e. most people who were going to see the card - to see a rendered version of it in their web browser, along with a few explanations.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1399061035"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">One-off websites</h2>
-		<h3 class="entryTime"><time>1398524154</time> (<time datetime="2014-04-26" pubdate>26.04.2014, 14:55</time>)</h3>
-		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1398524154" href="http://471.no#1398524154"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<a href="http://teachy.tv/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/TeachyTV.jpg" alt="Image of the Teachy.TV web site"></a>
-		<a href="http://rk.mrawr.net/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/rk01.png" alt="Image of the Russeknuter Trondheim 2014 web site"></a>
-		<a href="http://navmap.mrawr.net/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/Navmap2.jpg" alt="Image of the Discovery Navmaps web site"></a>
-		<p>There have been a few of these over the years, and there are probably quite a few more to come. The first one is perhaps the most stupid one, and even has it's own domain name registered (for now). Not bad for a site based off two rather fun hours on the <a href="http://twitch.tv/twitchplayspokemon">TwitchPlaysPokemon stream</a>. The other two are (were?) rather more useful, I suppose.</p>
-		<a class="fullWidthLink" target="_blank" href="http://teachy.tv/">Teachy TV</a>
-		<a class="fullWidthLink" target="_blank" href="http://rk.mrawr.net/">Russeknuter for Trondheim, 2014</a>
-		<a class="fullWidthLink" target="_blank" href="http://navmap.mrawr.net/">Discovery Mod Navmaps</a>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1398524154"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
+		<article class="entry" id="initEntry">
+		<div class="entryMain">
+			<div class="sliderContainer">
+				<ul class="rslides">
+					<li><img src='res/entries/slpNordensArk0215/DSC06452_lq600px.jpg' data-adaptive-background='1' alt="Low-key snow leopard"></li>
+					<li><img src='res/slider/DSC00010e2.jpg' data-adaptive-background='1' alt="Plush fox at sunset!"></li>
+					<li><img src='res/slider/DSC00993.jpg' data-adaptive-background='1' alt="The moon, (seen from) Earth"></li>
+					<li><img src='res/slider/DSC01339.jpg' data-adaptive-background='1' alt="Streetside in Nagano, Japan"></li>
+					<li><img src='res/slider/DSC01483.jpg' data-adaptive-background='1' alt="Mt. Fuji"></li>
+					<li><img src='res/slider/IMGP0248lq.jpg' data-adaptive-background='1' alt="Longyearbyen seen from Hjortfjellet, Svalbard, Spitsbergen"></li>
+					<li><img src='res/slider/IMGP0349lq.jpg' data-adaptive-background='1' alt="Isfjord Radio, Svalbard, Spitsbergen"></li>
+					<li><img src='res/slider/DSC02307.jpg' data-adaptive-background='1' alt="Akihabara District, Tokyo"></li>
+					<li><img src='res/slider/DSC02394.jpg' data-adaptive-background='1' alt="Aquarium tank with snake-like fish"></li>
+					<li><img src='res/slider/DSC03822c.jpg' data-adaptive-background='1' alt="Functional metal arch art installation"></li>
+					<li><img src='res/slider/DSC03971.jpg' data-adaptive-background='1' alt="East Ikebukuro, Tokyo"></li>
+					<li><img src='res/slider/DSC03999.jpg' data-adaptive-background='1' alt="Nighttime cityscape, Tokyo"></li>
+					<li><img src='res/slider/DSC04973.jpg' data-adaptive-background='1' alt="&#197;re, Sweden"></li>
+					<li><img src='res/slider/DSC06277.jpg' data-adaptive-background='1' alt="Snow leopard portrait"></li>
+					<li><img src='res/slider/DSC09327.jpg' data-adaptive-background='1' alt="Low-key snow leopard"></li>
+					<li><img src='res/slider/DSC09610.jpg' data-adaptive-background='1' alt="Lianvannet, Trondheim, Norway"></li>
+					<li><img src='res/slider/IMGP9420.jpg' data-adaptive-background='1' alt="F-16 formation flight at NTM2012"></li>
+					<li><img src='res/slider/IMGP9459.jpg' data-adaptive-background='1' alt="RNoAF P-3 Orion at NTM2012"></li>
+					<li><img src='res/slider/IMGP0127.jpg' data-adaptive-background='1' alt="Maj. Eskil Amdal's demo F-16AM at NTM2012"></li>
+					<li><img src='res/slider/DSC02565.jpg' data-adaptive-background='1' alt="Glaceon at Sn&#230;fellsj&#246;kull"></li>
+					<li><img src='res/slider/LongyearPanorama_01_LQ.jpg' data-adaptive-background='1' alt="Longyearbyen seen from PlatÃ¥berget, Svalbard, Spitsbergen"></li>
+					<li><img src='res/slider/Pyramiden_01_LQ.jpg' data-adaptive-background='1' alt="Pyramiden, Svalbard, Spitsbergen"></li>
+					<li><img src='res/slider/DSC04084c.jpg' data-adaptive-background='1' alt="Northern lights over Trondheim, Norway"></li>
+				</ul>
+			</div>
+			<script>
+			  $(function() {
+				    $(".rslides").responsiveSlides({
+					  auto: true,             // Boolean: Animate automatically, true or false
+					  speed: 500,            // Integer: Speed of the transition, in milliseconds
+					  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+					  pager: false,           // Boolean: Show pager, true or false
+					  nav: true,             // Boolean: Show navigation, true or false
+					  random: true,          // Boolean: Randomize the order of the slides, true or false
+					  pause: false,           // Boolean: Pause on hover, true or false
+					  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+					  prevText: "<",   // String: Text for the "previous" button
+					  nextText: ">",       // String: Text for the "next" button
+					  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+					  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+					  manualControls: "",     // Selector: Declare custom pager navigation
+					  namespace: "rslides",   // String: Change the default namespace used
+					  before: function(){},   // Function: Before callback
+					  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
+				});
+			  });
 
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Mozzi/Arduino synthesizer</h2>
-		<h3 class="entryTime"><time>1378683316</time> (<time datetime="2013-09-08" pubdate>08.09.2013, 23:35</time>)</h3>
-		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1378683316" href="http://471.no#1378683316"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<p>This is a small (currently) one-oscillator USB MIDI-controlled synthesizer sketch made for the Teensy++ 2.0 microcontroller (which I'm a rather large fan of) utilizing the Mozzi library (which it requires). The USB MIDI version uses no external parts except for a few wires to connect it to a mixer/amp, and has a basic LFO, low-pass filter, an AD envelope and, of course, a single sine/square/saw/triangle wave oscillator.</p>
-		<p>Please see the attached Arduino sketch below for more information.</p>
-		<a target="_blank" href="https://googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/mrawr/files/OneOscSynth6_0-130719a.zip">OneOscSynth6.0 sketch</a>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1378683316"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">Discovery Search Engine</h2>
-		<h3 class="entryTime"><time>1350440274</time> (<time datetime="2012-10-17" pubdate>17.10.2012, 02:17</time>)</h3>
-		<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
-		<h3 class="entryCategory searchable">projects</h3>
-		<a class="entryLink" id="1350440274" href="http://471.no#1350440274"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<p>A small Google Custom Search wrapper for the <a href="http://discoverygc.com" target="_blank">Discovery mod and community site(s)</a>. It uses promotions and a few other Google CSE goodies to help improve searches, including a large search term suggestion database.</p>
-		<a target="_blank" href="http://dgc.mrawr.net">Discovery Search Engine</a>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#1350440274"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
+			$(document).ready(function() {
+				resizeTargets(".sliderContainer");
+				$(".sliderContainer").resize(resizeTargets);
+				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 125);
+				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 300);
+				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 500);
+				setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 125);
+				setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 300);
+				setTimeout(function() {$(".rslides").find("img").each(function() {
+					newImgLoaded(this);
+				});},5000);
+			});
+			</script>
+		</div>
+		</article>
+		
+		<!-- init entry end -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Discovery Navmaps</h2>
+			<h3 class="entryTime"><time>1438652351</time> (<time datetime="2015-08-04" pubdate>04.08.2015, 01:39</time>)</h3>
+			<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1438652351" href="http://471.no#1438652351"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<a target="_blank" href="http://map.mrawr.net/"><img style="width: 30em; height: auto;" src="res/entries/navmap/demo.png" alt="Map of the Ontario system"></a>
+			<p>After having had a go at <a href="#1398524154">creating a map site</a> for the <a href="https://en.wikipedia.org/wiki/Freelancer_(video_game)" target="_blank">Freelancer</a> mod <a href="http://www.moddb.com/mods/discovery-freelancer" target="_blank">Discovery</a> about two years ago, I eventually got rather tired with looking at and updating the <a href="http://navmap.mrawr.net/Alaska.html" target="_blank">old raster screenshots</a> that it provides. The result of this and a few <s>days'</s> weeks of work is one of my newer web projects, which uses JavaScript, jQuery and quite a lot of CSS3 to render much more usable and interactable maps directly from the game files at run time (i.e. page load) without any server-side processing, so the only maintenance it requires is fresh game files to chew on whenever there's a new update out.</p>
+			<p>The in-development version can more or less be viewed above or at <a target="_blank" href="http://map.mrawr.net">its website</a>, for those who want to click around the Sirius sector for a bit or read some infocards.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1438652351"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
 
-	<article class="entry">
-	<header class="entryHeader">
-		<h2 class="entryTitle">About</h2>
-		<h3 class="entryTime"><time>809658774</time> (<time datetime="1995-08-29">29.08.1995, 01:12</time>)</h3>
-		<h3 class="entryICBM">63.421474N, 10.386919E, 12m</h3>
-		<!-- I won't give you a cookie if you can guess why the current tag for the "about" page is "about?". Sorry. Best workaround 2014 (as long as there are no other mentions of "about?" on the page, at least. Won't last for long). Kappa -->
-		<h3 class="entryCategory searchable">about?</h3>
-		<a class="entryLink" id="809658774" href="http://471.no#809658774"><i class="fa fa-link"></i>Link to this entry</a>
-	</header>
-	<div class="entryMain">
-		<p>That timestamp may be a bit off, unfortunately. Probably. I think I remember something about it being during the night, at least.</p>
-		<p>To keep things short: I'm a web design enthusiast/n00b, snow leopard enthusiast and a hobbyist ambient audio recorder. Plus a few other things.</p>
-		<p>This is my home page that I'm going to be using to post projects I'm working on, mostly for my own enjoyment so I've got some documentation of what I've done so far, and so I can get some of it up on the 'net in case I feel like showing it to somebody one day.</p>
-		<p>It is currently hosted on <s>Google Drive</s> GitHub Pages (29.08.2015), running on a Glorious Flat File CMS (tm) aided by quite a lot of hand-crafted HTML5, CSS3, JS plus some external libraries (jQuery, mainly) to keep things manageable until I get it up and running on a home server again. Looking forward to that one.</p>
-		<p>If you need to contact me, the "Facebook" and "Skype" links up on the navigation header would perhaps be good starting points.</p>
-		<a class="lynxFriendly" href="http://www.cs.umanitoba.ca/~djc/personal/lynxfriend.html"><img src="res/LynxFriendly_v1.png" alt="This web site is designed to be Lynx-friendly!"></a>
-		<p><i>(You'll just have to trust me on that one. Unless you're one of the few Lynx/screen reader users out there, of course. Hi!)</i></p>
-		<p>Disclaimers and credits: Pok&eacute;mon, the team sprites and all related content belongs to GameFreak/Nintendo. The code for the slider, adaptive background and dominant colour finder belong to their respective creators. All credit for the background images go to the (unfortunately unknown) creator(s). Everything else here was created by or otherwise belongs to me, unless anything else is explicitly stated or if the content is used under the terms of a license that does not require direct attribution.</p>
-	</div>
-	<footer class="entryFooter">
-		<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
-		<a class="entryLink" href="http://471.no#809658774"><i class="fa fa-link"></i>Link to this entry</a>
-	</footer>
-	</article>
-	
-	<!-- article spacer -->
-	
-	<a class="topLinkButton" href="#">
-		<i class="fa fa-paw" id="bottomLeftPaw"></i>
-		<i class="fa fa-paw" id="topRightPaw"></i>
-		<div class="scrollUpText">scroll up</div>
-	</a>
-	
-	</main>
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">D/S Skibladner</h2>
+			<h3 class="entryTime"><time>1437824700</time> (<time datetime="2015-07-25" pubdate>25.07.2015, 11:45</time>)</h3>
+			<h3 class="entryICBM">60.548608N, 11.199622E, 114m</h3>
+			<h3 class="entryCategory searchable">misc</h3>
+			<a class="entryLink" id="1437824700" href="http://471.no#1437824700"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 30em; height: auto;" src="res/entries/skibladner/DSC03202lq.jpg" alt="Two of D/S Skibladner's crankshafts.">
+			<div class="msPlayer" id="skibladner">
+				<canvas class="visualizer" width="600"></canvas>
+				<audio controls="controls" class="player" preload="metadata">
+					<source src="res/entries/skibladner/skibladner.mp3" type="audio/mpeg">
+					<source src="res/entries/skibladner/skibladner.ogg" type="audio/ogg">
+					<p>Your browser does not support the <code>audio</code> element! : (</p>
+					<p>You may download the sound file <a href="res/entries/skibladner/skibladner.mp3">here</a> instead.</p>
+				</audio>
+				<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="midTitle">MID</h3>
+				<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="444">
+				<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="sideTitle">SIDE</h3>
+				<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="568">
+				<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="masterTitle">MASTER</h3>
+				<input class="masterSlider" type="range" min="0" max="250" value="79"><button class="resetButton"><i class="fa fa-undo"></i></button>
+			</div>
+			<p>I first took a recording of the <a href="https://en.wikipedia.org/wiki/Skibladner" target="_blank">Skibladner</a>'s steam engine years ago before I had much more than a compact camera to do it with, and I've been wanting to revisit it ever since - and particularly so after getting some better recording equipment. One of the first ones can be heard <a href="res/entries/skibladner/skibladner.wav" target="_blank">here</a> (loud volume warning).</p>
+			<p>The recording above was made by hand approximately from the location pictured (i.e. the wall in the back), pointing down towards the piston heads. Equipment used was the H6 and SSH-6, <a href="#1434451727">as usual</a>.</p>
+			<p>Instructions on using the Mid/Side decoder may be found in <a href="#1433427360">this post</a>.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1437824700"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Hellishei&#240;i geothermal power station</h2>
+			<h3 class="entryTime"><time>1434451727</time> (<time datetime="2015-06-16" pubdate>16.06.2015, 10:48</time>)</h3>
+			<h3 class="entryICBM">64.266142N, 18.815813W, 260m</h3>
+			<h3 class="entryCategory searchable">misc</h3>
+			<a class="entryLink" id="1434451727" href="http://471.no#1434451727"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 30em; height: auto;" src="res/entries/icelandGeo/DSC01564.jpg" alt="Picture of 45MW high pressure turbine generator at Hellishei&#240;i geothermal power station, Iceland">
+			<div class="msPlayer" id="powerPlant">
+				<canvas class="visualizer" width="600"></canvas>
+				<audio controls="controls" class="player" preload="metadata">
+					<source src="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3" type="audio/mpeg">
+					<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_2.mp3" type="audio/mpeg">
+					<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_3.mp3" type="audio/mpeg">
+					<p>Your browser does not support the <code>audio</code> element! : (</p>
+					<p>You may download the sound file <a href="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3">here</a> instead.</p>
+				</audio>
+				<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="midTitle">MID</h3>
+				<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="710">
+				<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="sideTitle">SIDE</h3>
+				<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="670">
+				<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="masterTitle">MASTER</h3>
+				<input class="masterSlider" type="range" min="0" max="250" value="137"><button class="resetButton"><i class="fa fa-undo"></i></button>
+			</div>
+			<p>One of five recordings taken at the <a target="_blank" href="https://en.wikipedia.org/wiki/Hellishei%C3%B0i_Power_Station">Hellishei&#240;i geothermal power station</a> in Iceland. This particular one was done with the <a target="_blank" href="https://www.zoom-na.com/products/field-video-recording/field-recording/h6-handy-recorder">Zoom H6</a> and a <a target="_blank" href="https://www.zoom-na.com/products/product-accessories/zoom-ssh-6-stereo-shotgun-microphone-capsule-h5-h6-and-q8">SSH-6 mic module</a>, with the mid microphone pointed down towards the alternator of one of the two 45 MW high pressure turbine generators at Hellishei&#240;i, pictured in the bottom-right of the image above.</p>
+			<p>Instructions on using the Mid/Side decoder may be found in <a href="#1433427360">this post</a>.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1434451727"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+
+		<!-- article spacer -->
+
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">In-browser Mid/Side decoding</h2>
+			<h3 class="entryTime"><time>1433427360</time> (<time datetime="2015-06-04" pubdate>04.06.2015, 12:16</time>)</h3>
+			<h3 class="entryICBM">63.431588N, 10.379426E, 3m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1433427360" href="http://471.no#1433427360"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 30em; height: auto;" src="res/entries/msDecode/audioGraph.png" alt="Mid/Side microphone setup illustration and decoding steps/routing">
+			<p>For quite some time now I've wanted a platform for uploading and showcasing my (stereo) sound recordings. As a result of this, I recently started looking into the (relatively) new <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> as it's recently started to gain <a target="_blank" href="http://caniuse.com/#feat=audio-api">fairly widespread support</a> in most of the commonly-used mobile and desktop browsers, including the latest versions of Chrome and Firefox (for both platforms).</p>
+			<p>Using this it is possible to do <a target="_blank" href="http://www.uaudio.com/blog/mid-side-mic-recording/">Mid/Side microphone setup decoding</a> <i>in-browser in real time</i>,  allowing the listener to adjust the stereo width of the recording as desired, which is - to say it mildly - a rather useful feature when it comes to posting M/S stereo recordings online. This is due to quite a lot of the point of recording anything in Mid/Side (i.e. the interactivity that arises from the possibility to modify the stereo width post-recording) is lost the moment the raw, M/S-coded recording is mixed down to regular fixed-width stereo.</p>
+			<p>As seen in the <code>AudioContext</code> connection graph above, the implementation is relatively simple: A HTML5 <code>&lt;audio&gt;</code> element is used as the audio source for a M/S-coded recording, which is then routed through a <code>ChannelSplitterNode</code>, a few <code>GainNode</code>s (which handle the phase inversion and control the per-channel gain) before going into a <code>ChannelMergerNode</code> and finally to a <code>GainNode</code> for the master gain slider. The output of this node is then routed into an <code>AnalyserNode</code> for a bit of FFT action before being pushed to a <code>&lt;canvas&gt;</code> element for rendering.</p>
+			<p>A demonstration of the current version with gain sliders for the side and mid channels plus the summed master bus may be seen below.</p>
+			<img style="width: 30em; height: auto;" src="res/entries/msDecode/DSC00840.jpg" alt="NSB local train passing over the Skansen railway bridge at dusk.">
+			<div class="msPlayer" id="skansenDemo">
+				<canvas class="visualizer" width="480"></canvas>
+				<audio controls="controls" class="player" preload="metadata">
+					<source src="res/ZOOM0031_LR.mp3" type="audio/mpeg">
+					<source src="res/ZOOM0031_LR_2.mp3" type="audio/mpeg">
+					<source src="res/ZOOM0031_LR_3.mp3" type="audio/mpeg">
+					<p>Your browser does not support the <code>audio</code> element! : (</p>
+					<p>You may download the sound file <a href="res/ZOOM0031_LR.mp3">here</a> instead.</p>
+				</audio>
+				<meter class="midMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="midTitle">MID</h3>
+				<button class="muteButton mid">M</button><input class="midGainSlider" type="range" min="0" max="1000" value="440">
+				<meter class="sideMeter" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="sideTitle">SIDE</h3>
+				<button class="muteButton side">M</button><input class="sideGainSlider" type="range" min="0" max="1000" value="430">
+				<meter class="masterMeter left" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<meter class="masterMeter right" min="0" optimum="70" low="80" high="90" value="0" max="100"></meter>
+				<h3 class="masterTitle">MASTER</h3>
+				<input class="masterSlider" type="range" min="0" max="1000" value="170"><button class="resetButton"><i class="fa fa-undo"></i></button>
+			</div>
+			<p>Adjusting the SIDE slider relative to the MID slider will adjust the stereo width of the output, while adjusting the MASTER slider will adjust the post-MID/SIDE slider gain of the output. Using headphones is strongly recommended.</p>
+			<p>An interesting thing to note here is that one of the main consequences and/or advantages/drawbacks of recording audio in Mid/Side can be seen on the FFT visualization by reducing the mid level to zero (i.e. dragging the MID slider all the way to the left, or pressing the mute button): The visualizer will show zero for all frequencies, despite there still being sound on the left and right channels. Why is this?</p>
+			<p>Well. The visualizer is only looking at a (mono) single channel version of the signal; the sum (i.e. the mono signal mentioned earlier) of the two side channels is indeed zero as they are the inverse of each other, and the sum of a wave and its inverse <a href="http://www.phys.uconn.edu/~gibson/Notes/Section5_2/Sec5_2.htm">is neccessarily zero</a>. This is important to note, as it has implications for what'll happen if a Mid/Side recording is run through a single speaker or other mono audio source: The side channels will cancel each other out and disappear completely and leave only the mid channel audible in the output.</p>
+			<p>The recording was made earlier this year, and features the old <a href="https://en.wikipedia.org/wiki/Skansen_Bridge" target="_blank">Skansen bridge</a> in Trondheim (see the <a target="_blank" href="https://goo.gl/maps/czweS">entry coordinates</a>) in rain with two local trains passing over near the start and end of the track. It was recorded using the <a target="_blank" href="https://www.zoom-na.com/products/field-video-recording/field-recording/h6-handy-recorder">Zoom H6</a> equipped with a <a target="_blank" href="https://www.zoom-na.com/products/product-accessories/zoom-ssh-6-stereo-shotgun-microphone-capsule-h5-h6-and-q8">SSH-6 mic module</a>, with the recorder placed directly under the middle of the bridge with the microphone setup angled slightly up towards the train tracks overhead.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1433427360"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Nordens Ark V2015</h2>
+			<h3 class="entryTime"><time>1423320544</time> (<time datetime="2015-02-07" pubdate>07.02.2015, 14:49</time>)</h3>
+			<h3 class="entryICBM">58.438510N, 11.431632E, 58m</h3>
+			<h3 class="entryCategory searchable">misc</h3>
+			<a class="entryLink" id="1423320544" href="http://471.no#1423320544"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06452_lq600px.jpg" alt="Nordens Ark 1">
+			<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC09228_lq600px.jpg" alt="Nordens Ark 2">
+			<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC09327_lq600px.jpg" alt="Nordens Ark 3">
+			<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06785_lq600px.jpg" alt="Nordens Ark 4">
+			<img style="width: 30em; height: auto;" src="res/entries/slpNordensArk0215/DSC06269cc_lq600px.jpg" alt="Nordens Ark 5">
+			<p>It's fun to see how fast these have grown up since 2013! It's not even all that easy to distinguish between the adults and kids any more at this point, unless you're up for identifying them by their markings.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1423320544"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Uncia Uncia</h2>
+			<h3 class="entryTime"><time>1420169060</time> (<time datetime="2015-01-02" pubdate>02.01.2015, 11:24</time>)</h3>
+			<h3 class="entryICBM">35.647939N, 139.395531E, 165m</h3>
+			<h3 class="entryCategory searchable">misc</h3>
+			<a class="entryLink" id="1420169060" href="http://471.no#1420169060"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 30em; height: auto;" src="res/slider/DSC02682.jpg" alt="Tama Zoo, Tokyo">
+			<audio controls="controls" preload="metadata" style="width: 30em;">
+				<source src="res/entries/audioTama/slp2_lc.mp3" type="audio/mpeg">
+				<source src="res/entries/audioTama/slp2_lc_2.mp3" type="audio/mpeg">
+				<source src="res/entries/audioTama/slp2_lc_3.mp3" type="audio/mpeg">
+				<p>Your browser does not support the <code>audio</code> element! : (</p>
+				<p>You may download the sound file <a href="res/entries/audioTama/slp2_lc.mp3">here</a> instead.</p>
+			</audio>
+			<p>Probably one of the more interesting recordings I've done of snow leopard cries; in my experience so far they're usually not quite as vocal as this, so I guess I'll consider myself lucky.</p>
+			<p>The enclosure does have running water inside it with a fence and a few other things between the mic and... subject producing some warbly effects and distortion. The quality of the H6's MSH-6 mic probably contributes (negatively) to this as well, though, but I'm perfectly happy that the bits with snow leopard in them sound alright compared to what I've found online so far.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1420169060"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">KspPy or bust</h2>
+			<h3 class="entryTime"><time>1413018467</time> (<time datetime="2014-10-11" pubdate>11.10.2014, 11:07</time>)</h3>
+			<h3 class="entryICBM">63.417963N, 10.401233E, 41m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1413018467" href="http://471.no#1413018467"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 30em; height: auto;" src="res/entries/KspPy/KspPy1_lq.jpg" alt="A picture of the stock Aeris Mk 4 being controlled from Python.">
+			<p>After getting into cybernetics and control systems this autumn, I started stumbling around for a while trying to find a fun simulation environment to stage some experiments in. I wanted to start making an autopilot for Kerbal Space Program using PID controllers and various other forms of control logic, and initally started looking at keyboard emulation and a few rather roundabout ways for getting data in and out of KSP.</p>
+			<p>Fortunately, it turns out that there's a much better and well-tested solution out there already: the <a target="_blank" href="http://forum.kerbalspaceprogram.com/threads/24594-0-25-(2014-10-12)-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser">Telemachus</a> mod! It provides a really nifty <a href="https://github.com/richardbunt/Telemachus/wiki/HTTP-API">API</a> for getting data in and out of the game, requiring barely any setup beyond installing the mod to get it up and running, but there's (unfortunately) not a lot of documentation or help out there for programmatically controlling KSP with it, at least not for Python 3.</p>
+			<p>Here's a small Python 3 usage example that should help you get started if you're so inclined; it should be simple enough to understand even if you're relatively new to the language (like me).</p>
+			<div class="codeContainer" style="border: 0.1em black dashed; overflow: hidden;">
+			<pre style="color:#000000;margin-left: 1em; margin-top: 0.7em; margin-bottom: 0em; font-size: 0.9em">
+	<span style='color:#696969; '># config start</span>
+	tmurl <span style='color:#808030; '>=</span> <span style='color:#0000e6; '>"http://127.0.0.1:8085/telemachus/datalink?alt="</span>
+	updateRate <span style='color:#808030; '>=</span> <span style='color:#008000; '>0.08</span>
+	<span style='color:#696969; '># config end</span>
+
+	<span style='color:#696969; '># init start</span>
+	<span style='color:#800000; font-weight:bold; '>import</span> json
+	<span style='color:#800000; font-weight:bold; '>import</span> urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>,</span> urllib<span style='color:#808030; '>.</span>error<span style='color:#808030; '>,</span> urllib<span style='color:#808030; '>.</span>parse
+	<span style='color:#800000; font-weight:bold; '>import</span> socket
+	<span style='color:#800000; font-weight:bold; '>import</span> time
+
+	programCounter <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span>
+
+	<span style='color:#800000; font-weight:bold; '>def</span> fetch<span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+	    tmdata <span style='color:#808030; '>=</span> urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>.</span>urlopen<span style='color:#808030; '>(</span>tmurl <span style='color:#808030; '>+</span> <span style='color:#e34adc; '>str</span><span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+	    tmdata_out <span style='color:#808030; '>=</span> json<span style='color:#808030; '>.</span>loads<span style='color:#808030; '>(</span>tmfetch<span style='color:#808030; '>.</span>readall<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>.</span>decode<span style='color:#808030; '>(</span><span style='color:#0000e6; '>'utf-8'</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+	    <span style='color:#800000; font-weight:bold; '>return</span> tmdata_out<span style='color:#808030; '>[</span><span style='color:#0000e6; '>"alt"</span><span style='color:#808030; '>]</span>
+
+	<span style='color:#800000; font-weight:bold; '>def</span> write<span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+	    urllib<span style='color:#808030; '>.</span>request<span style='color:#808030; '>.</span>urlopen<span style='color:#808030; '>(</span>tmurl <span style='color:#808030; '>+</span> <span style='color:#e34adc; '>str</span><span style='color:#808030; '>(</span>tmvar<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+	<span style='color:#696969; '># init end</span>
+
+	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.stage"</span><span style='color:#808030; '>)</span>
+	write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.sas"</span><span style='color:#808030; '>)</span>
+
+	<span style='color:#800000; font-weight:bold; '>while</span> <span style='color:#e34adc; '>True</span><span style='color:#808030; '>:</span>
+	    time<span style='color:#808030; '>.</span>sleep<span style='color:#808030; '>(</span>updateRate<span style='color:#808030; '>)</span>
+	    programCounter <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span>
+
+	    <span style='color:#696969; '># get data from KSP</span>
+	    altAGL <span style='color:#808030; '>=</span> fetch<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"v.heightFromTerrain"</span><span style='color:#808030; '>)</span>
+	    liquidFuel <span style='color:#808030; '>=</span> fetch<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"r.resource[LiquidFuel]"</span><span style='color:#808030; '>)</span>
+	    
+	    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>programCounter <span style='color:#808030; '>%</span> <span style='color:#008c00; '>100</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+		<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>"Altitude (AGL) (m):"</span><span style='color:#808030; '>,</span> altAGL<span style='color:#808030; '>)</span>
+		<span style='color:#800000; font-weight:bold; '>print</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>"Liquid Fuel (kg):"</span><span style='color:#808030; '>,</span> liquidFuel<span style='color:#808030; '>)</span>
+
+	    <span style='color:#696969; '># set throttle to max if below 100 m AGL</span>
+	    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>altAGL <span style='color:#808030; '>></span> <span style='color:#008c00; '>100</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+		write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.setThrottle[0]"</span><span style='color:#808030; '>)</span>
+	    <span style='color:#800000; font-weight:bold; '>else</span><span style='color:#808030; '>:</span>
+		write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.setThrottle[1]"</span><span style='color:#808030; '>)</span>
+
+	    <span style='color:#696969; '># no fuel, you say? no problem:</span>
+	    <span style='color:#696969; '># spam the stage/typewriter button and hope for the best</span>
+	    <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#808030; '>(</span>liquidFuel <span style='color:#808030; '>&lt;</span> <span style='color:#008c00; '>5</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+		write<span style='color:#808030; '>(</span><span style='color:#0000e6; '>"f.stage"</span><span style='color:#808030; '>)</span>
+			</pre>
+			</div>
+		<p>The important bits here are the fetch(tmvar) and write(tmvar) functions, which get and write data to and from KSP via the <a target="_blank" href="https://github.com/richardbunt/Telemachus/wiki/HTTP-API">Telemachus HTTP API</a> using <a href="https://github.com/richardbunt/Telemachus/wiki/API-String">API query strings</a> such as <code>r.resource[LiquidFuel]</code>. I've personally got most of those in a library that saves me from having to remember all the different query strings, but that's not quite ready for the public just yet; however, the functionality of this minimal usage example is almost exactly the same.</p>
+		<p>Safe flights, and be careful with the polling/update rate! You <i>will</i> kill the connection if you push it too low, though the exact lower limit will probably depend on your setup.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1413018467"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Tinychart</h2>
+			<h3 class="entryTime"><time>1413629374</time> (<time datetime="2014-10-18" pubdate>18.10.2014, 12:50</time>)</h3>
+			<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1413629374" href="http://471.no#1413629374"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<a target="_blank" href="res/entries/tinyChart/410pxTypeChart.gif" style="display: block; text-align: center; width: 50%; padding-top: 0.5em; padding-bottom: 1em; float: left;"><img style="width: 32%; height: auto;" src="res/entries/tinyChart/410pxTypeChart.gif" alt="Tiny Pok&eacute;mon type chart"></a>
+			<a target="_blank" href="res/entries/tinyChart/240pxTypeChart4.gif" style="display: block; text-align: center; width: 50%; padding-top: 0.5em; padding-bottom: 1em; float: left;"><img style="width: 32%; height: auto;" src="res/entries/tinyChart/240pxTypeChart4.gif" alt="Tiny Pok&eacute;mon type chart"></a>
+			<p>A simple 41px 1.11KB Pok&eacute;mon type matchup chart. This is actually quite a bit more usable than it looks (provided that you scale it up a bit)! The rows indicate the attacking type, and the columns are the defending type (like on most type charts). It may work for you if you've played the games for years and recognize the types by colour, but still can't fathom the type matchups. Might even be able to fit this on a 3DS for in-battle use.</p>
+			<p>This is probably almost as small as you can make a type chart; you could technically remove the extra type rows/columns and the grid to get it down to ~21px, but that'd probably render it unreadable in the process.</p>
+			<p>EDIT: Added a 24px one. Actually works a lot better than the original, in my opinion.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1413629374"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Google Drive web hosting</h2>
+			<h3 class="entryTime"><time>1411064579</time> (<time datetime="2014-09-18" pubdate>18.09.2014, 18:22</time>)</h3>
+			<h3 class="entryICBM">63.395094N, 10.365054E, 129m</h3>
+			<h3 class="entryCategory searchable">misc</h3>
+			<a class="entryLink" id="1411064579" href="http://471.no#1411064579"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<a href="http://drive.google.com" style="display: block; text-align: center; width: 100%; padding-top: 0.5em;" target="_blank"><img style="width: 10%; height: auto;" src="res/entries/gDrive/gDrive.png" alt="Google Drive logo"></a>
+			<p>As you may have noticed, this and all the rest of my websites are and have been dependent on iframes for quite some time. The reason for this is rather simple: Almost all of them are hosted on Google Drive, with a bit of jQuery and AJAX here and there providing sparks of dynamic content in my wasteland of static flat HTML files. As you may have guessed by this point, there are quite a few drawbacks to using Google Drive, but for simple, small web sites like this one there are plenty of upsides to it as well.</p>
+			<p>If you'd like to give it a go yourself - which I've been asked about a few times before - it's really as simple as setting up web hosting could get: Create a new Google Drive folder, right click and set the sharing options on it to "Public on the web", throw a HTML file or two in there (and whatever else you may want accessible online) and access it by heading to:</p>
+			<p style="text-align: center;">http://googledrive.com/host/<a href="res/entries/gDrive/IDStringDrive.png" target="_blank">yourfoldersharingid</a>/site.html</p>
+			<p>And that's pretty much it!</p>
+			<p>Like I mentioned earlier, however, there's no real way to get a custom domain name on your Drive websites without resorting to a domain name provider that can host an iframe with your Drive website in it like Namecheap (which I'm using) or something similar. That's a rather small drawback for free, simple and always-on web hosting, though. At least it's a lot better and more reliable than my (or your) poor, old, chronically broken laptop server if all you need is somewhere to throw your (mostly) static HTML, CSS and image files.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1411064579"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Using Skype v4.2.0.187</h2>
+			<h3 class="entryTime"><time>1404296085</time> (<time datetime="2014-07-02" pubdate>02.07.2014, 10:14</time>)</h3>
+			<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+			<h3 class="entryCategory searchable">misc</h3>
+			<a class="entryLink" id="1404296085" href="http://471.no#1404296085"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+				<a href="https://www.google.com/search?q=what+is+my+ip" target="_blank">Find your IP address</a>
+				<div style="">
+					<input type="text" id="ipnum" size="15">
+					<input type="button" value="Convert" onclick="convert();return false;">
+				</div>
+				<p><b>Edit:</b> As of 18.08.2014, it seems like Microsoft has finally pulled the plug on v4.2.0.187; it is no longer be able to log in at all, and there is no known fix for it at this time, unfortunately.</p>
+				<p>Sometime in 2013, Microsoft silently made the Skype login servers provide invalid IP details to the v4.2.0.187 client (<a href="http://drive.mrawr.net/SkypeSetup_4.2.0.187.exe" target="_blank">download</a>), essentially making all fresh installs of this Skype version unable to log in any more.</p>
+				<p>The solution to this "feature" is luckily rather simple: Provide valid IP details yourself.</p>
+				<p>First, attempt to log in on your new copy of Skype v4.2.0.187 once. It will fail, so don't worry about that just yet.
+				<p>After that, navigate to Skype's shared.xml file in "%appdata%/Skype" (type that into the "Run" window; Windows key + R) and open it in Notepad. Take a backup of it as well, just in case anything goes wrong.</p>
+				<p>Then use Notepad's "Find" function (ctrl + F) to locate "&lt;LastIP&gt;". Replace the number in between <code>&lt;LastIP&gt;</code> and <code>&lt;/LastIP&gt;</code> with the number you get when you enter your IP address into the textbox above after clicking "Convert". If those two tags don't exist in your shared.xml file, you'll have to add them yourself after the opening <code>&lt;Connection&gt;</code> tag. Directly after it should work.</p>
+				<p>Save the file after ensuring that you've only replaced the number enclosed by the <code>&lt;LastIP&gt;</code> and <code>&lt;/LastIP&gt;</code> tags, without overwriting any of the <code>&lt;</code>s or <code>&gt;</code>s.</p>
+				<p>Start Skype; enjoy your (smoke)s and blinking text.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1404296085"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+			
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Not A Team Rocket Announcement</h2>
+			<h3 class="entryTime"><time>1404029527</time> (<time datetime="2014-06-29" pubdate>29.06.2014, 08:12</time>)</h3>
+			<h3 class="entryICBM">58.438510N, 11.431632E, 58m</h3>
+			<h3 class="entryCategory searchable">misc</h3>
+			<a class="entryLink" id="1404029527" href="http://471.no#1404029527"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/BigCat01_res1.jpg" alt="Playful snow leopard cub">
+			<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/IMGP9918_res1.jpg" alt="Two snow leopards playfighting">
+			<img style="width: 30em; height: auto;" src="res/entries/snowLeopards1/IMGP9891_res2.jpg" alt="Snow leopard family. Minus one member.">
+			<p style="text-align: center;"><i>Plot twist: It's actually a snow leopard announcement.</i></p>
+			<p></p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1404029527"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Team Rocket Announcement</h2>
+			<h3 class="entryTime"><time>1403554657</time> (<time datetime="2014-06-23" pubdate>23.06.2014, 20:17</time>)</h3>
+			<h3 class="entryICBM">63.400845N, 10.316698E, 220m</h3>
+			<h3 class="entryCategory searchable">team_rocket</h3>
+			<a class="entryLink" id="1403554657" href="http://471.no#1403554657"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<p>...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket! ...Uh... um. Testing! Testing 1,2,3... We're the amazing Team Rocket!</p>
+			<iframe class="youtubeAudio" width="100" height="65" src="//www.youtube.com/embed/hTaW0HK-Cw4" seamless></iframe>
+			<p>(<i>In other news, I've gone through another (!) revision of my home page. Who would have thought that one could go through five hosting solutions and layouts in less than two years without actually having any content to display!</i>)</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Team Rocket Executive</div>
+			<a class="entryLink" href="http://471.no#1403554657"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">"Russekort"!</h2>
+			<h3 class="entryTime"><time>1399061035</time> (<time datetime="2014-05-02" pubdate>02.05.2014, 20:03</time>)</h3>
+			<h3 class="entryICBM">63.395094N, 10.365054E, 129m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1399061035" href="http://471.no#1399061035"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<img style="width: 14.85em; height: auto;" src="res/entries/russekort/russekort_vfin.jpg" alt="Printed card">
+			<img style="width: 14.85em; height: auto;" src="res/entries/russekort/RusseKortRendered.png" alt="Browser-rendered (in Firefox, not Lynx) version of the code on the printed card.">
+			<p>This is a small bit of (nerdy) web design work that I did (mostly) back in November in preparation for May 2014. It's a form of <a href="http://en.wikipedia.org/wiki/Russefeiring#Cards_.28Russekort.29" target="_blank">contact card</a> which includes the source code for rendering the code for the actual card in a browser (though I admittedly had to resort to a few cheats, particularly for mobile browser compatibility).</p>
+			<p>The QR code leads to <a href="http://r.mrawr.net" target="_blank">this companion site</a> (in Norwegian), which enabled mobile users - i.e. most people who were going to see the card - to see a rendered version of it in their web browser, along with a few explanations.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1399061035"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">One-off websites</h2>
+			<h3 class="entryTime"><time>1398524154</time> (<time datetime="2014-04-26" pubdate>26.04.2014, 14:55</time>)</h3>
+			<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1398524154" href="http://471.no#1398524154"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<a href="http://teachy.tv/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/TeachyTV.jpg" alt="Image of the Teachy.TV web site"></a>
+			<a href="http://rk.mrawr.net/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/rk01.png" alt="Image of the Russeknuter Trondheim 2014 web site"></a>
+			<a href="http://navmap.mrawr.net/" target="_blank"><img style="width: 9.81em; height: auto;" src="res/entries/oneoffWebsite/Navmap2.jpg" alt="Image of the Discovery Navmaps web site"></a>
+			<p>There have been a few of these over the years, and there are probably quite a few more to come. The first one is perhaps the most stupid one, and even has it's own domain name registered (for now). Not bad for a site based off two rather fun hours on the <a href="http://twitch.tv/twitchplayspokemon">TwitchPlaysPokemon stream</a>. The other two are (were?) rather more useful, I suppose.</p>
+			<a class="fullWidthLink" target="_blank" href="http://teachy.tv/">Teachy TV</a>
+			<a class="fullWidthLink" target="_blank" href="http://rk.mrawr.net/">Russeknuter for Trondheim, 2014</a>
+			<a class="fullWidthLink" target="_blank" href="http://navmap.mrawr.net/">Discovery Mod Navmaps</a>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1398524154"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Mozzi/Arduino synthesizer</h2>
+			<h3 class="entryTime"><time>1378683316</time> (<time datetime="2013-09-08" pubdate>08.09.2013, 23:35</time>)</h3>
+			<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1378683316" href="http://471.no#1378683316"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<p>This is a small (currently) one-oscillator USB MIDI-controlled synthesizer sketch made for the Teensy++ 2.0 microcontroller (which I'm a rather large fan of) utilizing the Mozzi library (which it requires). The USB MIDI version uses no external parts except for a few wires to connect it to a mixer/amp, and has a basic LFO, low-pass filter, an AD envelope and, of course, a single sine/square/saw/triangle wave oscillator.</p>
+			<p>Please see the attached Arduino sketch below for more information.</p>
+			<a target="_blank" href="https://googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/mrawr/files/OneOscSynth6_0-130719a.zip">OneOscSynth6.0 sketch</a>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1378683316"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">Discovery Search Engine</h2>
+			<h3 class="entryTime"><time>1350440274</time> (<time datetime="2012-10-17" pubdate>17.10.2012, 02:17</time>)</h3>
+			<h3 class="entryICBM">63.400845N, 10.316698E, 218m</h3>
+			<h3 class="entryCategory searchable">projects</h3>
+			<a class="entryLink" id="1350440274" href="http://471.no#1350440274"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<p>A small Google Custom Search wrapper for the <a href="http://discoverygc.com" target="_blank">Discovery mod and community site(s)</a>. It uses promotions and a few other Google CSE goodies to help improve searches, including a large search term suggestion database.</p>
+			<a target="_blank" href="http://dgc.mrawr.net">Discovery Search Engine</a>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#1350440274"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+
+		<article class="entry">
+		<header class="entryHeader">
+			<h2 class="entryTitle">About</h2>
+			<h3 class="entryTime"><time>809658774</time> (<time datetime="1995-08-29">29.08.1995, 01:12</time>)</h3>
+			<h3 class="entryICBM">63.421474N, 10.386919E, 12m</h3>
+			<!-- I won't give you a cookie if you can guess why the current tag for the "about" page is "about?". Sorry. Best workaround 2014 (as long as there are no other mentions of "about?" on the page, at least. Won't last for long). Kappa -->
+			<h3 class="entryCategory searchable">about?</h3>
+			<a class="entryLink" id="809658774" href="http://471.no#809658774"><i class="fa fa-link"></i>Link to this entry</a>
+		</header>
+		<div class="entryMain">
+			<p>That timestamp may be a bit off, unfortunately. Probably. I think I remember something about it being during the night, at least.</p>
+			<p>To keep things short: I'm a web design enthusiast/n00b, snow leopard enthusiast and a hobbyist ambient audio recorder. Plus a few other things.</p>
+			<p>This is my home page that I'm going to be using to post projects I'm working on, mostly for my own enjoyment so I've got some documentation of what I've done so far, and so I can get some of it up on the 'net in case I feel like showing it to somebody one day.</p>
+			<p>It is currently hosted on <s>Google Drive</s> GitHub Pages (29.08.2015), running on a Glorious Flat File CMS (tm) aided by quite a lot of hand-crafted HTML5, CSS3, JS plus some external libraries (jQuery, mainly) to keep things manageable until I get it up and running on a home server again. Looking forward to that one.</p>
+			<p>If you need to contact me, the "Facebook" and "Skype" links up on the navigation header would perhaps be good starting points.</p>
+			<a class="lynxFriendly" href="http://www.cs.umanitoba.ca/~djc/personal/lynxfriend.html"><img src="res/LynxFriendly_v1.png" alt="This web site is designed to be Lynx-friendly!"></a>
+			<p><i>(You'll just have to trust me on that one. Unless you're one of the few Lynx/screen reader users out there, of course. Hi!)</i></p>
+			<p>Disclaimers and credits: Pok&eacute;mon, the team sprites and all related content belongs to GameFreak/Nintendo. The code for the slider, adaptive background and dominant colour finder belong to their respective creators. All credit for the background images go to the (unfortunately unknown) creator(s). Everything else here was created by or otherwise belongs to me, unless anything else is explicitly stated or if the content is used under the terms of a license that does not require direct attribution.</p>
+		</div>
+		<footer class="entryFooter">
+			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>
+			<a class="entryLink" href="http://471.no#809658774"><i class="fa fa-link"></i>Link to this entry</a>
+		</footer>
+		</article>
+		
+		<!-- article spacer -->
+		
+		<a class="topLinkButton" href="#">
+			<i class="fa fa-paw" id="bottomLeftPaw"></i>
+			<i class="fa fa-paw" id="topRightPaw"></i>
+			<div class="scrollUpText">scroll up</div>
+		</a>
+		
+		</main>
+		</div>
 	</div>
 	
 	<!-- g analytics -->
