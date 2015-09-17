@@ -7,13 +7,13 @@
 	-ms-user-select: none;
 	user-select: none;
 	transition: background 0.15s ease, color 0.15s ease, text-shadow 0.15s ease, border-radius 0.15s ease;
-	}
+}
 
 /* clickable - pointer cursor */
 .navButton, .searchable, #navMainButton {
 	cursor: pointer;
 	border-radius: 0.1em;
-	}
+}
 
 /* fallback for older browsers w/o HTML5 element support, render as block not inline */
 article, aside, details,
@@ -21,7 +21,7 @@ figcaption, figure,
 footer, header, hgroup,
 menu, nav, section {
 	display: block;
-	} 
+} 
 
 html {
 	font-family: "Open Sans", sans-serif;
@@ -29,41 +29,41 @@ html {
 	height: 100%;
 	overflow: auto;
 	/*Fun fact: This breaks rendering on iOS when used on the html element! -webkit-overflow-scrolling: touch; */
-	}
+}
 
 body {
 	overflow: auto;
 	margin: 0;
-	}
+}
 
 p {
 	display: block;
 	width: 100%;
 	min-width: 30em;
-	}
+}
 	
 code {
 	/* renders code elements at proper font size */
 	font-family: monospace, monospace;
-	}
+}
 	
 .entry a {
 	text-decoration: none;
 	color: #1276D4;
-	}
+}
 	
 .entry a:visited {
 	color: #7C09BF;
-	}
+}
 	
 .entry a:hover {
 	text-decoration: underline;
-	}
+}
 	
 .mainHeader {
 	position: absolute;
 	left: 0em;
-	}
+}
 
 .mainContainer {
 	position: absolute;
@@ -74,21 +74,21 @@ code {
 	right: 0;
 	bottom: 0;
 	margin: auto;
-	}
+}
 	
 .sidebarWrapper {
 	position: absolute;
 	left: 34em;
 	top: 0em;
 	display: none;
-	}
+}
 	
 .sidebar {
 	width: 18em;
 	height: 100%;
 	position: fixed;
 	z-index: 99;
-	}
+}
 	
 .updateNotice {
 	bottom: 8.3em;
@@ -112,7 +112,7 @@ code {
 	background-repeat: no-repeat;
 	position: absolute;
 	z-index: -5;
-	}
+}
 	
 .shelfContainer {
 	bottom: 8.5em;
@@ -147,14 +147,14 @@ code {
 	border-bottom-left-radius: 0.5em;
 	border-bottom-right-radius: 0.5em;
 	height: 4.4em;
-	}
+}
 	
 .mainTitle {
 	padding: 0em;
 	margin: 0.6em 0.4em 0.4em 5.8em;
 	z-index: 200;
 	position: absolute;
-	}
+}
 	
 .mainNavContainer {
 	margin: -1em;
@@ -163,7 +163,7 @@ code {
 	width: 32em;
 	padding: 1em 1em 2em;
 	left: 1em;
-	}
+}
 
 #primaryNav {
 	z-index: 99;
@@ -171,24 +171,24 @@ code {
 	position: fixed;
 	height: 2em;
 	top: -4.25em;
-	}
+}
 	
 #primaryNav .navButton {
 	position: absolute;
 	top: 3.8em;
-	}
+}
 	
 #primaryNav .navButton#navMainButton {
 	left: 6em;
-	}
+}
 
 #primaryNav .navButton#skypeLink {
 	left: 12.4em;
-	}
+}
 
 #primaryNav .navButton#facebookLink {
 	left: 18.70em;
-	}
+}
 	
 #secondaryNav {
 	z-index: 3;
@@ -200,24 +200,24 @@ code {
 	left: 0em;
 	border-bottom-left-radius: 0.5em;
 	border-bottom-right-radius: 0.5em;
-	}
+}
 	
 #secondaryNav .navButton, #pokeNavImg {
 	position: absolute;
 	top: 3.9em;
-	}
+}
 	
 #secondaryNav .navButton#navProjectsButton {
 	left: 6.78em;
-	}
+}
 
 #secondaryNav .navButton#navMiscButton {
 	left: 13.18em;
-	}
+}
 
 #secondaryNav .navButton#navAboutButton {
 	left: 19.48em;
-	}
+}
 
 .topLinkButton {
 	position: absolute;
@@ -233,22 +233,22 @@ code {
 	bottom: 0em;
 	width: 31.4005em;
 	left: 0em;
-	}
+}
 	
 .topLinkButton:hover,
 .topLinkButton:active{
 	color: #FFAF22;
-	}
+}
 	
 #topRightPaw {
 	position: relative;
 	bottom: 0.4em;
-	}
+}
 	
 #bottomLeftPaw {
 	position: relative;
 	bottom: -0.1em;
-	}
+}
 	
 /* 471 logo styles start */
 
@@ -315,7 +315,7 @@ code {
 	margin-bottom: 0.5em;
 	position: absolute;
 	top: 7.8em;
-	}
+}
 	
 #searchField {
 	width: 33.899em;
@@ -325,7 +325,7 @@ code {
 	padding-left: 1.3em;
 	margin: 0;
 	border: 0.2em solid #B4B4B4;
-	}
+}
 	
 .searchBox #inputIndicator {
     position: absolute;
@@ -346,7 +346,7 @@ code {
 .mainNav {
 	margin-top: 0.5em;
 	padding: 0;
-	}
+}
 	
 .mainContent {
 	display: block;
@@ -361,7 +361,7 @@ code {
 	width: 30em;
 	border: 1em solid rgba(49, 60, 71, 0.35);
 	left: 0em;
-	}
+}
 
 .entry {
 	position: relative;
@@ -371,37 +371,37 @@ code {
 	margin-bottom: 1em;
 	padding-bottom: 1em;
 	border-bottom: solid black 0.1em;
-	}
+}
 	
 .entryHeader {
 	position: relative;
 	height: 6.5em;
 	margin-bottom: 1em;
 	border-bottom: dashed grey 0.1em;
-	}
+}
 
 .entryTitle, .entryTime, .entryCategory, .entryICBM, .entryLink {
 	display: block;
-	}
+}
 
 .entryTitle {
 	margin: 0;
 	font-size: 1.5em;
-	}
+}
 	
 .entryTime {
 	font-size: 1em;
 	position: absolute;
 	left: 0.5em;
 	top: 1.5em;
-	}
+}
 	
 .entryICBM{
 	font-size: 1em;
 	position: absolute;
 	left: 0.5em;
 	top: 3.5em;
-	}
+}
 	
 .entryCategory {
 	position: absolute;
@@ -411,7 +411,7 @@ code {
 	top: 0.8em;
 	height: 1.3em;
 	font-size: 1.5em;
-	}
+}
 	
 .youtubeAudio {
 	border-bottom-left-radius: 0.5em;
@@ -422,54 +422,54 @@ code {
 	width: 29em;
 	height: 65px;
 	background-color: gray;
-	}
+}
 	
 .entryFooter {
 	position: relative;
 	height: 1em;
-	}
+}
 	
 .entryHeader .entryLink {
 	position: relative;
 	visibility: hidden;
 	top: -7.5em;
 	height: 0;
-	}
+}
 	
 .entryFooter .entryLink {
 	display: block;
 	position: absolute;
 	bottom: -0.5em;
 	text-decoration: none;
-	}
+}
 
 .entryFooter .entryLink .fa-link {
 	padding-right: 0.2em;
-	}
+}
 
 .fullWidthLink {
 	display: inline-block;
 	width: 100%;
 	margin-bottom: 0.2em;
-	}
+}
 	
 .userSignature {
 	position: absolute;
 	right: 1em;
 	bottom: -0.5em;
 	font-style: italic;
-	}
+}
 
 .lynxFriendly {
 	display: block;
 	margin-bottom: 1em;
 	margin-top: 1em;
 	text-align: center;
-	}
+}
 
 .lynxFriendly img {
 	width: 60%;
-	}
+}
 
 .navButton {
 	display: block;
@@ -484,7 +484,7 @@ code {
 	cursor: pointer;
 	height: 1.24em;
 	width: 5.00462em;
-	}
+}
 
 .navButton:hover,
 .navButton:active,
@@ -494,7 +494,7 @@ code {
 	border-color: #FFAF22;
 	box-shadow: 0 0 9px #FFAF22;
 	border-radius: 0.2em;
-	}
+}
 	
 #pokeClock {
 	  position: absolute;
@@ -506,19 +506,19 @@ code {
 	  top: 3.9em;
 	  overflow: hidden;
 	  color: #F5F5F5;
-	}
+}
 	
 .fancySeparator {
-	height: 3em;
-    position: absolute;
-    z-index: 1;
-    width: 34em;
-    left: 0em;
-    top: 33.2em;
+	height: 3.015em;
+	position: absolute;
+	z-index: 1;
+	width: 34em;
+	left: 0em;
+	top: 33.15em;
 	vertical-align: middle;
-    border: 1em solid rgba(49, 60, 71, 0.35);
-    border-left-width: 0;
-    border-right-width: 0;
+	border: 1em solid rgba(49, 60, 71, 0.35);
+	border-left-width: 0;
+	border-right-width: 0;
 	text-align: center;
 	border-radius: 1em;
 	background: rgb(49, 60, 71);
@@ -526,13 +526,14 @@ code {
 
 .fancySeparator a {
 	width: 100%;
-    display: inline-block;
-    top: -0.3em;
-    bottom: 0;
-    position: relative;
-    font-size: 3em;
+	display: inline-block;
+	top: -0.315em;
+	bottom: 0;
+	position: relative;
+	font-size: 3em;
+	padding-bottom: 0.2em;
 	color: #3F53DD;
-    font-family: "Open Sans", sans-serif;
+	font-family: "Open Sans", sans-serif;
 }
 
 .fancySeparator a:hover {
@@ -608,21 +609,17 @@ code {
 	text-align: center;
 	vertical-align: middle;
 	bottom: -1.1em;
-	border-radius: 0.222em;
+	border-radius: 0.2em;
 }
 
 .rslides_nav.prev {
-    left: -0.222em;
-	border-top-right-radius: 0.3em;
-	border-bottom-right-radius: 0.3em;
+    	left: -0.225em;
 	color: #3F53DD !important;
 	text-decoration: none !important;
 }
 
 .rslides_nav.next {
-	right: -0.222em;
-	border-top-left-radius: 0.3em;
-	border-bottom-left-radius: 0.3em;
+	right: -0.225em;
 	color: #3F53DD !important;
 	text-decoration: none !important;
 }
@@ -1448,31 +1445,31 @@ button.muteButton:active, button.resetButton:active {
 
 /* fallback, in case of noscript */
 body {
-	}
+}
 
 .morning, .morning .fancySeparator {
-	}
+}
 	
 .lateMorning, .lateMorning .fancySeparator {
-	}
+}
 	
 .afternoon, .afternoon .fancySeparator {
-	}
+}
 
 .lateAfternoon, .lateAfternoon .fancySeparator {
-	}
+}
 
 .evening, .evening .fancySeparator {
-	}
+}
 
 .lateEvening, .lateEvening .fancySeparator {
-	}
+}
 
 .night, .night .fancySeparator {
-	}
+}
 
 .lateNight, .lateNight .fancySeparator {
-	}
+}
 
 .backgroundContainer {
   width: 100%;
