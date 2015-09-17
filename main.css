@@ -1136,28 +1136,26 @@ button.muteButton:active, button.resetButton:active {
 		
 .mapContainer {
     width: 18em;
-    height: 21.5em;
+    height: 3.5em;
     margin: 0 auto;
     background: rgba(49, 60, 71, 0.35);
     margin-top: 0em;
     position: relative;
-    border-bottom-left-radius: 555em;
-    border-bottom-right-radius: 555em;
-	}
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
 	
 .zoi {
 	height: 22.2em;
 	width: 22.2em;
 	position: relative;
-	border-radius: 999em;
 	top: 4.266667em;
-	border: 0.1em solid white;
 	left: -0.1em;
 	font-size: 0.8125em;
 	font-family: "Open Sans", sans-serif;
 }
 
-.star {
+/* pre-transparent .star {
 	border-radius: 9999em;
 	width: 1em;
 	height: 1em;
@@ -1170,6 +1168,22 @@ button.muteButton:active, button.resetButton:active {
 	margin: auto;
 	overflow: visible;
 	box-shadow: 0em 0em 2.5em 0.2em  rgb(220, 226, 124);
+} */
+
+.star {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	overflow: visible;
+	z-index: -4;
+	width: 1em;
+	height: 1em;
+	background-color: white;
+	box-shadow: 0 0 10em 7em rgba(255,255,200,0.3);
+	border-radius: 100%;
 }
 
 .orbit {
@@ -1570,13 +1584,14 @@ body {
 }
 
 .sun {
-  position: absolute;
-  z-index: -4;
-  width: 1em;
-  height: 1em;
-  background-color: white;
-  box-shadow: 0 0 10em 7em rgba(255,255,200,0.3);
-  border-radius: 100%;
+	display: none;
+	position: absolute;
+	z-index: -4;
+	width: 1em;
+	height: 1em;
+	background-color: white;
+	box-shadow: 0 0 10em 7em rgba(255,255,200,0.3);
+	border-radius: 100%;
 }
 
 .spaceElevator .solarPanel {
