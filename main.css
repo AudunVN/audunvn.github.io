@@ -1904,9 +1904,19 @@ body {
 }
 
 @keyframes flyAnimation {
-	0%{right: -10em;}
-	30%{right: -10em;}
-  100%{right: 120%;}
+	0% {
+		right: -10em;
+		display: none;
+	}
+	29% {
+		right: -10em;
+		display: none;
+	}
+	30% {
+		right: -10em;
+		display: block;
+	}
+	100% {right: 120%;}
 }
 
 @keyframes flashLight {
