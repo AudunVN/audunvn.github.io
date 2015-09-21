@@ -1093,6 +1093,7 @@ button.muteButton:active, button.resetButton:active {
 	position: absolute;
 	background-size: cover;
 	background-position-x: 0%;
+	overflow: hidden;
 }
 
 .positionMarker {
