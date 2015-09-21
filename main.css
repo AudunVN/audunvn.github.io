@@ -1109,6 +1109,39 @@ button.muteButton:active, button.resetButton:active {
 	-webkit-transform: translateZ(0);
 	transition: all 0.5s ease;
 }
+
+.positionMarker div {
+    background-color: rgba(255,165,0,0.6);
+    position: absolute;
+}
+
+.positionMarker div.nLine {
+	width: 0.1em;
+	height: 100em;
+	top: -100em;
+	left: 0.175em;
+}
+
+.positionMarker div.eLine {
+	width: 100em;
+	height: 0.1em;
+	left: 0.5em;
+	bottom: 0.175em;
+}
+
+.positionMarker div.sLine {
+	width: 0.1em;
+	height: 100em;
+	left: 0.175em;
+	bottom: -100em;
+}
+
+.positionMarker div.wLine {
+	width: 100em;
+	height: 0.1em;
+	right: 0.5em;
+	bottom: 0.175em;
+}
 		
 .mapContainer * {
 	font-family: "Open Sans", sans-serif;
