@@ -285,10 +285,7 @@ code {
 	box-shadow: 0px 0.01em 0.1em 0.05em rgba(127, 127, 255, 0.15);
 	height: 0.05em;
 	background-color: #1073C5;
-	background: transparent linear-gradient(270deg, #1073C5, #39CDEE) repeat scroll 0% 0% / 400% 400%;
-	-webkit-animation: pulse 7s ease infinite;
-	-moz-animation: pulse 7s ease infinite;
-	animation: pulse 7s ease infinite;
+	background: url("res/entries/slpNordensArk0215/DSC09228_lq600px.jpg") 287% 144%;
 }
 
 // keyframes for the dash gradient animation
