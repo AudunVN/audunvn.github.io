@@ -178,8 +178,8 @@
 <script>
 	function resizeTargets(container) {
 		var viewportHeight = $(container).height();
-		var sliderString = "; height: "+viewportHeight + "px !important;";
-		var bodyString = "; height: "+viewportHeight + "px !important;";
+		var sliderString = "height: "+viewportHeight + "px !important;";
+		var bodyString = "height: "+viewportHeight + "px !important;";
 		$(".rslides > li").each(function() {
 			$(this).attr("style", function(i,s) { return s + sliderString});
 		});
@@ -189,7 +189,7 @@
 		$(".rslides").each(function() {
 			$(this).attr("style", function(i,s) { return s + sliderString});
 		});
-		$("body").attr("style", function(i,s) { return s + bodyString});
+		$("rslides").attr("style", function(i,s) { return s + bodyString});
 	}
 
 	function newImgLoaded(loadedImg) {
