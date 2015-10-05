@@ -178,8 +178,8 @@
 <script>
 	function resizeTargets(container) {
 		var viewportHeight = $(container).height();
-		var sliderString = "height: "+viewportHeight + "px !important;";
-		var bodyString = "height: "+viewportHeight + "px !important;";
+		var sliderString = "; height: "+viewportHeight + "px !important;";
+		var bodyString = "; height: "+viewportHeight + "px !important;";
 		$(".rslides > li").each(function() {
 			$(this).attr("style", function(i,s) { return s + sliderString});
 		});
@@ -189,7 +189,7 @@
 		$(".rslides").each(function() {
 			$(this).attr("style", function(i,s) { return s + sliderString});
 		});
-		$("rslides").attr("style", function(i,s) { return s + bodyString});
+		$("body").attr("style", function(i,s) { return s + bodyString});
 	}
 
 	function newImgLoaded(loadedImg) {
@@ -883,44 +883,39 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 				</ul>
 			</div>
 			<script>
-				$(document).ready(function(){
-					  $(function() {
-						    $(".rslides").responsiveSlides({
-							  auto: true,             // Boolean: Animate automatically, true or false
-							  speed: 500,            // Integer: Speed of the transition, in milliseconds
-							  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
-							  pager: false,           // Boolean: Show pager, true or false
-							  nav: true,             // Boolean: Show navigation, true or false
-							  random: true,          // Boolean: Randomize the order of the slides, true or false
-							  pause: false,           // Boolean: Pause on hover, true or false
-							  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
-							  prevText: "<",   // String: Text for the "previous" button
-							  nextText: ">",       // String: Text for the "next" button
-							  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
-							  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
-							  manualControls: "",     // Selector: Declare custom pager navigation
-							  namespace: "rslides",   // String: Change the default namespace used
-							  before: function(){},   // Function: Before callback
-							  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
-						});
-					});
+			  $(function() {
+				    $(".rslides").responsiveSlides({
+					  auto: true,             // Boolean: Animate automatically, true or false
+					  speed: 500,            // Integer: Speed of the transition, in milliseconds
+					  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+					  pager: false,           // Boolean: Show pager, true or false
+					  nav: true,             // Boolean: Show navigation, true or false
+					  random: true,          // Boolean: Randomize the order of the slides, true or false
+					  pause: false,           // Boolean: Pause on hover, true or false
+					  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+					  prevText: "<",   // String: Text for the "previous" button
+					  nextText: ">",       // String: Text for the "next" button
+					  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+					  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+					  manualControls: "",     // Selector: Declare custom pager navigation
+					  namespace: "rslides",   // String: Change the default namespace used
+					  before: function(){},   // Function: Before callback
+					  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
 				});
+			  });
 
-				$(document).ready(function() {
-					resizeTargets(".sliderContainer");
-					$(".sliderContainer").resize(resizeTargets);
-					setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 125);
-					setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 300);
-					setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 500);
-					setTimeout(function() {$(".rslides").find("img").each(function() {
-						newImgLoaded(this);
-					});},500);
-					setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 125);
-					setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 300);
-					setTimeout(function() {$(".rslides").find("img").each(function() {
-						newImgLoaded(this);
-					});},5000);
-				});
+			$(document).ready(function() {
+				resizeTargets(".sliderContainer");
+				$(".sliderContainer").resize(resizeTargets);
+				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 125);
+				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 300);
+				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 500);
+				setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 125);
+				setTimeout(function() {$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"})}, 300);
+				setTimeout(function() {$(".rslides").find("img").each(function() {
+					newImgLoaded(this);
+				});},5000);
+			});
 			</script>
 		</div>
 		</article>
