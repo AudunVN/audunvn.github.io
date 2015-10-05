@@ -905,8 +905,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 			  });
 
 			$(document).ready(function() {
-				resizeTargets(".sliderContainer");
-				$(".sliderContainer").resize(resizeTargets);
+				$(".rslides > li").height($(".sliderContainer").height());
 				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 125);
 				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 300);
 				setTimeout(function() {newImgLoaded(".rslides1_on > img")}, 500);
