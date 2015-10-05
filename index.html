@@ -1482,6 +1482,9 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 				setTimeout(function() {$(".rslides").find("img").each(function() {
 					newImgLoaded(this);
 				});},5000);
+				$( ".rslides1_on > img" ).load(function() {
+					newImgLoaded(".rslides1_on > img");
+				});
 			});
 		</script>
 </body>
