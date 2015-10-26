@@ -829,7 +829,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 					</div>
 					<input id="timeInputBox">
 				</div>
-				<span class="updateNotice">Updated 16.10</span>
+				<span class="updateNotice">Updated 04.10</span>
 				<div class="glaceon"></div>
 				<div class="shelfContainer">
 					<div class="shelf"></div>
@@ -1441,9 +1441,9 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 					var icbmString =  $(this).closest(".entryTime").next(".entryICBM").html();
 					setOrbit(time);
 					updateMap(icbmString);
-					location.hash = time;
+					history.pushState(time, "471.no "+time, "#"+time);
 				  } else {
-					// in case you want do something when it leaves the viewport
+					// element has gone out of viewport
 				  }
 			});
 		})();
