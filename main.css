@@ -115,22 +115,23 @@ code {
 }
 	
 .shelfContainer {
-	bottom: 8.5em;
+	bottom: 8.55em;
 	left: 0.15em;
 	width: 17.75em;
 	height: 5em;
 	position: absolute;
 	z-index: -6;
 	perspective: 24em;
-	perspective-origin: bottom;
+	perspective-origin: center bottom;
 }
 
 .shelf {
-	width: 15em;
 	height: 8.2em;
-	background-color: white;
+	background-color: #FFF;
 	transform: rotateX(83deg);
-	margin: 0 auto;
+	margin: 0px auto;
+	box-shadow: 0px 0px 0.15em 0.15em rgb(255, 255, 255);
+	width: 14.38em;
 }
 
 .mainTitleContainer {
@@ -1088,7 +1089,8 @@ button.muteButton:active, button.resetButton:active {
 .worldMap {
 	width: 18em;
 	height: 9em;
-	background: url("https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/space/res/Equirectangular_projection_SW.jpg");
+	background-color: rgb(35, 139, 171);
+	background: rgb(35, 139, 171) url("https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/space/res/Equirectangular_projection_SW.jpg");
 	bottom: 0;
 	position: absolute;
 	background-size: cover;
