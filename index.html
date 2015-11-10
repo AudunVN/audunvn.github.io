@@ -20,6 +20,7 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="res/js/prefixfree.min.js"></script>
+	<script src="res/js/wavesurfer.min.js"></script>
 	
 	<!-- lynx: http://www.epochconverter.com/, http://www.daftlogic.com/sandbox-google-maps-find-altitude.htm -->
 	
@@ -481,14 +482,23 @@ function msDecode(container) {
 			}
 		}
 	};
+	
+	$(container).append("<div class='msWaveform'></div>");
+	var wavesurfer = Object.create(WaveSurfer);
 
+	wavesurfer.init({
+		container: document.querySelector("#" + parentID + " .msWaveform"),
+		backend: 'MediaElement',
+		waveColor: '#313C47',
+		normalize: 'true',
+		barWidth: '2',
+		progressColor: '#1989F8',
+		mediaControls: 'true'
+	});
+	
+	var mp3audioSource = document.querySelector("#" + parentID + " .player").innerHTML.match(/res\/.*\.wavesurfer\.mp3/g)[0];
+	wavesurfer.load(mp3audioSource);
 	draw();
-	/*
-	setTimeout(function () {
-		// adding an approximately three second timeout for loading seems to fix a relatively rare Chrome AudioContext bug.
-		$("#" + parentID + " .loadingOverlay").remove();
-	}, 3471);
-	*/
 }
 </script>
 <!-- array averaging function -->
@@ -725,7 +735,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 		<div class="starfield"></div>
 		<div class="sun"></div>
 		<div class="atmosphere"></div>
-		<div class="spaceshipBody primaryShipColor">
+		<!--<div class="spaceshipBody primaryShipColor">
 			<div class="tailFin"></div>
 			<div class="fuelContainer"></div>
 			<div class="noseCone primaryShipColor"></div>
@@ -733,16 +743,16 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 			<i class="fa-battery-full fa door"></i>
 			<div class="leg left"></div>
 			<div class="navLight flashing"></div>
-			<!--<div class="windowContainer">
+			<div class="windowContainer">
 				<div class="window left"></div>
 				<div class="window middle"></div>
 				<div class="window right "></div>
-			</div>-->
+			</div>
 			<div class="engineStack">
 				<div class="nozzle upper"></div>
 				<div class="nozzle lower"></div>
 			</div>
-		</div>
+		</div>-->
 		<div class="spaceElevator">
 			<div class="laserReceiver upper"></div>
 			<div class="receiverBox">
@@ -923,6 +933,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 				<audio controls="controls" class="player" preload="metadata">
 					<source src="res/entries/skibladner/skibladner.mp3" type="audio/mpeg">
 					<source src="res/entries/skibladner/skibladner.ogg" type="audio/ogg">
+					<source src="res/entries/skibladner/skibladner.wavesurfer.mp3" type="audio/mpeg">
 					<p>Your browser does not support the <code>audio</code> element! : (</p>
 					<p>You may download the sound file <a href="res/entries/skibladner/skibladner.mp3">here</a> instead.</p>
 				</audio>
@@ -961,10 +972,12 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 			<img style="width: 30em; height: auto;" src="res/entries/icelandGeo/DSC01564.jpg" alt="Picture of 45MW high pressure turbine generator at Hellishei&#240;i geothermal power station, Iceland">
 			<div class="msPlayer" id="powerPlant">
 				<canvas class="visualizer" width="600"></canvas>
+				<div id="wave"></div>
 				<audio controls="controls" class="player" preload="metadata">
 					<source src="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3" type="audio/mpeg">
 					<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_2.mp3" type="audio/mpeg">
 					<source src="res/entries/icelandGeo/ZOOM36_V2_LQ_3.mp3" type="audio/mpeg">
+					<source src="res/entries/icelandGeo/ZOOM36_V2_LQ.wavesurfer.mp3" type="audio/mpeg">
 					<p>Your browser does not support the <code>audio</code> element! : (</p>
 					<p>You may download the sound file <a href="res/entries/icelandGeo/ZOOM36_V2_LQ.mp3">here</a> instead.</p>
 				</audio>
@@ -1011,6 +1024,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 					<source src="res/ZOOM0031_LR.mp3" type="audio/mpeg">
 					<source src="res/ZOOM0031_LR_2.mp3" type="audio/mpeg">
 					<source src="res/ZOOM0031_LR_3.mp3" type="audio/mpeg">
+					<source src="res/ZOOM0031_LR.wavesurfer.mp3" type="audio/mpeg">
 					<p>Your browser does not support the <code>audio</code> element! : (</p>
 					<p>You may download the sound file <a href="res/ZOOM0031_LR.mp3">here</a> instead.</p>
 				</audio>
@@ -1392,7 +1406,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 			<p>If you need to contact me, the "Facebook" and "Skype" links up on the navigation header would perhaps be good starting points.</p>
 			<a class="lynxFriendly" href="http://www.cs.umanitoba.ca/~djc/personal/lynxfriend.html"><img src="res/LynxFriendly_v1.png" alt="This web site is designed to be Lynx-friendly!"></a>
 			<p><i>(You'll just have to trust me on that one. Unless you're one of the few Lynx/screen reader users out there, of course. Hi!)</i></p>
-			<p>Disclaimers and credits: Pok&eacute;mon, the team sprites and all related content belongs to GameFreak/Nintendo. The code for the slider, adaptive background and dominant colour finder belong to their respective creators. Everything else here was created by or otherwise belongs to me, unless anything else is explicitly stated or if the content is used under the terms of a license that does not require direct attribution.</p>
+			<p>Disclaimers and credits: Pok&eacute;mon, the team sprites and all related content belongs to GameFreak/Nintendo. The code for the slider, adaptive background and dominant colour finder belong to their respective creators. Everything else here was created by or otherwise belongs to me, unless anything else is explicitly stated or if the content is used/modified under the terms of a license that does not require explicit in-text or user-facing attribution.</p>
 		</div>
 		<footer class="entryFooter">
 			<div class="userSignature">Audun Vigdiss&#248;nn Nytr&#248;</div>

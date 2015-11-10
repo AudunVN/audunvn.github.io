@@ -662,7 +662,7 @@ code {
 
 .msPlayer {
 	position: relative;
-	height: 9.725em;
+	height: 17.725em;
 	border: solid 0.2em gray;
 	padding: 0.2em;
 	padding-bottom: 0.7em;
@@ -685,7 +685,7 @@ code {
 	margin: 0;
 }
 
-.msPlayer canvas {
+.msPlayer canvas.visualizer {
 	margin-top: 0.2em;
 	height: 5em;
 	position: absolute;
@@ -823,15 +823,15 @@ code {
 }
 
 .msPlayer button.muteButton.mid {
-    top: 3.75em;
+    bottom: 7.075em;
 }
 
 .msPlayer button.muteButton.side {
-    top: 6.75em;
+    bottom: 4.075em;
 }
 
 .msPlayer button.resetButton {
-    bottom: 1.1em;
+    bottom: 1.15em;
 }
 
 button.muteButton.muted {
@@ -849,11 +849,11 @@ button.muteButton:active, button.resetButton:active {
 }
 
 .msPlayer input.midGainSlider {
-	bottom: 7.75em;
+	bottom: 7.7em;
 }
 
 .msPlayer input.sideGainSlider {
-	bottom: 5.25em;
+	bottom: 5.225em;
 }
 
 .msPlayer input.masterSlider {
@@ -1008,15 +1008,15 @@ button.muteButton:active, button.resetButton:active {
 }
 
 .msPlayer h3.midTitle {
-	top: 2.6em;
+	bottom: 5.05em;
 }
 
 .msPlayer h3.sideTitle {
-	top: 4.75em;
+	bottom: 2.925em;
 }
 
 .msPlayer h3.masterTitle {
-	top: 6.85em;
+	bottom: 0.825em;
 }
 
 .loadingOverlay {
