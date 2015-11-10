@@ -598,7 +598,7 @@ code {
 	position: absolute;
 	display: block;
 	z-index: 999;
-	height: 1.1em;
+	height: 1.12em;
 	font-size: 4.5em;
 	width: 1.1em;
 	background-color: rgba(0, 0, 0, 0.58);
@@ -606,8 +606,8 @@ code {
 	text-decoration: none;
 	text-align: center;
 	vertical-align: middle;
-	bottom: -1.1em;
-	border-radius: 0.2em;
+	bottom: -1.1025em;
+	border-radius: 0.215em;
 }
 
 .rslides_nav.prev {
