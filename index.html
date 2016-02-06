@@ -96,6 +96,7 @@
 	$("#searchField").keyup(function doSearch() {
 		$("html, body").scrollTop(0);
 		var search = $.trim(this.value);
+		window.requestAnimationFrame(updateBackgroundHeight);
 		if (search === "") {
 			show_all();
 		}
@@ -501,6 +502,11 @@ function msDecode(container) {
 	draw();
 }
 </script>
+<script>
+	function updateBackgroundHeight() {
+		document.querySelector(".backgroundContainer").style.height = $(document).height()+"px;"
+	}
+</script>
 <!-- array averaging function -->
 <script>
 function getAverageVolume(array) {
@@ -611,9 +617,6 @@ function getAverageVolume(array) {
     }
 
     $(window).scroll(function () {
-    	// move background down on scroll
-  	window.requestAnimationFrame(function(){document.querySelector(".backgroundContainer").style.top = -100*($(window).scrollTop())/($(document).height()-$(window).height())+"%";});
-
         var vpH = getViewportHeight(),
             scrolltop = (document.documentElement.scrollTop ?
                 document.documentElement.scrollTop :
@@ -1451,6 +1454,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 	<!-- orbit script exec -->
 	<script>
 		(function() {
+			updateBackgroundHeight();
 			updateUniverse();
 			setInterval(updateUniverse, 1000);
 			$(".entryTime time:first-child").bind('inview', function (event, visible) {
