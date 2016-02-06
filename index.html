@@ -612,7 +612,7 @@ function getAverageVolume(array) {
 
     $(window).scroll(function () {
     	// move background down on scroll
-  	document.querySelector(".backgroundContainer").style.top = -100*$(window).scrollTop()/$(document).height()+"%";
+  	document.querySelector(".backgroundContainer").style.top = -100*($(window).scrollTop())/($(document).height()-$(window).height())+"%";
 
         var vpH = getViewportHeight(),
             scrolltop = (document.documentElement.scrollTop ?
