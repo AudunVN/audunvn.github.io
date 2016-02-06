@@ -1666,10 +1666,10 @@ body {
   margin: 0 auto;
   width: 0.2em;
   height: 100%;
-      background: transparent linear-gradient(270deg, #1073C5, #39CDEE) repeat scroll 0% 0% / 400% 400%;
-    -webkit-animation: pulse 4s ease infinite;
+  background: transparent linear-gradient(270deg, #1073C5, #39CDEE) repeat scroll 0% 0% / 400% 400%;
+  /*-webkit-animation: pulse 4s ease infinite;
     -moz-animation: pulse 4s ease infinite;
-    animation: pulse 4s ease infinite;
+    animation: pulse 4s ease infinite; */
   box-shadow: 0 0 0.5em 0.5em rgba(0,0,255,0.5);
   z-index: -5;
 }
