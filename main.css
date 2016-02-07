@@ -29,11 +29,13 @@ html {
 	height: 100%;
 	overflow: auto;
 	/*Fun fact: This breaks rendering on iOS when used on the html element! -webkit-overflow-scrolling: touch; */
+	background: #000;
 }
 
 body {
 	overflow: auto;
 	margin: 0;
+	background: #000;
 }
 
 p {
