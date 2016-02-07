@@ -611,9 +611,6 @@ function getAverageVolume(array) {
     }
 
     $(window).scroll(function () {
-    	// move background down on scroll
-  	window.requestAnimationFrame(function(){document.querySelector(".backgroundContainer").style.top = -100*($(window).scrollTop())/($(document).height()-$(window).height())+"%";});
-
         var vpH = getViewportHeight(),
             scrolltop = (document.documentElement.scrollTop ?
                 document.documentElement.scrollTop :
@@ -650,8 +647,46 @@ function getAverageVolume(array) {
     });
 })(jQuery);
 </script>
-<!-- on change orbit update function -->
+<!-- on change orbit and bg update function -->
 <script>
+function throttle(fn, threshhold, scope) {
+  threshhold || (threshhold = 250);
+  var last,
+      deferTimer;
+  return function () {
+    var context = scope || this;
+
+    var now = +new Date,
+        args = arguments;
+    if (last && now < last + threshhold) {
+      // hold on to it
+      clearTimeout(deferTimer);
+      deferTimer = setTimeout(function () {
+        last = now;
+        fn.apply(context, args);
+      }, threshhold);
+    } else {
+      last = now;
+      fn.apply(context, args);
+    }
+  };
+}
+
+function debounce(fn, delay) {
+  var timer = null;
+  return function () {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
+}
+
+$(window).on('scroll', debounce(function (event) {
+  window.requestAnimationFrame(function(){document.querySelector(".backgroundContainer").style.top = -100*($(window).scrollTop())/($(document).height()-$(window).height())+"%";});
+}, 500));
+
 function setOrbit(time) {
 	document.querySelector("#timeInputBox").value = time;
 	updateUniverse();
