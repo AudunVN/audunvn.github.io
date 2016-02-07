@@ -1322,11 +1322,13 @@ button.muteButton:active, button.resetButton:active {
 .Earth.planet {
 	margin-left: 0em;
 	margin-top: 0em;
+	background-size: cover;
+	background-image: url("http://471.no/Navmap/textures/planets/planet_earthgaia.txm/01.jpg");
 	background-color: #4F7FC0;
 }
 
 .Earth .zeroMeridian {
-	
+	display: none;
 }
 
 .Mercury.orbit {
