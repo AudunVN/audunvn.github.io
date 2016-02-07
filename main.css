@@ -1456,6 +1456,7 @@ button.muteButton:active, button.resetButton:active {
 	z-index: 999;
 	font-size: 1.3em;
 	text-shadow: 0px 0px 0.2em black;
+	display: none;
 }
 
 .star > label {
