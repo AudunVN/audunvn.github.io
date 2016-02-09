@@ -1501,7 +1501,10 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 	<script>
 		var lastTime;
 		var lastIcbmString;
-		(function() {;
+		(function() {
+			$("#timeInputBox").keyup(function() {
+				updateUniverse();
+			});
 			$(".entryTime time:first-child").bind('inview', function (event, visible) {
 				  if (visible == true) {
 					lastTime =  $(this).html();
