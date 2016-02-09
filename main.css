@@ -1538,7 +1538,6 @@ body {
   position: fixed;
 }
 
-.backgroundContainer,
 .sidebar {
   /* test for mobile webkit scroll performance */
   -webkit-transform: translateZ(0);
