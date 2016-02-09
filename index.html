@@ -230,7 +230,7 @@
 <script>
 function updateClocks() {
     var unixTime = Math.floor(Date.now() / 1000);
-	timeInput.placeholder = unixTime;
+	document.querySelector("#timeInputBox").placeholder = unixTime;
     var offsetTime = Math.floor((unixTime+2*3600));
     var currentTime = (offsetTime % 86400)/120;
     var currentPokemon = Math.floor(currentTime);
