@@ -228,8 +228,9 @@
 
 <!-- pokemon clock script -->
 <script>
-function updateClock() {
-    var unixTime = Math.floor(Date.now() / 1000)
+function updateClocks() {
+    var unixTime = Math.floor(Date.now() / 1000);
+	timeInput.placeholder = unixTime;
     var offsetTime = Math.floor((unixTime+2*3600));
     var currentTime = (offsetTime % 86400)/120;
     var currentPokemon = Math.floor(currentTime);
@@ -684,6 +685,14 @@ function debounce(fn, delay) {
 }
 
 $(window).on('scroll', debounce(function (event) {
+  if ($(window).scrollTop() != 0 && lastTime !== "undefined" && lastIcbmString !== "undefined") {
+	  setOrbit(lastTime);
+	  updateMap(lastIcbmString);
+	  history.pushState(lastTime, "471.no "+lastTime, "#"+lastTime);
+  } else {
+	  setOrbit("");
+	  history.replaceState("471.no", "471.no", ".");
+  }
   window.requestAnimationFrame(function(){document.querySelector(".backgroundContainer").style.top = -100*($(window).scrollTop())/($(document).height()-$(window).height())+"%";});
 }, 500));
 
@@ -1478,23 +1487,20 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 	<!-- pokeclock script exec -->
 	<script>
 		(function() {
-		    updateClock();
-		    setInterval(updateClock, 1000);
+		    updateClocks();
+		    setInterval(updateClocks, 1000);
 		})();
 	</script>
 	
 	<!-- orbit script exec -->
 	<script>
-		(function() {
-			updateUniverse();
-			setInterval(updateUniverse, 1000);
+		var lastTime;
+		var lastIcbmString;
+		(function() {;
 			$(".entryTime time:first-child").bind('inview', function (event, visible) {
 				  if (visible == true) {
-					var time =  $(this).html();
-					var icbmString =  $(this).closest(".entryTime").next(".entryICBM").html();
-					setOrbit(time);
-					updateMap(icbmString);
-					history.pushState(time, "471.no "+time, "#"+time);
+					lastTime =  $(this).html();
+					lastIcbmString =  $(this).closest(".entryTime").next(".entryICBM").html();
 				  } else {
 					// element has gone out of viewport
 				  }
