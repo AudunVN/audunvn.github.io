@@ -612,6 +612,7 @@ function getAverageVolume(array) {
     }
 
     $(window).scroll(function () {
+		$("body").addClass("scrolling");
         var vpH = getViewportHeight(),
             scrolltop = (document.documentElement.scrollTop ?
                 document.documentElement.scrollTop :
@@ -685,6 +686,7 @@ function debounce(fn, delay) {
 }
 
 $(window).on('scroll', debounce(function (event) {
+  $("body").removeClass("scrolling");
   if ($(window).scrollTop() != 0 && lastTime !== "undefined" && lastIcbmString !== "undefined") {
 	  setOrbit(lastTime);
 	  updateMap(lastIcbmString);
@@ -739,16 +741,18 @@ function generateStarfield(starCount, containerSelector, avgFreq) {
 }
 
 function twinkleEvent(avgFreq, elementCount) {
-  // -> removing the class
-  var element = document.querySelector("#no" + Math.floor(Math.random() * elementCount));
-  element.classList.remove("twinkle");
+  if (!document.querySelector("body.scrolling")) {
+	  // -> removing the class
+	  var element = document.querySelector("#no" + Math.floor(Math.random() * elementCount));
+	  element.classList.remove("twinkle");
 
-  // -> triggering reflow /* The actual magic */
-  // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
-  element.offsetWidth = element.offsetWidth;
+	  // -> triggering reflow /* The actual magic */
+	  // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
+	  element.offsetWidth = element.offsetWidth;
 
-  // -> and re-adding the class
-  element.classList.add("twinkle");
+	  // -> and re-adding the class
+	  element.classList.add("twinkle");
+  }
   setTimeout(function() {
     twinkleEvent(avgFreq, elementCount);
   }, Math.random() * 1000 + 1000 / avgFreq);
