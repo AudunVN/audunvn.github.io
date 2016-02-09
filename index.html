@@ -685,16 +685,21 @@ function debounce(fn, delay) {
   };
 }
 
+var scrollAnimationDelay;
+
 $(window).on('scroll', debounce(function (event) {
-  $("body").removeClass("scrolling");
-  if ($(window).scrollTop() != 0 && lastTime !== "undefined" && lastIcbmString !== "undefined") {
-	  setOrbit(lastTime);
-	  updateMap(lastIcbmString);
-	  history.pushState(lastTime, "471.no "+lastTime, "#"+lastTime);
-  } else {
-	  setOrbit("");
-	  history.replaceState("471.no", "471.no", ".");
-  }
+  clearTimeout(scrollAnimationDelay);
+  scrollAnimationDelay = setTimeout(function () {
+	$("body").removeClass("scrolling");
+    if ($(window).scrollTop() != 0 && lastTime !== "undefined" && lastIcbmString !== "undefined") {
+	    setOrbit(lastTime);
+	    updateMap(lastIcbmString);
+	    history.pushState(lastTime, "471.no "+lastTime, "#"+lastTime);
+    } else {
+   	    setOrbit("");
+	    history.replaceState("471.no", "471.no", ".");
+    } 
+  }, 505);
   window.requestAnimationFrame(function(){document.querySelector(".backgroundContainer").style.top = -100*($(window).scrollTop())/($(document).height()-$(window).height())+"%";});
 }, 500));
 
