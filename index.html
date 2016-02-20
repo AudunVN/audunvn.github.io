@@ -895,7 +895,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 					</div>
 					<input id="timeInputBox">
 				</div>
-				<span class="updateNotice">Updated 18.02</span>
+				<span class="updateNotice">Updated 20.02</span>
 				<a target="_blank" href="http://bulbapedia.bulbagarden.net/wiki/Glaceon_(Pok%C3%A9mon)"><div class="glaceon"></div></a>
 				<div class="shelfContainer">
 					<div class="shelf"></div>
@@ -1493,7 +1493,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 	  ga('send', 'pageview');
 	</script>
 	
-	<!-- pokeclock script exec -->
+	<!-- clock script exec -->
 	<script>
 		(function() {
 		    updateClocks();
@@ -1521,36 +1521,47 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 		})();
 	</script>
 	
+	<!-- post reflow scroll -->
+	<script>
+		$(window).load(function() {
+		    var urlHash = window.location.href.split("#")[1];
+		    var escapedUrlHash = "\\3"+urlHash.slice(0,1)+" "+urlHash.slice(1);
+		    if (escapedUrlHash &&  $('#' + escapedUrlHash).length ) {
+		      window.scrollTo(document.querySelector("#"+escapedUrlHash).offsetTop, 0);
+		    }
+		});
+	</script>
+	
 	<!-- slider script exec -->
-		<script>
-			$(function() {
-				    $(".rslides").responsiveSlides({
-					  auto: true,             // Boolean: Animate automatically, true or false
-					  speed: 500,            // Integer: Speed of the transition, in milliseconds
-					  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
-					  pager: false,           // Boolean: Show pager, true or false
-					  nav: true,             // Boolean: Show navigation, true or false
-					  random: true,          // Boolean: Randomize the order of the slides, true or false
-					  pause: false,           // Boolean: Pause on hover, true or false
-					  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
-					  prevText: "<",   // String: Text for the "previous" button
-					  nextText: ">",       // String: Text for the "next" button
-					  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
-					  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
-					  manualControls: "",     // Selector: Declare custom pager navigation
-					  namespace: "rslides",   // String: Change the default namespace used
-					  before: function(){newImgLoaded(".rslides1_on > img");},   // Function: Before callback
-					  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
-				});
-			  });
-
-			$(document).ready(function() {
-				$(".rslides > li").height($(".sliderContainer").height());
-				$( ".rslides1_on > img" ).load(function() {
-					newImgLoaded(".rslides1_on > img");
-					$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"});
-				});
+	<script>
+		$(function() {
+			    $(".rslides").responsiveSlides({
+				  auto: true,             // Boolean: Animate automatically, true or false
+				  speed: 500,            // Integer: Speed of the transition, in milliseconds
+				  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+				  pager: false,           // Boolean: Show pager, true or false
+				  nav: true,             // Boolean: Show navigation, true or false
+				  random: true,          // Boolean: Randomize the order of the slides, true or false
+				  pause: false,           // Boolean: Pause on hover, true or false
+				  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+				  prevText: "<",   // String: Text for the "previous" button
+				  nextText: ">",       // String: Text for the "next" button
+				  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+				  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+				  manualControls: "",     // Selector: Declare custom pager navigation
+				  namespace: "rslides",   // String: Change the default namespace used
+				  before: function(){newImgLoaded(".rslides1_on > img");},   // Function: Before callback
+				  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
 			});
-		</script>
+		  });
+
+		$(document).ready(function() {
+			$(".rslides > li").height($(".sliderContainer").height());
+			$( ".rslides1_on > img" ).load(function() {
+				newImgLoaded(".rslides1_on > img");
+				$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"});
+			});
+		});
+	</script>
 </body>
 </html>
