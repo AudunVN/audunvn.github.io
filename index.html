@@ -1533,6 +1533,11 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 		$(window).load(function() {
 			if (escapedUrlHash &&  $('#' + escapedUrlHash).length ) {
 				window.scrollTo(0, $("#"+escapedUrlHash).offset().top);
+				var inviewTimeElement = $(".entryTime time:first-child").filter(function() { 
+					return $(this).data("inview") == true 
+				});
+				lastTime = inviewTimeElement.html();
+				lastIcbmString = inviewTimeElement.closest(".entryTime").next(".entryICBM").html();
 				$(window).scroll();
 			}
 		});
