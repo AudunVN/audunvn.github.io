@@ -1523,13 +1523,17 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 	
 	<!-- post reflow scroll -->
 	<script>
-		var urlHash = window.location.href.split("#")[1];
-		var escapedUrlHash = "\\3"+urlHash.slice(0,1)+" "+urlHash.slice(1);
-		
+		if (location.hash) {
+			var urlHash = window.location.href.split("#")[1];
+			var escapedUrlHash = "\\3"+urlHash.slice(0,1)+" "+urlHash.slice(1);
+			setTimeout(function() {
+				window.scrollTo(0, 0);
+			}, 1);
+		}
 		$(window).load(function() {
-		    if (escapedUrlHash &&  $('#' + escapedUrlHash).length ) {
-		      window.scrollTo(0, $("#"+escapedUrlHash).offset().top);
-		    }
+			if (escapedUrlHash &&  $('#' + escapedUrlHash).length ) {
+				window.scrollTo(0, $("#"+escapedUrlHash).offset().top);
+			}
 		});
 	</script>
 	
