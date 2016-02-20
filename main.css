@@ -185,11 +185,11 @@ code {
 	left: 6em;
 }
 
-#primaryNav .navButton#skypeLink {
+#primaryNav .navButton#contactLink {
 	left: 12.4em;
 }
 
-#primaryNav .navButton#facebookLink {
+#primaryNav .navButton#navAboutButton {
 	left: 18.70em;
 }
 	
@@ -210,15 +210,15 @@ code {
 	top: 3.9em;
 }
 	
-#secondaryNav .navButton#navProjectsButton {
+#secondaryNav .navButton#skypeLink {
 	left: 6.78em;
 }
 
-#secondaryNav .navButton#navMiscButton {
+#secondaryNav .navButton#navProjectsButton {
 	left: 13.18em;
 }
 
-#secondaryNav .navButton#navAboutButton {
+#secondaryNav .navButton#navMiscButton {
 	left: 19.48em;
 }
 
