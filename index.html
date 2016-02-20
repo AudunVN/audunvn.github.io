@@ -1533,6 +1533,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 		$(window).load(function() {
 			if (escapedUrlHash &&  $('#' + escapedUrlHash).length ) {
 				window.scrollTo(0, $("#"+escapedUrlHash).offset().top);
+				$(window).scroll();
 			}
 		});
 	</script>
