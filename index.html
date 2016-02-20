@@ -1528,7 +1528,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 		
 		$(window).load(function() {
 		    if (escapedUrlHash &&  $('#' + escapedUrlHash).length ) {
-		      window.scrollTo(document.querySelector("#"+escapedUrlHash).offsetTop, 0);
+		      window.scrollTo(0, $("#"+escapedUrlHash).offset().top);
 		    }
 		});
 	</script>
