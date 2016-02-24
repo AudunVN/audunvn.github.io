@@ -329,7 +329,7 @@ code {
 .searchBox #inputIndicator {
     position: absolute;
     left: 0.5em;
-    top: 0.23em;
+    top: 0em;
     font-weight: bold;
 	color: #B4B4B4;
 }
