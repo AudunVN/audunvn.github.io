@@ -600,14 +600,14 @@ code {
 	display: block;
 	z-index: 999;
 	height: 1.12em;
-	font-size: 4.5em;
+	font-size: 4.449em;
 	width: 1.1em;
 	background-color: rgba(0, 0, 0, 0.58);
 	color: #3F53DD;
 	text-decoration: none;
 	text-align: center;
 	vertical-align: middle;
-	bottom: -1.1025em;
+	bottom: -1.112em;
 	border-radius: 0.215em;
 }
 
