@@ -206,7 +206,13 @@
 		} else {
 			var imgString = "width: 100% !important; margin-top:"+imgMargin+"px !important;";
 		}
+		if (!($(loadedImg).parent().find('.imgOverlay').length)) {
+			$(loadedImg).parent().append("<div class='imgOverlay'></div>");
+		}
 		$(loadedImg).attr("style", imgString);
+		$(loadedImg).parent().find('.imgOverlay').attr("style", imgString);
+		$(loadedImg).parent().find('.imgOverlay').height($(loadedImg).height()+"px");
+		$(loadedImg).parent().find('.imgOverlay').width($(loadedImg).width()+"px");
 	}
 
 	function colorTools_getApproxLuminosity(r, g, b) {
@@ -1569,6 +1575,9 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 
 		$(document).ready(function() {
 			$(".rslides > li").height($(".sliderContainer").height());
+			$(".rslides > li > img").on('ab-color-found', function(ev,payload) {
+				document.querySelector(".rslides1_on .imgOverlay").style.boxShadow = "0 0 2em 0em "+payload.color+" inset";
+			});
 			$( ".rslides1_on > img" ).load(function() {
 				newImgLoaded(".rslides1_on > img");
 				$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"});

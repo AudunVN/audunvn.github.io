@@ -568,6 +568,15 @@ code {
 	transition: background 1s ease;
 }
 
+.imgOverlay {
+	position: absolute;
+    top: 0;
+    margin: 0 auto;
+    display: block;
+    left: 0;
+    right: 0;
+}
+
 .rslides {
 	position: relative;
 	list-style: none;
