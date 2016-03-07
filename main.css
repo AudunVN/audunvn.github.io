@@ -575,6 +575,7 @@ code {
     display: block;
     left: 0;
     right: 0;
+	transition: box-shadow 1s ease;
 }
 
 .rslides {

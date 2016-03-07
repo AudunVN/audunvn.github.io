@@ -1576,7 +1576,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 		$(document).ready(function() {
 			$(".rslides > li").height($(".sliderContainer").height());
 			$(".rslides > li > img").on('ab-color-found', function(ev,payload) {
-				document.querySelector(".rslides1_on .imgOverlay").style.boxShadow = "0 0 2em 0em "+payload.color+" inset";
+				document.querySelector(".rslides1_on .imgOverlay").style.boxShadow = "0 0 1em 0.2em "+payload.color+" inset";
 			});
 			$( ".rslides1_on > img" ).load(function() {
 				newImgLoaded(".rslides1_on > img");
