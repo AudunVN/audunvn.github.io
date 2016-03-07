@@ -327,11 +327,13 @@ code {
 }
 	
 .searchBox #inputIndicator {
-    position: absolute;
+	position: absolute;
     left: 0.5em;
-    top: 0em;
+    top: 0.25em;
     font-weight: bold;
-	color: #B4B4B4;
+    color: #B4B4B4;
+    height: 100%;
+    font-size: 0.9em;
 }
 
 #searchField:focus + #inputIndicator {
