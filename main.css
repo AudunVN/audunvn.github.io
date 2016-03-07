@@ -332,8 +332,9 @@ code {
     top: 0.25em;
     font-weight: bold;
     color: #B4B4B4;
-    height: 100%;
-    font-size: 0.9em;
+    font-size: 1em;
+	height: 1em;
+	line-height: 1em;
 }
 
 #searchField:focus + #inputIndicator {
