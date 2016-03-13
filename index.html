@@ -1571,7 +1571,17 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 				  before: function(){newImgLoaded(".rslides1_on > img");},   // Function: Before callback
 				  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
 			});
-		  });
+		});
+
+		var resizeTimer;
+		$(window).resize(function() {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(windowResized, 500);
+		});
+
+		function windowResized(){
+			$(".rslides > li").height($(".sliderContainer").height());
+		}
 
 		$(document).ready(function() {
 			$(".rslides > li").height($(".sliderContainer").height());
