@@ -194,6 +194,7 @@
 	}
 
 	function newImgLoaded(loadedImg) {
+		$(".rslides > li").height($(".sliderContainer").height());
 		var viewportHeight = $(".sliderContainer").height();
 		var viewportWidth = $(".sliderContainer").width();
 		var viewportAspect = viewportWidth/viewportHeight;
@@ -901,7 +902,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 					</div>
 					<input id="timeInputBox">
 				</div>
-				<span class="updateNotice">Updated 07.03</span>
+				<span class="updateNotice">Updated 13.03</span>
 				<a target="_blank" href="http://bulbapedia.bulbagarden.net/wiki/Glaceon_(Pok%C3%A9mon)"><div class="glaceon"></div></a>
 				<div class="shelfContainer">
 					<div class="shelf"></div>
@@ -1572,16 +1573,6 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 				  after: function(){newImgLoaded(".rslides1_on > img"); setTimeout($.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"}), 5600);}     // Function: After callback
 			});
 		});
-
-		var resizeTimer;
-		$(window).resize(function() {
-			clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(windowResized, 500);
-		});
-
-		function windowResized(){
-			$(".rslides > li").height($(".sliderContainer").height());
-		}
 
 		$(document).ready(function() {
 			$(".rslides > li").height($(".sliderContainer").height());
