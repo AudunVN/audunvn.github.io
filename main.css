@@ -692,6 +692,7 @@ code {
 }
 
 .msPlayer * {
+	height: auto;
 	position: relative;
 }
 
