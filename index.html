@@ -303,6 +303,9 @@ $(document).ready(function() {
 			+'<div class="volume bar"><i class="fa fa-volume-up"></i><div class="stateIndicator"></div><div class="seekIndicator"></div></div>'
 			+'</div>'
 		).insertAfter(this);
+		src.volume = 0.999;
+		src.currentTime = 0;
+		src.removeAttribute("controls");
 		var icon = $(uaClass+" + .audioPlayer .playPause");
 		var player = $(uaClass+" + .audioPlayer ");
 		var duration;
@@ -384,9 +387,6 @@ $(document).ready(function() {
 
 			$(uaClass+" + .audioPlayer .volume.bar .stateIndicator").removeClass("active");
 		});
-		src.volume = 0.999;
-		src.currentTime = 0;
-		src.removeAttribute("controls");
 		
 		/* code for custom audio controls end */
 	});
