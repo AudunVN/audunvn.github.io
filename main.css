@@ -2018,7 +2018,9 @@ body {
 /* custom audio player styles begin */
 
 .audioPlayer, 
-.audioPlayer span {
+.audioPlayer span,
+.msPlayer,
+.msPlayer * {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
