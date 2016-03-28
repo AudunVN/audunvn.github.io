@@ -2012,7 +2012,7 @@ body {
 }
 
 /* custom audio player styles begin */
-.msPlayer .msWaveform .audioPlayer {
+.audioPlayer {
 	position: relative;
 	width: 100%;
 	background: gray;
@@ -2026,13 +2026,13 @@ body {
 	overflow: hidden;
 }
 
-.msPlayer .msWaveform .audioPlayer .button {
+.audioPlayer .button {
 	width: 2em;
 	height: 100%;
 	background: #313C47;
 }
 
-.msPlayer .msWaveform .audioPlayer .elapsedTime {
+.audioPlayer .elapsedTime {
 	margin-left: 0.5em;
 	margin-right: 0.5em;
 	color: white;
@@ -2044,7 +2044,7 @@ body {
    transform: translateY(-50%);
 }
 
-.msPlayer .msWaveform .audioPlayer .fileLength {
+.audioPlayer .fileLength {
 	color: white;
 	position: relative;
 	font-size: 1em;
@@ -2054,7 +2054,7 @@ body {
 	margin-right: 0.5em;
 }
 
-.msPlayer .msWaveform .audioPlayer .playPause .icon {
+.audioPlayer .playPause .icon {
    top: 0.5em;
 	left: 0.5em;
 	position: relative;
@@ -2064,7 +2064,7 @@ body {
 	transition: transform ease 0.5s;
 }
 
-.msPlayer .msWaveform .audioPlayer.paused .playPause .icon {
+.audioPlayer.paused .playPause .icon {
    top: 0.5em;
 	left: 0.5em;
 	position: relative;
@@ -2073,26 +2073,26 @@ body {
 	transform: rotate(90deg);
 }
 
-.msPlayer .msWaveform .audioPlayer .playPause .icon .top,
-.msPlayer .msWaveform .audioPlayer .playPause .icon .bottom {
+.audioPlayer .playPause .icon .top,
+.audioPlayer .playPause .icon .bottom {
 	transition: transform ease 0.5s, background ease 0.25s;
 	background: #2E82D1;
 }
 
-.msPlayer .msWaveform .audioPlayer .playPause:hover .icon .top,
-.msPlayer .msWaveform .audioPlayer .playPause:hover .icon .bottom {
+.audioPlayer .playPause:hover .icon .top,
+.audioPlayer .playPause:hover .icon .bottom {
 	background: #FFAF22;
 }
 
-.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .top,
-.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .bottom {
+.audioPlayer.paused .playPause .icon .top,
+.audioPlayer.paused .playPause .icon .bottom {
 	border-top-left-radius: 5em;
 	border-top-right-radius: 5em;
 		border-bottom-left-radius: 5em;
 	border-bottom-right-radius: 5em;
 }
 
-.msPlayer .msWaveform .audioPlayer .playPause .icon .top {
+.audioPlayer .playPause .icon .top {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2103,7 +2103,7 @@ body {
 	right: 70%;
 }
 
-.msPlayer .msWaveform .audioPlayer .playPause .icon .bottom {
+.audioPlayer .playPause .icon .bottom {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2114,7 +2114,7 @@ body {
 	right: 0;
 }
 
-.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .top {
+.audioPlayer.paused .playPause .icon .top {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2127,7 +2127,7 @@ body {
 	transform-origin: 100% 100%;
 }
 
-.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .bottom {
+.audioPlayer.paused .playPause .icon .bottom {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2140,7 +2140,7 @@ body {
 	transform-origin: 0% 100%;
 }
 
-.msPlayer .msWaveform .audioPlayer .volume.bar {
+.audioPlayer .volume.bar {
 	top: 0;
 	left: 81%;
 	right: 0;
@@ -2149,7 +2149,7 @@ body {
 	background: #EEEEEE;
 }
 
-.msPlayer .msWaveform .audioPlayer .bar .stateIndicator {
+.audioPlayer .bar .stateIndicator {
 	width: 10%;
 	position: absolute;
 	left: 0;
@@ -2158,11 +2158,11 @@ body {
 	text-align: center;
 }
 
-.msPlayer .msWaveform .audioPlayer .bar:hover .seekIndicator {
+.audioPlayer .bar:hover .seekIndicator {
 	display: block;
 }
 
-.msPlayer .msWaveform .audioPlayer .bar .seekIndicator {
+.audioPlayer .bar .seekIndicator {
 	display: none;
 	width: 2px;
 	position: absolute;
@@ -2172,7 +2172,7 @@ body {
 	text-align: center;
 }
 
-.msPlayer .msWaveform .audioPlayer .volume.bar .fa {
+.audioPlayer .volume.bar .fa {
 	color: #313C47;
 	position: absolute;
 	top: 0.5em;
@@ -2182,11 +2182,11 @@ body {
 	z-index: 5;
 }
 
-.msPlayer .msWaveform .audioPlayer .bar:hover .stateIndicator {
+.audioPlayer .bar:hover .stateIndicator {
 	background: #FFAF22;
 }
 
-.msPlayer .msWaveform .audioPlayer .progress.bar {
+.audioPlayer .progress.bar {
 	top: 0;
 	left: 2em;
 	right: 20%;
