@@ -2002,3 +2002,189 @@ body {
   50%{opacity: 0.9}
   100%{opacity: 0.1}
 }
+
+/* custom audio player styles begin */
+.audioPlayer {
+	position: relative;
+	width: 100%;
+	background: gray;
+	height: 2em;
+	min-width: 20em;
+	text-align: center;
+	font-family: "Open Sans", sans-serif;
+	cursor: pointer;
+	border-radius: 0.2em;
+	margin-top: 0.25em;
+	overflow: hidden;
+}
+
+.audioPlayer .button {
+	width: 2em;
+	height: 100%;
+	background: #313C47;
+}
+
+.audioPlayer .elapsedTime {
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	color: white;
+	text-align: center;
+	position: relative;
+	font-size: 1em;
+	display: inline-block;
+   top: 50%;
+   transform: translateY(-50%);
+}
+
+.audioPlayer .fileLength {
+	color: white;
+	position: relative;
+	font-size: 1em;
+	display: inline-block;
+   top: 50%;
+   transform: translateY(-50%);
+	margin-right: 0.5em;
+}
+
+.audioPlayer .playPause .icon {
+   top: 0.5em;
+	left: 0.5em;
+	position: relative;
+	height: 1em;
+	width: 1em;
+	transform: rotate(0deg);
+	transition: transform ease 0.5s;
+}
+
+.audioPlayer.paused .playPause .icon {
+   top: 0.5em;
+	left: 0.5em;
+	position: relative;
+	height: 1em;
+	width: 1em;
+	transform: rotate(90deg);
+}
+
+.audioPlayer .playPause .icon .top,
+.audioPlayer .playPause .icon .bottom {
+	transition: transform ease 0.5s, background ease 0.25s;
+	background: #2E82D1;
+}
+
+.audioPlayer .playPause:hover .icon .top,
+.audioPlayer .playPause:hover .icon .bottom {
+	background: #FFAF22;
+}
+
+.audioPlayer.paused .playPause .icon .top,
+.audioPlayer.paused .playPause .icon .bottom {
+	border-top-left-radius: 5em;
+	border-top-right-radius: 5em;
+		border-bottom-left-radius: 5em;
+	border-bottom-right-radius: 5em;
+}
+
+.audioPlayer .playPause .icon .top {
+	position: absolute;
+	margin: auto;
+	width: auto;
+	height: auto;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 70%;
+}
+
+.audioPlayer .playPause .icon .bottom {
+	position: absolute;
+	margin: auto;
+	width: auto;
+	height: auto;
+	left: 70%;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.audioPlayer.paused .playPause .icon .top {
+	position: absolute;
+	margin: auto;
+	width: auto;
+	height: auto;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 70%;
+	transform: rotate(23deg);
+	transform-origin: 100% 100%;
+}
+
+.audioPlayer.paused .playPause .icon .bottom {
+	position: absolute;
+	margin: auto;
+	width: auto;
+	height: auto;
+	left: 70%;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	transform: rotate(-23deg);
+	transform-origin: 0% 100%;
+}
+
+.audioPlayer .volume.bar {
+	top: 0;
+	left: 81%;
+	right: 0;
+	height: 100%;
+	position: absolute;
+	background: #EEEEEE;
+}
+
+.audioPlayer .bar .stateIndicator {
+	width: 10%;
+	position: absolute;
+	left: 0;
+	background: #2E82D1;
+	height: 100%;
+	text-align: center;
+}
+
+.audioPlayer .bar:hover .seekIndicator {
+	display: block;
+}
+
+.audioPlayer .bar .seekIndicator {
+	display: none;
+	width: 2px;
+	position: absolute;
+	left: 0;
+	background: gray;
+	height: 100%;
+	text-align: center;
+}
+
+.audioPlayer .volume.bar .fa {
+	color: #313C47;
+	position: absolute;
+	top: 0.5em;
+	font-size: 1em;
+	display: block;
+	width: 100%;
+	z-index: 5;
+}
+
+.audioPlayer .bar:hover .stateIndicator {
+	background: #FFAF22;
+}
+
+.audioPlayer .progress.bar {
+	top: 0;
+	left: 2em;
+	right: 20%;
+	height: 100%;
+	position: absolute;
+	background: #999999;
+	text-align: right;
+}
+/* custom audio player styles end */

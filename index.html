@@ -282,7 +282,12 @@ $(document).ready(function() {
 	$('.msPlayer').each(function(){
 		msDecode(this);
 	});
+	var audioID = 0;
 	$('audio').each(function () {
+		audioID++;
+		var uaClass = "no"+audioID;
+		$(this).addClass(uaClass);
+		var uaClass = "."+uaClass;
 		var myAudio = this;
 		this.addEventListener('play', function () {
 			$('audio').each(function () {
@@ -291,6 +296,99 @@ $(document).ready(function() {
 				}
 			});
 		});
+		/* code for custom audio controls begin */
+		$('<div class="audioPlayer paused">'
+			+'<div class="playPause button"><div class="icon"><div class="top"></div><div class="bottom"></div></div></div>'
+			+'<div class="progress bar"><div class="stateIndicator"><span class="elapsedTime">0s</span></div><div class="seekIndicator"></div><span class="fileLength"></span></div>'
+			+'<div class="volume bar"><i class="fa fa-volume-up"></i><div class="stateIndicator"></div><div class="seekIndicator"></div></div>'
+			+'</div>'
+		).insertAfter(this);
+		var icon = $(uaClass+" + .audioPlayer .playPause");
+		var player = $(uaClass+" + .audioPlayer ");
+		var duration;
+		var src = document.querySelector(uaClass);
+		src.addEventListener("timeupdate", timeUpdate, false);
+		src.addEventListener("ended", function() {
+			player.addClass("paused");
+		});
+
+		function timeUpdate() {
+			if (src.currentTime > duration && !isNaN(src.currentTime)) {
+				duration = src.currentTime;
+				document.querySelector(uaClass+" + .audioPlayer .progress.bar .fileLength").innerHTML = Math.floor(duration) + "s";
+			}
+			document.querySelector(uaClass+" + .audioPlayer .progress.bar .elapsedTime").innerHTML = Math.floor(src.currentTime) + "s";
+			var playPercent = 100 * (src.currentTime / duration);
+			document.querySelector(uaClass+" + .audioPlayer .progress.bar .stateIndicator").style.width = playPercent + "%";
+		}
+
+		// Gets audio file duration
+		src.addEventListener("canplaythrough", function() {
+			duration = src.duration;
+			document.querySelector(uaClass+" + .audioPlayer .progress.bar .fileLength").innerHTML = Math.floor(src.duration) + "s";
+		}, false);
+		icon.click(function() {
+			player.toggleClass("paused")
+			if (src.paused) {
+				src.play();
+			} else {
+				src.pause();
+			}
+		});
+		$(uaClass+" + .audioPlayer .progress.bar").click(function(e) {
+			var parentOffset = $(this).offset();
+			var relativeXPosition = (e.pageX - parentOffset.left) / $(this).outerWidth();
+			src.currentTime = relativeXPosition * duration;
+		});
+		$(uaClass+" + .audioPlayer .progress.bar").mousemove(function(e) {
+
+			$(uaClass+" + .audioPlayer .progress.bar .stateIndicator").addClass("active");
+			var parentOffset = $(this).offset();
+			var relativeXPosition = (e.pageX - parentOffset.left) / $(this).outerWidth(); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
+			document.querySelector(uaClass+" + .audioPlayer .progress.bar .seekIndicator").style.left = relativeXPosition * 100 + "%";
+		}).mouseout(function() {
+
+			$(uaClass+" + .audioPlayer .progress.bar .stateIndicator").removeClass("active");
+		});
+
+		src.addEventListener("volumechange", function() {
+			document.querySelector(uaClass+" + .audioPlayer .volume.bar .stateIndicator").style.width = src.volume * 100 + "%";
+		});
+
+		src.addEventListener("play", function() {
+			player.removeClass("paused");
+		});
+
+		src.addEventListener("pause", function() {
+			player.addClass("paused");
+		});
+
+		src.addEventListener("loadedmetadata", function() {
+			duration = src.duration;
+			document.querySelector(uaClass+" + .audioPlayer .progress.bar .fileLength").innerHTML = Math.floor(src.duration) + "s";
+		});
+
+		$(uaClass+" + .audioPlayer .volume.bar").mousedown(function(e) {
+			var parentOffset = $(this).offset();
+			var relativeXPosition = (e.pageX - parentOffset.left) / $(this).outerWidth();
+			src.volume = relativeXPosition;
+			document.querySelector(uaClass+" + .audioPlayer .volume.bar .stateIndicator").style.width = relativeXPosition * 100 + "%";
+		});
+		$(uaClass+" + .audioPlayer .volume.bar").mousemove(function(e) {
+
+			$(uaClass+" + .audioPlayer .volume.bar .stateIndicator").addClass("active");
+			var parentOffset = $(this).offset();
+			var relativeXPosition = (e.pageX - parentOffset.left) / $(this).outerWidth(); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
+			document.querySelector(uaClass+" + .audioPlayer .volume.bar .seekIndicator").style.left = relativeXPosition * 100 + "%";
+		}).mouseout(function() {
+
+			$(uaClass+" + .audioPlayer .volume.bar .stateIndicator").removeClass("active");
+		});
+		src.volume = 0.999;
+		src.currentTime = 0;
+		src.removeAttribute("controls");
+		
+		/* code for custom audio controls end */
 	});
 });
 </script>
