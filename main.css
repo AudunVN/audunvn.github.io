@@ -2156,6 +2156,7 @@ body {
 	background: #2E82D1;
 	height: 100%;
 	text-align: center;
+	transition: width 0.25s ease;
 }
 
 .audioPlayer .bar:hover .seekIndicator {
