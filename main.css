@@ -1019,6 +1019,8 @@ button.muteButton:active, button.resetButton:active {
 	font-weight: normal;
 	color: white;
 	left: 0.28em;
+	margin: 0;
+	padding: 0;
 	position: absolute;
 	text-shadow: 0 0 0.2em black;
 }
