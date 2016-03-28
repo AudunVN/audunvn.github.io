@@ -303,9 +303,6 @@ $(document).ready(function() {
 			+'<div class="volume bar"><i class="fa fa-volume-up"></i><div class="stateIndicator"></div><div class="seekIndicator"></div></div>'
 			+'</div>'
 		).insertAfter(this);
-		src.volume = 0.999;
-		src.currentTime = 0;
-		src.removeAttribute("controls");
 		var icon = $(uaClass+" + .audioPlayer .playPause");
 		var player = $(uaClass+" + .audioPlayer ");
 		var duration;
@@ -384,10 +381,11 @@ $(document).ready(function() {
 			var relativeXPosition = (e.pageX - parentOffset.left) / $(this).outerWidth(); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
 			document.querySelector(uaClass+" + .audioPlayer .volume.bar .seekIndicator").style.left = relativeXPosition * 100 + "%";
 		}).mouseout(function() {
-
 			$(uaClass+" + .audioPlayer .volume.bar .stateIndicator").removeClass("active");
 		});
-		
+		document.querySelector(uaClass).volume = 0.999;
+		document.querySelector(uaClass).currentTime = 0;
+		document.querySelector(uaClass).removeAttribute("controls");
 		/* code for custom audio controls end */
 	});
 });
