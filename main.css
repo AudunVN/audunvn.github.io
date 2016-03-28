@@ -676,6 +676,13 @@ code {
 	font-size: 1.4em;
 }
 
+.msImg {
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	width: 29.65em !important;
+	border: 0.2em solid gray;
+}
+
 .msPlayer {
 	position: relative;
 	height: 18em;
@@ -684,7 +691,7 @@ code {
 	padding-bottom: 0.7em;
 	width: 29.25em;
 	border-top: none;
-	top: -0.27em;
+	top: -0.31em;
 	z-index: 0;
 	border-bottom-left-radius: 0.5em;
 	border-bottom-right-radius: 0.5em;

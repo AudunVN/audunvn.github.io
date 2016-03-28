@@ -1088,7 +1088,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 			<a class="entryLink" id="1437824700" href="http://471.no#1437824700"><i class="fa fa-link"></i>Link to this entry</a>
 		</header>
 		<div class="entryMain">
-			<img style="width: 30em; height: auto;" src="res/entries/skibladner/DSC03202lq.jpg" alt="Two of D/S Skibladner's crankshafts.">
+			<img class="msImg" style="width: 30em; height: auto;" src="res/entries/skibladner/DSC03202lq.jpg" alt="Two of D/S Skibladner's crankshafts.">
 			<div class="msPlayer" id="skibladner">
 				<canvas class="visualizer" width="600"></canvas>
 				<audio controls="controls" class="player" preload="metadata">
@@ -1130,7 +1130,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 			<a class="entryLink" id="1434451727" href="http://471.no#1434451727"><i class="fa fa-link"></i>Link to this entry</a>
 		</header>
 		<div class="entryMain">
-			<img style="width: 30em; height: auto;" src="res/entries/icelandGeo/DSC01564.jpg" alt="Picture of 45MW high pressure turbine generator at Hellishei&#240;i geothermal power station, Iceland">
+			<img class="msImg" style="width: 30em; height: auto;" src="res/entries/icelandGeo/DSC01564.jpg" alt="Picture of 45MW high pressure turbine generator at Hellishei&#240;i geothermal power station, Iceland">
 			<div class="msPlayer" id="powerPlant">
 				<canvas class="visualizer" width="600"></canvas>
 				<div id="wave"></div>
@@ -1179,7 +1179,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 			<p>Using this it is possible to do <a target="_blank" href="http://www.uaudio.com/blog/mid-side-mic-recording/">Mid/Side microphone setup decoding</a> <i>in-browser in real time</i>,  allowing the listener to adjust the stereo width of the recording as desired, which is - to say it mildly - a rather useful feature when it comes to posting M/S stereo recordings online. This is due to quite a lot of the point of recording anything in Mid/Side (i.e. the interactivity that arises from the possibility to modify the stereo width post-recording) is lost the moment the raw, M/S-coded recording is mixed down to regular fixed-width stereo.</p>
 			<p>As seen in the <code>AudioContext</code> connection graph above, the implementation is relatively simple: A HTML5 <code>&lt;audio&gt;</code> element is used as the audio source for a M/S-coded recording, which is then routed through a <code>ChannelSplitterNode</code>, a few <code>GainNode</code>s (which handle the phase inversion and control the per-channel gain) before going into a <code>ChannelMergerNode</code> and finally to a <code>GainNode</code> for the master gain slider. The output of this node is then routed into an <code>AnalyserNode</code> for a bit of FFT action before being pushed to a <code>&lt;canvas&gt;</code> element for rendering.</p>
 			<p>A demonstration of the current version with gain sliders for the side and mid channels plus the summed master bus may be seen below.</p>
-			<img style="width: 30em; height: auto;" src="res/entries/msDecode/DSC00840.jpg" alt="NSB local train passing over the Skansen railway bridge at dusk.">
+			<img class="msImg" style="width: 30em; height: auto;" src="res/entries/msDecode/DSC00840.jpg" alt="NSB local train passing over the Skansen railway bridge at dusk.">
 			<div class="msPlayer" id="skansenDemo">
 				<canvas class="visualizer" width="480"></canvas>
 				<audio controls="controls" class="player" preload="metadata">
