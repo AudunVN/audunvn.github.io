@@ -691,13 +691,13 @@ code {
 	box-shadow: 0em 0em 0.9em 0.1em #B2B2B2;
 }
 
-.msPlayer :not(.audioPlayer *) {
+.msPlayer :not(.audioPlayer) *, .msPlayer :not(.audioPlayer) {
 	width: 100%;
 	height: auto;
 	position: relative;
 }
 
-.msPlayer :not(.audioPlayer *) {
+.msPlayer :not(.audioPlayer) *, .msPlayer :not(.audioPlayer) {
 	margin: 0;
 }
 
