@@ -709,7 +709,7 @@ code {
 }
 
 .msPlayer audio {
-	height: 2em;
+	height: auto;
 }
 
 .msPlayer meter {
