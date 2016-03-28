@@ -2040,7 +2040,7 @@ body {
 .audioPlayer {
 	position: relative;
 	width: 100%;
-	background: gray;
+	background: #A3AEB7;
 	height: 2em;
 	min-width: 20em;
 	text-align: center;
@@ -2074,8 +2074,8 @@ body {
 	position: relative;
 	font-size: 1em;
 	display: inline-block;
-   top: 50%;
-   transform: translateY(-50%);
+    top: 50%;
+    transform: translateY(-50%);
 	margin-right: 0.5em;
 }
 
@@ -2113,7 +2113,7 @@ body {
 .audioPlayer.paused .playPause .icon .bottom {
 	border-top-left-radius: 5em;
 	border-top-right-radius: 5em;
-		border-bottom-left-radius: 5em;
+	border-bottom-left-radius: 5em;
 	border-bottom-right-radius: 5em;
 }
 
@@ -2171,7 +2171,7 @@ body {
 	right: 0;
 	height: 100%;
 	position: absolute;
-	background: #EEEEEE;
+	background: #313C47;
 }
 
 .audioPlayer .bar .stateIndicator {
@@ -2199,7 +2199,7 @@ body {
 }
 
 .audioPlayer .volume.bar .fa {
-	color: #313C47;
+	color: #FFFFFF;
 	position: absolute;
 	top: 0.5em;
 	font-size: 1em;
@@ -2218,7 +2218,7 @@ body {
 	right: 20%;
 	height: 100%;
 	position: absolute;
-	background: #999999;
+	background: #313C47;
 	text-align: right;
 }
 /* custom audio player styles end */
