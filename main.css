@@ -2150,7 +2150,7 @@ body {
 }
 
 .audioPlayer .bar .stateIndicator {
-	width: 10%;
+	width: 0%;
 	position: absolute;
 	left: 0;
 	background: #2E82D1;
