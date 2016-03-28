@@ -691,13 +691,13 @@ code {
 	box-shadow: 0em 0em 0.9em 0.1em #B2B2B2;
 }
 
-.msPlayer :not(.audioPlayer) *, .msPlayer :not(.audioPlayer) {
+.msPlayer * {
 	width: 100%;
 	height: auto;
 	position: relative;
 }
 
-.msPlayer :not(.audioPlayer) *, .msPlayer :not(.audioPlayer) {
+.msPlayer * {
 	margin: 0;
 }
 
@@ -2006,7 +2006,7 @@ body {
 }
 
 /* custom audio player styles begin */
-.audioPlayer {
+.msPlayer .msWaveform .audioPlayer {
 	position: relative;
 	width: 100%;
 	background: gray;
@@ -2020,13 +2020,13 @@ body {
 	overflow: hidden;
 }
 
-.audioPlayer .button {
+.msPlayer .msWaveform .audioPlayer .button {
 	width: 2em;
 	height: 100%;
 	background: #313C47;
 }
 
-.audioPlayer .elapsedTime {
+.msPlayer .msWaveform .audioPlayer .elapsedTime {
 	margin-left: 0.5em;
 	margin-right: 0.5em;
 	color: white;
@@ -2038,7 +2038,7 @@ body {
    transform: translateY(-50%);
 }
 
-.audioPlayer .fileLength {
+.msPlayer .msWaveform .audioPlayer .fileLength {
 	color: white;
 	position: relative;
 	font-size: 1em;
@@ -2048,7 +2048,7 @@ body {
 	margin-right: 0.5em;
 }
 
-.audioPlayer .playPause .icon {
+.msPlayer .msWaveform .audioPlayer .playPause .icon {
    top: 0.5em;
 	left: 0.5em;
 	position: relative;
@@ -2058,7 +2058,7 @@ body {
 	transition: transform ease 0.5s;
 }
 
-.audioPlayer.paused .playPause .icon {
+.msPlayer .msWaveform .audioPlayer.paused .playPause .icon {
    top: 0.5em;
 	left: 0.5em;
 	position: relative;
@@ -2067,26 +2067,26 @@ body {
 	transform: rotate(90deg);
 }
 
-.audioPlayer .playPause .icon .top,
-.audioPlayer .playPause .icon .bottom {
+.msPlayer .msWaveform .audioPlayer .playPause .icon .top,
+.msPlayer .msWaveform .audioPlayer .playPause .icon .bottom {
 	transition: transform ease 0.5s, background ease 0.25s;
 	background: #2E82D1;
 }
 
-.audioPlayer .playPause:hover .icon .top,
-.audioPlayer .playPause:hover .icon .bottom {
+.msPlayer .msWaveform .audioPlayer .playPause:hover .icon .top,
+.msPlayer .msWaveform .audioPlayer .playPause:hover .icon .bottom {
 	background: #FFAF22;
 }
 
-.audioPlayer.paused .playPause .icon .top,
-.audioPlayer.paused .playPause .icon .bottom {
+.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .top,
+.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .bottom {
 	border-top-left-radius: 5em;
 	border-top-right-radius: 5em;
 		border-bottom-left-radius: 5em;
 	border-bottom-right-radius: 5em;
 }
 
-.audioPlayer .playPause .icon .top {
+.msPlayer .msWaveform .audioPlayer .playPause .icon .top {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2097,7 +2097,7 @@ body {
 	right: 70%;
 }
 
-.audioPlayer .playPause .icon .bottom {
+.msPlayer .msWaveform .audioPlayer .playPause .icon .bottom {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2108,7 +2108,7 @@ body {
 	right: 0;
 }
 
-.audioPlayer.paused .playPause .icon .top {
+.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .top {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2121,7 +2121,7 @@ body {
 	transform-origin: 100% 100%;
 }
 
-.audioPlayer.paused .playPause .icon .bottom {
+.msPlayer .msWaveform .audioPlayer.paused .playPause .icon .bottom {
 	position: absolute;
 	margin: auto;
 	width: auto;
@@ -2134,7 +2134,7 @@ body {
 	transform-origin: 0% 100%;
 }
 
-.audioPlayer .volume.bar {
+.msPlayer .msWaveform .audioPlayer .volume.bar {
 	top: 0;
 	left: 81%;
 	right: 0;
@@ -2143,7 +2143,7 @@ body {
 	background: #EEEEEE;
 }
 
-.audioPlayer .bar .stateIndicator {
+.msPlayer .msWaveform .audioPlayer .bar .stateIndicator {
 	width: 10%;
 	position: absolute;
 	left: 0;
@@ -2152,11 +2152,11 @@ body {
 	text-align: center;
 }
 
-.audioPlayer .bar:hover .seekIndicator {
+.msPlayer .msWaveform .audioPlayer .bar:hover .seekIndicator {
 	display: block;
 }
 
-.audioPlayer .bar .seekIndicator {
+.msPlayer .msWaveform .audioPlayer .bar .seekIndicator {
 	display: none;
 	width: 2px;
 	position: absolute;
@@ -2166,7 +2166,7 @@ body {
 	text-align: center;
 }
 
-.audioPlayer .volume.bar .fa {
+.msPlayer .msWaveform .audioPlayer .volume.bar .fa {
 	color: #313C47;
 	position: absolute;
 	top: 0.5em;
@@ -2176,11 +2176,11 @@ body {
 	z-index: 5;
 }
 
-.audioPlayer .bar:hover .stateIndicator {
+.msPlayer .msWaveform .audioPlayer .bar:hover .stateIndicator {
 	background: #FFAF22;
 }
 
-.audioPlayer .progress.bar {
+.msPlayer .msWaveform .audioPlayer .progress.bar {
 	top: 0;
 	left: 2em;
 	right: 20%;
