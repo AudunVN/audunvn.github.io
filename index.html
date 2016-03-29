@@ -309,9 +309,6 @@ $(document).ready(function() {
 		var src = document.querySelector(uaClass);
 		
 		src.volume = 0.999;
-		src.addEventListener("loadedmetadata", function() {
-			src.currentTime = 0;
-		}, false);
 		src.style.display = "none";
 		src.removeAttribute("controls");
 		
@@ -372,6 +369,7 @@ $(document).ready(function() {
 		});
 
 		src.addEventListener("loadedmetadata", function() {
+			src.currentTime = 0;
 			duration = src.duration;
 			document.querySelector(uaClass+" + .audioPlayer .progress.bar .fileLength").innerHTML = Math.floor(src.duration) + "s";
 		});
