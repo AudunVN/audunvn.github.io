@@ -303,6 +303,10 @@ $(document).ready(function() {
 			+'<div class="volume bar"><i class="fa fa-volume-up"></i><div class="stateIndicator"></div><div class="seekIndicator"></div></div>'
 			+'</div>'
 		).insertAfter(this);
+		document.querySelector(uaClass).volume = 0.999;
+		document.querySelector(uaClass).currentTime = 0;
+		document.querySelector(uaClass).style.display = "none";
+		document.querySelector(uaClass).removeAttribute("controls");
 		var icon = $(uaClass+" + .audioPlayer .playPause");
 		var player = $(uaClass+" + .audioPlayer ");
 		var duration;
