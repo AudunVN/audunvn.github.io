@@ -303,14 +303,11 @@ $(document).ready(function() {
 			+'<div class="volume bar"><i class="fa fa-volume-up"></i><div class="stateIndicator"></div><div class="seekIndicator"></div></div>'
 			+'</div>'
 		).insertAfter(this);
-		document.querySelector(uaClass).volume = 0.999;
-		document.querySelector(uaClass).currentTime = 0;
-		document.querySelector(uaClass).style.display = "none";
-		document.querySelector(uaClass).removeAttribute("controls");
 		var icon = $(uaClass+" + .audioPlayer .playPause");
 		var player = $(uaClass+" + .audioPlayer ");
 		var duration;
 		var src = document.querySelector(uaClass);
+		
 		src.addEventListener("timeupdate", timeUpdate, false);
 		src.addEventListener("ended", function() {
 			player.addClass("paused");
@@ -387,10 +384,10 @@ $(document).ready(function() {
 		}).mouseout(function() {
 			$(uaClass+" + .audioPlayer .volume.bar .stateIndicator").removeClass("active");
 		});
-		document.querySelector(uaClass).volume = 0.999;
-		document.querySelector(uaClass).currentTime = 0;
-		document.querySelector(uaClass).style.display = "none";
-		document.querySelector(uaClass).removeAttribute("controls");
+		src.volume = 0.999;
+		src.currentTime = 0;
+		src.style.display = "none";
+		src.removeAttribute("controls");
 		/* code for custom audio controls end */
 	});
 });
