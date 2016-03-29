@@ -308,6 +308,13 @@ $(document).ready(function() {
 		var duration;
 		var src = document.querySelector(uaClass);
 		
+		src.volume = 0.999;
+		src.addEventListener("loadedmetadata", function() {
+			src.currentTime = 0;
+		}, false);
+		src.style.display = "none";
+		src.removeAttribute("controls");
+		
 		src.addEventListener("timeupdate", timeUpdate, false);
 		src.addEventListener("ended", function() {
 			player.addClass("paused");
@@ -384,10 +391,6 @@ $(document).ready(function() {
 		}).mouseout(function() {
 			$(uaClass+" + .audioPlayer .volume.bar .stateIndicator").removeClass("active");
 		});
-		src.volume = 0.999;
-		src.currentTime = 0;
-		src.style.display = "none";
-		src.removeAttribute("controls");
 		/* code for custom audio controls end */
 	});
 });
