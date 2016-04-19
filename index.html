@@ -1023,6 +1023,7 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 						</div>
 					</div>
 				</a>
+				<div id="feed" class="compactFeed"></div>
 			</div>
 		</div>
 
@@ -1689,6 +1690,67 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 				newImgLoaded(".rslides1_on > img");
 				$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"});
 			});
+		});
+	</script>
+	<!-- gh activity script exec and includes -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+	<link rel="stylesheet" href="res/ghActivity/github-activity-0.1.4.min.css">
+	<style>
+		#feed.compactFeed .gha-header,
+		#feed.compactFeed .gha-push,
+		#feed.compactFeed .gha-push-small,
+		#feed.compactFeed .gha-footer {
+			display: none !important;
+		}
+		
+		#feed.compactFeed .gha-feed {
+			margin: 0 !important;
+			padding: 0 !important;
+			border: none !important;
+			padding-left: 0.25em;
+			padding-right: 0.25em;
+		}
+		
+		#feed.compactFeed .gha-activity-icon {
+			display: block !important;
+			position: absolute !important;
+			left: 0 !important;
+			top: 0 !important;
+			bottom: 0 !important;
+		}
+		
+		#feed.compactFeed .gha-activity {
+			margin: 0 !important;
+			padding: 0 !important;
+			border: none !important;
+		}
+		
+		#feed.compactFeed .gha-time {
+			width: 100%;
+			text-align: center;
+		}
+		
+		#feed.compactFeed .gha-message {
+			margin-left: 4em !important;
+		}
+		
+		#feed.compactFeed .gha-activity-icon .octicon {
+			top: 25% !important;
+			position: absolute !important;
+			transform: translateY(-25%) !important;
+		}
+		
+		#feed.compactFeed .gha-footer {
+			text-align: center !important;
+		}
+	</style>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+	<script type="text/javascript" src="res/ghActivity/github-activity-0.1.4.min.js"></script>
+	<script>
+		GitHubActivity.feed({
+			username: "audunvn",
+			selector: "#feed",
+			limit: 1
 		});
 	</script>
 </body>
