@@ -1696,6 +1696,28 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
 	<link rel="stylesheet" href="res/ghActivity/github-activity-0.1.4.min.css">
 	<style>
+		.updateNotice {
+			bottom: 11.7em !important;
+		}
+		
+		.glaceon {
+			bottom: 12.5em !important;
+		}
+		
+		.shelfContainer {
+			bottom: 12.54em !important;
+		}
+		
+		#feed.compactFeed {
+			position: absolute !important;
+			bottom: 9em;
+			height: 4em;
+			border-top: 1px solid #E2E2E2;
+			box-sizing: border-box;
+			background: #FFF !important;
+			width: 100%;
+		}
+		
 		#feed.compactFeed .gha-header,
 		#feed.compactFeed .gha-push,
 		#feed.compactFeed .gha-push-small,
@@ -1735,9 +1757,10 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 		}
 		
 		#feed.compactFeed .gha-activity-icon .octicon {
-			top: 25% !important;
-			position: absolute !important;
-			transform: translateY(-25%) !important;
+			padding: 0;
+			margin: 0;
+			display: block;
+			padding-top: 0.7em;
 		}
 		
 		#feed.compactFeed .gha-footer {
