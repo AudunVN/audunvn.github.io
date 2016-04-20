@@ -1008,21 +1008,26 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 					</div>
 					<input id="timeInputBox">
 				</div>
-				<span class="updateNotice">Updated 30.03</span>
-				<a target="_blank" href="http://bulbapedia.bulbagarden.net/wiki/Glaceon_(Pok%C3%A9mon)"><div class="glaceon"></div></a>
-				<div class="shelfContainer">
-					<div class="shelf"></div>
-				</div>
-				<a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_SW.jpg" target="_blank">
-					<div class="worldMap">
-						<div class="positionMarker">
-							<div class="nLine"></div>
-							<div class="eLine"></div>
-							<div class="sLine"></div>
-							<div class="wLine"></div>
+				<div class="utilWrapper">
+					<div class="mapWrapper">
+						<span class="updateNotice">Updated 20.04</span>
+						<a target="_blank" href="http://bulbapedia.bulbagarden.net/wiki/Glaceon_(Pok%C3%A9mon)"><div class="glaceon"></div></a>
+						<div class="shelfContainer">
+							<div class="shelf"></div>
 						</div>
+						<a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_SW.jpg" target="_blank">
+							<div class="worldMap">
+								<div class="positionMarker">
+									<div class="nLine"></div>
+									<div class="eLine"></div>
+									<div class="sLine"></div>
+									<div class="wLine"></div>
+								</div>
+							</div>
+						</a>
 					</div>
-				</a>
+					<div id="feed" class="compactFeed"></div>
+				</div>
 			</div>
 		</div>
 
@@ -1689,6 +1694,18 @@ function Star(x, y, magnitude, classString, number, containerSelector) {
 				newImgLoaded(".rslides1_on > img");
 				$.adaptiveBackground.run({parent:".sliderContainer", selector:".rslides1_on > img"});
 			});
+		});
+	</script>
+	<!-- gh activity script exec and includes -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+	<link rel="stylesheet" href="res/ghActivity/github-activity-0.1.4.min.css">
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+	<script type="text/javascript" src="res/ghActivity/github-activity-0.1.4.min.js"></script>
+	<script>
+		GitHubActivity.feed({
+			username: "audunvn",
+			selector: "#feed",
+			limit: 1
 		});
 	</script>
 </body>

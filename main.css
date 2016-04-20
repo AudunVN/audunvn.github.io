@@ -91,7 +91,88 @@ code {
 	position: fixed;
 	z-index: 99;
 }
-	
+
+.utilWrapper {
+	position: absolute;
+	bottom: 0;
+}
+
+.mapWrapper {
+	position: relative;
+	width: 100%;
+}
+
+#feed.compactFeed {
+	position: relative;
+	background: #FFF !important;
+	width: 100%;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	font-family: "Open Sans", sans-serif;
+}
+
+#feed.compactFeed *:not(.octicon) {
+	font-family: "Open Sans", sans-serif !important;
+}
+
+#feed.compactFeed .gha-header,
+#feed.compactFeed .gha-push,
+#feed.compactFeed .gha-push-small,
+#feed.compactFeed .gha-footer {
+	display: none !important;
+}
+
+#feed.compactFeed .gha-feed {
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+}
+
+#feed.compactFeed .gha-activity-icon {
+	display: block !important;
+	position: absolute !important;
+	left: 0 !important;
+	top: 0 !important;
+	bottom: 0 !important;
+}
+
+#feed.compactFeed .gha-activity {
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+}
+
+#feed.compactFeed .gha-time::after {
+	content: ': ';
+}
+
+#feed.compactFeed .gha-time {
+	display: inline;
+	color: #616161;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+#feed.compactFeed .gha-message {
+	margin-left: 4em !important;
+	width: calc(100% - 4.5em) !important;		
+}
+
+#feed.compactFeed .gha-activity-icon .octicon {
+	padding: 0;
+	margin: 0;
+	display: block;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#feed.compactFeed .gha-footer {
+	text-align: center !important;
+}
+
 .updateNotice {
 	bottom: 8.3em;
 	left: 2.9em;
@@ -117,7 +198,7 @@ code {
 }
 	
 .shelfContainer {
-	bottom: 8.54em;
+	bottom: 8.52em;
 	width: 18em;
 	height: 5em;
 	position: absolute;
