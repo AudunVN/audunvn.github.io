@@ -104,10 +104,11 @@ code {
 
 #feed.compactFeed {
 	position: relative;
-	background: #FFF !important;
+	background: #F7F7F7 !important;
 	width: 100%;
-	padding-top: 0.2em;
 	padding-bottom: 0.2em;
+	font-family: "Open Sans", sans-serif;
+	margin-top: -0.2em;
 	font-family: "Open Sans", sans-serif;
 }
 
@@ -128,6 +129,7 @@ code {
 	border: none !important;
 	padding-left: 0.25em;
 	padding-right: 0.25em;
+	background: #F7F7F7 !important;
 }
 
 #feed.compactFeed .gha-activity-icon {
