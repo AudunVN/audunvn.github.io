@@ -122,6 +122,8 @@
 			h2 {
 				bottom: -2.25em;
 				font-size: 1em;
+				transition: color 0.5s cubic-bezier(0, 0.69, 0.2, 1), text-shadow 0.5s cubic-bezier(0, 0.69, 0.2, 1);
+    				cursor: pointer;
 			}
 			
 			h2:before, h2:after {
@@ -195,8 +197,13 @@
 				width: 0.5em;
 			}
 			
+			h2:hover {
+				color: #E3F0FF;
+				text-shadow: 0 0 0.3em #307ACB;
+			}
+			
 			h2 i {
-				font-size: 0.7em;
+				font-size: 0.7em !important;
 				vertical-align: 0.2em;
 			}
 			
@@ -256,7 +263,7 @@
 			<div class="atmosphere"></div>
 		</div>
 		<div class="contactCard">
-			<h2><span>471.no</span><span id="spacer"></span><i class="fa fa-arrow-right" aria-hidden="true"></i></h2>
+			<h2><a href="http://471.no"></a><span>471.no</span><span id="spacer"></span><i class="fa fa-arrow-right" aria-hidden="true"></i></h2></a>
 			<canvas class="contentBackground"></canvas>
 			<div class="cardContents">
 				<nav class="linkIconNav">
