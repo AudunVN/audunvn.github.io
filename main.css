@@ -131,6 +131,7 @@ code {
 	padding-left: 0.25em;
 	padding-right: 0.25em;
 	background: #F7F7F7 !important;
+	overflow-y: hidden;
 }
 
 #feed.compactFeed .gha-activity-icon {
