@@ -111,6 +111,7 @@ code {
 	font-family: "Open Sans", sans-serif;
 	margin-top: -0.375em;
 	font-family: "Open Sans", sans-serif;
+	overflow-wrap: break-word;
 }
 
 #feed.compactFeed *:not(.octicon) {
