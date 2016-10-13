@@ -250,10 +250,9 @@ function updateClocks() {
     containerHeight = document.getElementById('pokeClock').clientHeight;
     if (!document.getElementById("sprite1")) {
 	// rewrite; CSS
-	var css = "<style>@font-face {font-family: 'pokeFont';src: url('https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/pkmndp.ttf') format('truetype');}</style>"
-	var sprite1div = "<div id='sprite1' style='position: absolute; text-align: right; vertical-align: center; font-size:1.3em; background-position: 12% 16%; height: 100%; width: 97%; top: "+sprite1x+"%; background-repeat: no-repeat; background-image:url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite1+".png);'><span style=\"vertical-align: middle; position: relative; right: 0.1em; font-family: 'pokeFont', monospace;\" id='pokeText1'></span></div>";
-	var sprite2div = "<div id='sprite2' style='position: absolute; text-align: right; vertical-align: center; font-size:1.3em; background-position: 12% 16%; height: 100%; width: 97%; top: "+sprite2x+"%; background-repeat: no-repeat; background-image:url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite2+".png);'><span style=\"vertical-align: middle; position: relative; right: 0.1em; font-family: 'pokeFont', monospace;\" id='pokeText2'></span></div>";
-	clockInnerHTML = css+sprite1div+sprite2div;
+	var sprite1div = "<div id='sprite1' style='position: absolute; text-align: right; vertical-align: center; font-size:1.3em; background-position: 12% 16%; height: 100%; width: 97%; top: "+sprite1x+"%; background-repeat: no-repeat; background-image:url(http://drive.mrawr.net/pokeclock/res/teamSprites/"+sprite1+".png);'><span style=\"vertical-align: middle; position: relative; right: 0.1em; font-family: 'pokeFont', monospace;\" id='pokeText1'></span></div>";
+	var sprite2div = "<div id='sprite2' style='position: absolute; text-align: right; vertical-align: center; font-size:1.3em; background-position: 12% 16%; height: 100%; width: 97%; top: "+sprite2x+"%; background-repeat: no-repeat; background-image:url(http://drive.mrawr.net/pokeclock/res/teamSprites/"+sprite2+".png);'><span style=\"vertical-align: middle; position: relative; right: 0.1em; font-family: 'pokeFont', monospace;\" id='pokeText2'></span></div>";
+	clockInnerHTML = sprite1div+sprite2div;
 	document.getElementById('pokeClock').innerHTML = clockInnerHTML;
     }
     var sprite1divElement = document.querySelector("#sprite1");
@@ -270,8 +269,8 @@ function updateClocks() {
 	sprite2 = nextPokemon;
 	sprite1 = currentPokemon;
 	}
-    sprite1divElement.style.backgroundImage = "url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite1+".png)";
-    sprite2divElement.style.backgroundImage = "url(https://24e3021dd42ba493ca4b980e89f1158d0706cb0f.googledrive.com/host/0B-jbiuTm6FjRVUdKSWRnRFlLS0k/pokeclock/res/teamSprites/"+sprite2+".png)";
+    sprite1divElement.style.backgroundImage = "url(http://drive.mrawr.net/pokeclock/res/teamSprites/"+sprite1+".png)";
+    sprite2divElement.style.backgroundImage = "url(http://drive.mrawr.net/pokeclock/res/teamSprites/"+sprite2+".png)";
     sprite1text.innerHTML = "#"+sprite1;
     sprite2text.innerHTML = "#"+sprite2;
 }
