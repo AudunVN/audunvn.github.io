@@ -22,10 +22,31 @@
 				z-index: -10;
 				position: absolute;
 			}
-
-			.linkIconNav {
+			
+			@keyframes warp {
+				0%, 38%, 50% {
+					opacity: 1;
+					transform: skewX(0deg);
+				}
+				40% {
+					opacity: 0.8;
+					transform: skewX(-100deg);
+				}
+				45% {
+					opacity: 0.6;
+					transform: skewX(20deg);
+				}
 			}
 
+			.linkIconNav {
+				overflow: hidden;
+			}
+
+			.errorMessage {
+				animation: warp 3s infinite alternate;
+				display: inline-block;
+			}
+			
 			.linkIconNav ul {
 				margin: 0;
 				padding: 0;
