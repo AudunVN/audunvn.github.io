@@ -212,8 +212,8 @@
 		}
 		$(loadedImg).attr("style", imgString);
 		$(loadedImg).parent().find('.imgOverlay').attr("style", imgString);
-		$(loadedImg).parent().find('.imgOverlay').height($(loadedImg).height()+"px");
-		$(loadedImg).parent().find('.imgOverlay').width($(loadedImg).width()+"px");
+		$(loadedImg).parent().find('.imgOverlay').height($(loadedImg).height()+2+"px");
+		$(loadedImg).parent().find('.imgOverlay').width($(loadedImg).width()+2+"px");
 	}
 
 	function colorTools_getApproxLuminosity(r, g, b) {
