@@ -1712,6 +1712,7 @@ body {
 
 .backgroundContainer .atmosphere {
   opacity: 1 !important;
+  transform: translate3d(0,0,0);
 }
 
 .backgroundContainer .sun {
