@@ -363,8 +363,10 @@ code {
 }
 
 .logo .start {
-  color: #1073C5;
-  text-shadow: 0 0 0.05em #1073C5;
+	color: #1073C5;
+	text-shadow: 0 0 0.05em #1073C5;
+	font-size: 1.09em;
+	vertical-align: top;
 }
 
 .logo .end {
